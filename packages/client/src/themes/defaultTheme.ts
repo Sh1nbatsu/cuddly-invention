@@ -3,7 +3,7 @@ export const defaultTheme = {
     borderRadius: 6,
     colorBgBase: '#fff',
     colorError: '#ff4d4f',
-    colorInfo: '	#1677ff',
+    colorInfo: '#1677ff',
     colorLink: '#1677ff',
     colorPrimary: '#1677ff',
     colorSuccess: '#52c41a',
