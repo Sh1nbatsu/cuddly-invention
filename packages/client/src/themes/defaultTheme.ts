@@ -24,4 +24,3 @@ export const defaultTheme = {
 }
 
 // Пример создания темы
-// Для проверки можно перейти на /game/leaderboard, и поменять colorBgBase на #000
