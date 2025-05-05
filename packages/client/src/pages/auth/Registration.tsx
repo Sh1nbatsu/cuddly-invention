@@ -1,14 +1,17 @@
 import { FormInput } from '@/components/FormInput/FormInput'
-import {
-  AuthFooterText,
-  AuthLink,
-  AuthSpace,
-} from '@/components/FormInput/styled'
+
 import Wrapper from '@/components/Wrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { RegisterFormData, RegisterSchema } from './schemas'
-import { AuthForm, AuthSubmitButton, AuthTitle } from './styled'
+import {
+  AuthFooterText,
+  AuthForm,
+  AuthLink,
+  AuthSpace,
+  AuthSubmitButton,
+  AuthTitle,
+} from './styled'
 
 const DEFAULT_VALUES = {
   nickname: '',
@@ -54,7 +57,7 @@ export const Registration = () => {
           label="Пароль"
           inputProps={{
             type: 'password',
-            autoComplete: 'new-password', // Или 'off' если нужно полное отключение
+            autoComplete: 'new-password',
           }}
         />
         <AuthSubmitButton
