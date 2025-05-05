@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({
   logo = 'Дино Кликер',
   navItems = [
     { to: '/leaderboard', text: 'Таблица лидеров' },
-    { to: '/signin', text: 'Авторизация' },
+    { to: '/sign-up', text: 'Авторизация' },
   ],
 }) => {
   return (

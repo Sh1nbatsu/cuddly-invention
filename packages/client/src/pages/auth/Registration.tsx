@@ -1,4 +1,3 @@
-// Registration.tsx
 import { FormInput } from '@/components/FormInput/FormInput'
 
 import { register } from '@/api/auth'
@@ -68,7 +67,6 @@ export const Registration = () => {
             type: 'email',
           }}
         />
-
         <FormInput
           control={control}
           name="password"
