@@ -1,3 +1,4 @@
+// Registration.tsx
 import { FormInput } from '@/components/FormInput/FormInput'
 import {
   AuthFooterText,
@@ -11,9 +12,12 @@ import { RegisterFormData, RegisterSchema } from './schemas'
 import { AuthForm, AuthSubmitButton, AuthTitle } from './styled'
 
 const DEFAULT_VALUES = {
-  nickname: '',
+  first_name: '',
+  second_name: '',
+  login: '',
   email: '',
   password: '',
+  phone: '',
 }
 
 export const Registration = () => {
@@ -39,7 +43,13 @@ export const Registration = () => {
     <Wrapper>
       <AuthForm onFinish={onFinish} layout="vertical" autoComplete="off">
         <AuthTitle level={2}>Регистрация</AuthTitle>
-        <FormInput control={control} name="nickname" label="Никнейм" />
+
+        <FormInput control={control} name="first_name" label="Имя" />
+
+        <FormInput control={control} name="second_name" label="Фамилия" />
+
+        <FormInput control={control} name="login" label="Логин" />
+
         <FormInput
           control={control}
           name="email"
@@ -48,15 +58,26 @@ export const Registration = () => {
             type: 'email',
           }}
         />
+
         <FormInput
           control={control}
           name="password"
           label="Пароль"
           inputProps={{
             type: 'password',
-            autoComplete: 'new-password', // Или 'off' если нужно полное отключение
+            autoComplete: 'new-password',
           }}
         />
+
+        <FormInput
+          control={control}
+          name="phone"
+          label="Телефон"
+          inputProps={{
+            type: 'tel',
+          }}
+        />
+
         <AuthSubmitButton
           variant="outlined"
           htmlType="submit"
