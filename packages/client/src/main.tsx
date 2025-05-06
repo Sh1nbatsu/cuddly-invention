@@ -6,7 +6,9 @@ import { RouterProvider } from 'react-router-dom'
 import '../global.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <ConfigProvider theme={defaultTheme}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </ConfigProvider>
 )
