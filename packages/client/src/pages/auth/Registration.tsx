@@ -1,9 +1,11 @@
 // Registration.tsx
 import { FormInput } from '@/components/FormInput/FormInput'
 
+import { register } from '@/api/auth'
 import Wrapper from '@/components/Wrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { RegisterFormData, RegisterSchema } from './schemas'
 import {
   AuthFooterText,
@@ -33,9 +35,14 @@ export const Registration = () => {
     mode: 'onChange',
     resolver: zodResolver(RegisterSchema),
   })
-
-  const onSubmit = (data: RegisterFormData) => {
-    console.log('Submitted data:', data)
+  const navigate = useNavigate()
+  const onSubmit = async (data: RegisterFormData) => {
+    try {
+      await register(data)
+      navigate('sign-in')
+    } catch (error) {
+      console.error('error', error)
+    }
   }
 
   const onFinish = () => {

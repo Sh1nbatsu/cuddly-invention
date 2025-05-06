@@ -44,10 +44,7 @@ export const RegisterSchema = z.object({
 export type RegisterFormData = z.infer<typeof RegisterSchema>
 
 export const LoginSchema = z.object({
-  email: z
-    .string()
-    .email('Введите корректный email')
-    .max(50, 'Email не должен превышать 50 символов'),
+  login: z.string().max(50, 'Email не должен превышать 50 символов'),
 
   password: z
     .string()

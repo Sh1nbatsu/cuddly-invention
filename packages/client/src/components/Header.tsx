@@ -1,5 +1,5 @@
 import React from 'react'
-import { CustomLink } from './CustomLink'
+import { CustomLink } from './CustomLink/CustomLink'
 
 interface HeaderProps {
   logo?: React.ReactNode

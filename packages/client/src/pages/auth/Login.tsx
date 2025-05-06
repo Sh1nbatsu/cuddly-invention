@@ -2,6 +2,8 @@ import { FormInput } from '@/components/FormInput/FormInput'
 import Wrapper from '@/components/Wrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../../api/auth'
 import { LoginFormData, LoginSchema } from './schemas'
 import {
   AuthFooterText,
@@ -13,7 +15,7 @@ import {
 } from './styled'
 
 const DEFAULT_VALUES = {
-  email: '',
+  login: '',
   password: '',
 }
 
@@ -28,26 +30,26 @@ export const Login = () => {
     resolver: zodResolver(LoginSchema),
   })
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log('Submitted data:', data)
+  const navigate = useNavigate()
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await login(data)
+      navigate('/')
+    } catch (error) {
+      console.error('Произошла ошибка:', error)
+    }
   }
 
-  const onFinish = () => {
-    return handleSubmit(onSubmit)()
+  const onFinish = async () => {
+    await handleSubmit(onSubmit)()
   }
 
   return (
     <Wrapper>
       <AuthForm onFinish={onFinish} layout="vertical" autoComplete="off">
         <AuthTitle level={2}>Вход</AuthTitle>
-        <FormInput
-          control={control}
-          name="email"
-          label="Почта"
-          inputProps={{
-            type: 'email',
-          }}
-        />
+        <FormInput control={control} name="login" label="Логин" />
         <FormInput
           control={control}
           name="password"
