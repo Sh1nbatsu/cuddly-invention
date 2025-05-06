@@ -1,12 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom'
+import NotFoundPage from '@/pages/404/NotFoundPage'
+import { Login } from '@/pages/auth/Login'
+import { Registration } from '@/pages/auth/Registration'
 import HomePage from '@/pages/game/HomePage'
-import NotFoundPage from '@/pages/404/NotFoundPage' // Создадим этот компонент
+import { createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <HomePage />,
     errorElement: <NotFoundPage />,
+  },
+  {
+    path: '/sign-up',
+    element: <Registration />,
+  },
+  {
+    path: '/sign-in',
+    element: <Login />,
   },
   {
     path: '*',
