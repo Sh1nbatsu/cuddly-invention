@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { List, Avatar } from 'antd'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import { dataSource } from './mockData'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import Wrapper from '../../../components/Wrapper'
-import { CustomButton } from './Leaderboard.styled'
-import { ScrollableDiv } from './Leaderboard.styled'
-import { NavigationDiv } from './Leaderboard.styled'
+import {
+  CustomButton,
+  ScrollableDiv,
+  NavigationDiv,
+} from './Leaderboard.styled'
 
 const Leaderboard = () => {
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState([])
-  const [page, setPage] = useState(1)
-
   const loadMoreData = () => {
     console.log('Loading more data...')
   }
@@ -41,7 +38,7 @@ const Leaderboard = () => {
                         height: 40,
                         width: 40,
                       }}
-                      src={item.avatar}
+                      src={'/'}
                       // В данный момент не буду загружать статику для аватаров, так что будет жаловаться на отсутствие поля
                     />
                   }
