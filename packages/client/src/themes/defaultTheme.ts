@@ -5,7 +5,7 @@ export const defaultTheme = {
     colorError: '#ff4d4f',
     colorInfo: '#1677ff',
     colorLink: '#1677ff',
-    colorPrimary: '#1677ff',
+    colorPrimary: '#99BC85',
     colorSuccess: '#52c41a',
     colorTextBase: '#000',
     colorWarning: '#faad14',
