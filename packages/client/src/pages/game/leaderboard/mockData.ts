@@ -92,3 +92,5 @@ export const dataSource = [
     date: '10 may 2024',
   },
 ]
+
+// Мок дата для отображения лидерборда

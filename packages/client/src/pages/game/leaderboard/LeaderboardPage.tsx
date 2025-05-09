@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import Wrapper from '../../../components/Wrapper'
-import { CustomButton } from './Leaderboard.styled'
 import { List, Avatar } from 'antd'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { dataSource } from './mockData'
+import Wrapper from '../../../components/Wrapper'
+import { CustomButton } from './Leaderboard.styled'
+import { ScrollableDiv } from './Leaderboard.styled'
+import { NavigationDiv } from './Leaderboard.styled'
 
 const Leaderboard = () => {
   const [loading, setLoading] = useState(false)
@@ -15,16 +17,8 @@ const Leaderboard = () => {
   }
 
   return (
-    <Wrapper style={{ display: 'flex' }}>
-      <div
-        id="scrollableDiv"
-        style={{
-          height: '100vh',
-          overflow: 'auto',
-          padding: '0 16px',
-          border: '1px solid rgba(140, 140, 140, 0.35)',
-          width: '33vw',
-        }}>
+    <Wrapper style={{ display: 'flex', padding: '16px' }}>
+      <ScrollableDiv id="scrollableDiv">
         <InfiniteScroll
           dataLength={20}
           next={loadMoreData}
@@ -60,10 +54,13 @@ const Leaderboard = () => {
             )}
           />
         </InfiniteScroll>
-      </div>
-      <div>
+      </ScrollableDiv>
+      <NavigationDiv>
         <CustomButton type="primary">Restart?</CustomButton>
-      </div>
+        <CustomButton type="link" color="cyan" variant="solid">
+          Forum
+        </CustomButton>
+      </NavigationDiv>
     </Wrapper>
   )
 }
