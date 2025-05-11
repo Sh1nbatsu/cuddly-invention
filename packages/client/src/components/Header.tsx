@@ -1,5 +1,5 @@
 import React from 'react'
-import { CustomLink } from './CustomLink/CustomLink'
+import CustomLink from '@/components/CustomLink'
 
 interface HeaderProps {
   logo?: React.ReactNode
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({
   logo = 'Дино Кликер',
   navItems = [
     { to: '/leaderboard', text: 'Таблица лидеров' },
-    { to: '/sign-up', text: 'Авторизация' },
+    { to: '/signin', text: 'Авторизация' },
   ],
 }) => {
   return (
