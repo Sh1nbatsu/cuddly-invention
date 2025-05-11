@@ -1,7 +1,10 @@
-import { router } from '@/router/router'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
+import router from '@/router/router'
+import { ConfigProvider } from 'antd'
+import 'antd/dist/reset.css'
+import { defaultTheme } from './themes/defaultTheme'
 
 import '../global.css'
 
