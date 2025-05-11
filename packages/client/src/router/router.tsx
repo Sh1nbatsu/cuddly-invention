@@ -1,17 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
+import NotFoundPage from '@/pages/404/NotFoundPage'
 import HomePage from '@/pages/game/HomePage'
-import NotFoundPage from '@/pages/404/NotFoundPage' // Создадим этот компонент
+import { createBrowserRouter } from 'react-router-dom'
+import { authRoutes } from './auth/auth'
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
     errorElement: <NotFoundPage />,
   },
+  authRoutes,
   {
     path: '*',
     element: <NotFoundPage />,
   },
 ])
-
-export default router
