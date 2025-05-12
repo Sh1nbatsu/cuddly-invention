@@ -1,5 +1,6 @@
 import Wrapper from '@/components/Wrapper';
 import Header from '@/components/Header';
+import Canvas from '@/components/Canvas';
 
 const HomePage = () => {
 	return (
@@ -15,7 +16,7 @@ const HomePage = () => {
 					border: '2px dashed var(--color-primary)',
 				}}
 			>
-				<p style={{ fontWeight: 500, color: 'var(--color-primary)' }}>В разработке</p>
+				<Canvas />
 			</div>
 		</Wrapper>
 	);
