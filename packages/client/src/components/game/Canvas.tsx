@@ -7,7 +7,7 @@ const LOCAL_STORAGE_KEY = 'score';
 
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
 
-const Canvas: React.FC = () => {
+export const Canvas: React.FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -126,5 +126,3 @@ const Canvas: React.FC = () => {
 		</div>
 	);
 };
-
-export default Canvas;

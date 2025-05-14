@@ -1,6 +1,6 @@
 import Wrapper from '@/components/Wrapper';
 import Header from '@/components/Header';
-import Canvas from '@/components/game/Canvas';
+import { Canvas } from '@/components/game/Canvas';
 
 const HomePage = () => {
 	return (
