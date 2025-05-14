@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState, useCallback, useLayoutEffect } from
 const TARGET_RADIUS = 80;
 const MIN_RADIUS = TARGET_RADIUS * 0.9;
 const TEXT_OFFSET = 50;
+const LOCAL_STORAGE_KEY = 'score';
 
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
 
@@ -10,12 +11,20 @@ const Canvas: React.FC = () => {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
-	const [score, setScore] = useState(0);
+	const [score, setScore] = useState(() => {
+		const storedScore = localStorage.getItem(LOCAL_STORAGE_KEY);
+		return storedScore ? parseInt(storedScore, 10) : 0;
+	});
+
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 	const [radius, setRadius] = useState(TARGET_RADIUS);
 
 	const animationFrameId = useRef<number | null>(null);
 	const targetPos = useRef({ x: 0, y: 0 });
+
+	useEffect(() => {
+		localStorage.setItem(LOCAL_STORAGE_KEY, score.toString());
+	}, [score]);
 
 	useLayoutEffect(() => {
 		const updateSize = () => {

@@ -1,6 +1,6 @@
 import Wrapper from '@/components/Wrapper';
 import Header from '@/components/Header';
-import Canvas from '@/components/Canvas';
+import Canvas from '@/components/game/Canvas';
 
 const HomePage = () => {
 	return (
@@ -13,7 +13,6 @@ const HomePage = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 					height: 'calc(100vh - 74px - 74px)',
-					border: '2px dashed var(--color-primary)',
 				}}
 			>
 				<Canvas />
