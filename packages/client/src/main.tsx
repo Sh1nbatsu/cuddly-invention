@@ -5,13 +5,16 @@ import router from '@/router/router'
 import { ConfigProvider } from 'antd'
 import 'antd/dist/reset.css'
 import { defaultTheme } from './themes/defaultTheme'
-
+import { ThemeProvider } from 'styled-components'
+import { lightTheme } from '@/styles/theme'
 import '../global.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ConfigProvider theme={defaultTheme}>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </ConfigProvider>
+  <ThemeProvider theme={lightTheme}>
+    <ConfigProvider theme={defaultTheme}>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </ConfigProvider>
+  </ThemeProvider>
 )

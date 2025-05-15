@@ -1,45 +1,62 @@
 import React from 'react'
+import styled from 'styled-components'
 import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
-import { ErrorConfig } from '@/config/errorConfig'
+import { Typography } from 'antd'
 import Wrapper from '@/components/Wrapper'
 import Header from '@/components/Header'
 import CustomLink from '@/components/CustomLink'
-import './ErrorPage.css'
+import { ErrorConfig } from '@/config/errorConfig'
 
-interface ErrorPageProps {
+const Page = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  height: calc(100vh - 148px);
+`
+
+const Content = styled.div`
+  max-width: 480px;
+  text-align: center;
+  padding: 2rem;
+  background: ${({ theme }) => theme.staticBackground};
+  border-radius: 4px;
+  border: 2px solid ${({ theme }) => theme.primary};
+  box-shadow: 4px 4px ${({ theme }) => theme.primary};
+  font-weight: 600;
+`
+
+export interface ErrorPageProps {
   config: ErrorConfig
 }
 
-const ErrorPage: React.FC<ErrorPageProps> = ({ config }) => {
+export const ErrorPage: React.FC<ErrorPageProps> = ({ config }) => {
   const error = useRouteError()
-  const status = isRouteErrorResponse(error) ? error.status : undefined
-  const statusText = isRouteErrorResponse(error) ? error.statusText : undefined
+  const isRouteError = isRouteErrorResponse(error)
+  const status = isRouteError ? error.status : undefined
+  const statusText = isRouteError ? error.statusText : undefined
 
   return (
     <Wrapper>
       <Header />
-
-      <div className="error-page">
-        <div className="error-page__content">
-          <h1 className="error-page__title">{config.title}</h1>
-          <p className="error-page__message">{config.message}</p>
-
+      <Page>
+        <Content>
+          <Typography.Title level={2}>{config.title}</Typography.Title>
+          <Typography.Paragraph>{config.message}</Typography.Paragraph>
           {config.showStatus && status != null && (
-            <p className="error-page__status">
+            <Typography.Paragraph>
               Код ошибки: <strong>{status}</strong>
-            </p>
+            </Typography.Paragraph>
           )}
           {config.showStatusText && statusText && (
-            <p className="error-page__status-text">{statusText}</p>
+            <Typography.Text>{statusText}</Typography.Text>
           )}
-
           <CustomLink to="/" variant="retro">
             На главную
           </CustomLink>
-        </div>
-      </div>
+        </Content>
+      </Page>
     </Wrapper>
   )
 }
-
-export default ErrorPage
