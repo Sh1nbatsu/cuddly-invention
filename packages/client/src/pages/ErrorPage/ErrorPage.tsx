@@ -20,10 +20,10 @@ const Content = styled.div`
   max-width: 480px;
   text-align: center;
   padding: 2rem;
-  background: ${({ theme }) => theme.staticBackground};
+  background: ${({ theme }) => theme.token.colorBgBase};
   border-radius: 4px;
-  border: 2px solid ${({ theme }) => theme.primary};
-  box-shadow: 4px 4px ${({ theme }) => theme.primary};
+  border: 2px solid ${({ theme }) => theme.token.colorBgPrimary};
+  box-shadow: 4px 4px ${({ theme }) => theme.token.colorBgPrimary};
   font-weight: 600;
 `
 
