@@ -1,30 +1,34 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
+import { ProtectedRoute } from '@/components/ProtectedRoute'
 import HomePage from '@/pages/game/HomePage'
+import ErrorPage from '@/pages/ErrorPage/ErrorPage'
+import { Login } from '@/pages/auth/Login'
+import { Registration } from '@/pages/auth/Registration'
+import { authRoutes } from './auth/auth'
 import { PAGE_ERROR, NOT_FOUND_ERROR } from '@/config/errorConfig'
-
-const ErrorPage = React.lazy(() =>
-  import('@/pages/ErrorPage/ErrorPage').then(m => ({ default: m.ErrorPage }))
-)
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
-    errorElement: (
-      <Suspense fallback={<div>Загрузка...</div>}>
-        <ErrorPage config={PAGE_ERROR} />
-      </Suspense>
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
     ),
+    errorElement: <ErrorPage config={PAGE_ERROR} />,
+  },
+  authRoutes,
+  {
+    path: '/sign-up',
+    element: <Registration />,
+  },
+  {
+    path: '/sign-in',
+    element: <Login />,
   },
   {
     path: '*',
-    element: (
-      <Suspense fallback={<div>Загрузка...</div>}>
-        <ErrorPage config={NOT_FOUND_ERROR} />
-      </Suspense>
-    ),
+    element: <ErrorPage config={NOT_FOUND_ERROR} />,
   },
 ])
-
-export default router
