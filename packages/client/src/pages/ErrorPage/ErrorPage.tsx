@@ -4,7 +4,7 @@ import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
 import { Typography } from 'antd'
 import Wrapper from '@/components/Wrapper'
 import Header from '@/components/Header'
-import CustomLink from '@/components/CustomLink'
+import { CustomLink } from '@/components/CustomLink/CustomLink'
 import { ErrorConfig } from '@/config/errorConfig'
 
 const Page = styled.div`
