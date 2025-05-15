@@ -1,12 +1,10 @@
-import React from 'react'
-import { createBrowserRouter } from 'react-router-dom'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
-import HomePage from '@/pages/game/HomePage'
-import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
+import NotFoundPage from '@/pages/404/NotFoundPage'
 import { Login } from '@/pages/auth/Login'
 import { Registration } from '@/pages/auth/Registration'
+import HomePage from '@/pages/game/HomePage'
+import { createBrowserRouter } from 'react-router-dom'
 import { authRoutes } from './auth/auth'
-import { PAGE_ERROR, NOT_FOUND_ERROR } from '@/config/errorConfig'
 
 export const router = createBrowserRouter([
   {
@@ -16,21 +14,19 @@ export const router = createBrowserRouter([
         <HomePage />
       </ProtectedRoute>
     ),
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
+    errorElement: <NotFoundPage />,
   },
   authRoutes,
   {
     path: '/sign-up',
     element: <Registration />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
   {
     path: '/sign-in',
     element: <Login />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
   {
     path: '*',
-    element: <ErrorPage config={NOT_FOUND_ERROR} />,
+    element: <NotFoundPage />,
   },
 ])
