@@ -10,7 +10,7 @@ interface CustomLinkProps extends Omit<LinkProps, 'className'> {
   disabled?: boolean
 }
 
-const CustomLink = ({
+export const CustomLink = ({
   children,
   variant = 'default',
   disabled = false,
@@ -33,5 +33,3 @@ const CustomLink = ({
     </Link>
   )
 }
-
-export default CustomLink
