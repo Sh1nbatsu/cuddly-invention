@@ -1,6 +1,7 @@
 import { Table as AntTable } from 'antd'
 import { Button as AntButton } from 'antd'
 import styled from 'styled-components'
+import Wrapper from '@/components/Wrapper'
 
 export const CustomTable = styled(AntTable)`
   &&& {
@@ -41,4 +42,9 @@ export const NavigationDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+`
+
+export const CustomWrapper = styled(Wrapper)`
+  display: flex;
+  padding: 16px;
 `

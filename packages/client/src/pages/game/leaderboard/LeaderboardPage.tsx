@@ -1,11 +1,11 @@
 import { List, Avatar } from 'antd'
 import { dataSource } from './mockData'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Wrapper from '../../../components/Wrapper'
 import {
   CustomButton,
   ScrollableDiv,
   NavigationDiv,
+  CustomWrapper,
 } from './Leaderboard.styled'
 
 const Leaderboard = () => {
@@ -14,7 +14,7 @@ const Leaderboard = () => {
   }
 
   return (
-    <Wrapper style={{ display: 'flex', padding: '16px' }}>
+    <CustomWrapper>
       <ScrollableDiv id="scrollableDiv">
         <InfiniteScroll
           dataLength={20}
@@ -59,7 +59,7 @@ const Leaderboard = () => {
           Forum
         </CustomButton>
       </NavigationDiv>
-    </Wrapper>
+    </CustomWrapper>
   )
 }
 
