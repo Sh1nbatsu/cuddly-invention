@@ -10,7 +10,7 @@ interface CustomLinkProps extends Omit<LinkProps, 'className'> {
 	disabled?: boolean;
 }
 
-const CustomLink = ({ children, variant = 'default', disabled = false, to, ...rest }: CustomLinkProps) => {
+export const CustomLink = ({ children, variant = 'default', disabled = false, to, ...rest }: CustomLinkProps) => {
 	const location = useLocation();
 	const isActive = location.pathname === to;
 
@@ -27,5 +27,3 @@ const CustomLink = ({ children, variant = 'default', disabled = false, to, ...re
 		</Link>
 	);
 };
-
-export default CustomLink;
