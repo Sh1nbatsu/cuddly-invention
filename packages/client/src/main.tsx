@@ -5,16 +5,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { defaultTheme } from './themes/defaultTheme'
-import { ThemeProvider } from 'styled-components'
-import { lightTheme } from '@/styles/theme'
+
 import '../global.css'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ThemeProvider theme={lightTheme}>
-    <ConfigProvider theme={defaultTheme}>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
-    </ConfigProvider>
-  </ThemeProvider>
+  <ConfigProvider theme={defaultTheme}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </ConfigProvider>
 )
