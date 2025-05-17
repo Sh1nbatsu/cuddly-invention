@@ -2,6 +2,7 @@ export const defaultTheme = {
   token: {
     borderRadius: 6,
     colorBgBase: '#fff',
+    colorBgPrimary: '#121212',
     colorError: '#ff4d4f',
     colorInfo: '#1677ff',
     colorLink: '#1677ff',
