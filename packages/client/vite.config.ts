@@ -22,35 +22,34 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', '**/*.{js,css,html,ico,png,svg}'],
-      strategies: 'injectManifest',
-      srcDir: 'src/sw',
-      filename: 'sw.ts',
+      strategies: 'generateSW',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-      },
-      manifest: {
-        name: 'My Clicker',
-        short_name: 'Clicker',
-        theme_color: '#ffffff',
-        icons: [
+        runtimeCaching: [
           {
-            src: 'pwa-192x192.png', // Эти имена файлов плагин сгенерирует сам
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any maskable',
+            urlPattern: /\.(?:png|jpg|jpeg|svg|ico)$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'images-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
+            },
           },
           {
-            src: 'pwa-512x512.png', // И этот тоже
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
+            urlPattern: /\.(?:js|css)$/,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'assets-cache',
+            },
           },
         ],
       },
       devOptions: {
-        enabled: true,
+        enabled: process.env.NODE_ENV === 'development',
         type: 'module',
+        navigateFallback: 'index.html',
       },
     }),
   ],

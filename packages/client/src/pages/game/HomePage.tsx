@@ -1,12 +1,13 @@
-import Wrapper from '@/components/Wrapper'
 import Header from '@/components/Header'
+import Wrapper from '@/components/Wrapper'
 import { Canvas } from '@/components/game/Canvas'
+import { useServiceWorker } from '@/hooks/useServiceWorker'
 
 const HomePage = () => {
+  useServiceWorker()
   return (
     <Wrapper>
       <Header />
-
       <div
         style={{
           display: 'flex',
