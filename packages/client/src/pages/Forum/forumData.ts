@@ -1,27 +1,6 @@
-export interface ForumComment {
-  id: number
-  author: string
-  text: string
-  date: string
-  replies: ForumComment[]
-}
-
-export interface Topic {
-  id: number
-  title: string
-  author: string
-  text: string
-  date: string
-  comments: ForumComment[]
-}
+import type { ForumComment, Topic, StoredData } from '@/types/forumData'
 
 const LS_KEY = 'forumData'
-
-interface StoredData {
-  topics: Topic[]
-  nextTopicId: number
-  nextCommentId: number
-}
 
 const now = () =>
   new Date().toLocaleString('ru-RU', {
@@ -309,3 +288,4 @@ export const deleteComment = (topicId: number, commentId: number): boolean => {
 }
 
 export { topics }
+export type { Topic, ForumComment }

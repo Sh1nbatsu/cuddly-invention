@@ -1,24 +1,15 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
-import {
-  Layout,
-  Typography,
-  Card,
-  List,
-  Tooltip,
-  Form,
-  Input,
-  Button,
-  Modal,
-} from 'antd'
+import { Button, Card, List, Input, Tooltip, Typography, Modal } from 'antd'
 import {
   DeleteOutlined,
   ArrowLeftOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons'
+import { useForm, Controller } from 'react-hook-form'
 import Wrapper from '@/components/Wrapper'
 import Header from '@/components/Header'
+import { TopicNotFound } from '@/components/Forum/TopicNotFound'
 import {
   getTopicById,
   addComment,
@@ -27,30 +18,14 @@ import {
   Topic,
   ForumComment,
 } from './forumData'
+import { PageContainer, CommentCard, TopActions } from './styled'
 
-const { Content } = Layout
 const { Title, Text } = Typography
 const { confirm } = Modal
 
-const PageContainer = styled(Content)`
-  padding: 24px;
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-`
+type CommentFormData = { text: string }
 
-const CommentCard = styled(Card)<{ $nested?: boolean }>`
-  margin-bottom: 12px;
-  ${({ $nested }) => $nested && 'margin-left: 32px;'}
-`
-
-const TopActions = styled.div`
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-`
-
-export const TopicPage: React.FC = () => {
+export const TopicPage = () => {
   const { topicId } = useParams()
   const navigate = useNavigate()
 
@@ -58,34 +33,33 @@ export const TopicPage: React.FC = () => {
   const initial = getTopicById(id)
   const [topic, setTopic] = useState<Topic | null>(initial)
   const [replyTarget, setReplyTarget] = useState<number | null>(null)
-  const [commentForm] = Form.useForm()
+
+  const {
+    control: plainControl,
+    handleSubmit: handlePlainSubmit,
+    reset: resetPlain,
+    formState: { errors: plainErrors },
+  } = useForm<CommentFormData>()
 
   if (!topic) {
-    return (
-      <Wrapper>
-        <Header />
-        <PageContainer>
-          <Title level={3}>Тема не найдена</Title>
-        </PageContainer>
-      </Wrapper>
-    )
+    return <TopicNotFound />
   }
 
-  const refresh = () => setTopic(getTopicById(topic.id))
+  const refresh = (): void => setTopic(getTopicById(topic.id))
 
-  const addPlain = ({ text }: { text: string }) => {
+  const addPlain = ({ text }: CommentFormData): void => {
     addComment(topic.id, text.trim())
     refresh()
-    commentForm.resetFields()
+    resetPlain()
   }
 
-  const addReply = (txt: string, pid: number) => {
+  const addReply = (txt: string, pid: number): void => {
     addComment(topic.id, txt.trim(), pid)
     refresh()
     setReplyTarget(null)
   }
 
-  const askDeleteTopic = () => {
+  const askDeleteTopic = (): void => {
     confirm({
       title: 'Удалить тему целиком?',
       icon: <ExclamationCircleOutlined />,
@@ -99,9 +73,10 @@ export const TopicPage: React.FC = () => {
     })
   }
 
-  const askDeleteComment = (cid: number) => {
+  const askDeleteComment = (cid: number): void => {
     confirm({
       title: 'Удалить комментарий?',
+      icon: <ExclamationCircleOutlined />,
       okText: 'Удалить',
       okType: 'danger',
       cancelText: 'Отмена',
@@ -113,33 +88,43 @@ export const TopicPage: React.FC = () => {
   }
 
   const ReplyForm: React.FC<{ pid: number }> = ({ pid }) => {
-    const [form] = Form.useForm()
+    const {
+      control,
+      handleSubmit,
+      reset,
+      formState: { errors },
+    } = useForm<CommentFormData>()
 
-    const submit = ({ text }: { text: string }) => {
+    const submit = ({ text }: CommentFormData): void => {
       addReply(text, pid)
-      form.resetFields()
+      reset()
     }
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault()
-        form.submit()
+        handleSubmit(submit)()
       }
     }
 
     return (
-      <Form form={form} onFinish={submit} style={{ marginTop: 8 }}>
-        <Form.Item
+      <form onSubmit={handleSubmit(submit)} style={{ marginTop: 8 }}>
+        <Controller
           name="text"
-          rules={[{ required: true, message: 'Введите текст' }]}>
-          <Input.TextArea
-            autoSize
-            placeholder="Ваш ответ…"
-            onKeyDown={handleKeyDown}
-            autoFocus
-          />
-        </Form.Item>
-        <Form.Item style={{ marginBottom: 0 }}>
+          control={control}
+          rules={{ required: 'Введите текст ответа' }}
+          render={({ field }) => (
+            <Input.TextArea
+              {...field}
+              autoSize
+              placeholder="Ваш ответ…"
+              onKeyDown={onKeyDown}
+              autoFocus
+            />
+          )}
+        />
+        {errors.text && <Text type="danger">{errors.text.message}</Text>}
+        <div style={{ marginTop: 8 }}>
           <Button type="primary" htmlType="submit" size="small">
             Ответить
           </Button>
@@ -149,8 +134,8 @@ export const TopicPage: React.FC = () => {
             onClick={() => setReplyTarget(null)}>
             Отмена
           </Button>
-        </Form.Item>
-      </Form>
+        </div>
+      </form>
     )
   }
 
@@ -223,20 +208,29 @@ export const TopicPage: React.FC = () => {
         <Card
           title="Добавить комментарий"
           style={{ width: '100%', marginTop: 32 }}>
-          <Form form={commentForm} layout="vertical" onFinish={addPlain}>
-            <Form.Item
+          <form onSubmit={handlePlainSubmit(addPlain)}>
+            <Controller
               name="text"
-              rules={[
-                { required: true, message: 'Введите текст комментария' },
-              ]}>
-              <Input.TextArea rows={4} placeholder="Введите текст…" />
-            </Form.Item>
-            <Form.Item>
+              control={plainControl}
+              rules={{ required: 'Введите текст комментария' }}
+              render={({ field }) => (
+                <Input.TextArea
+                  rows={4}
+                  placeholder="Введите текст…"
+                  {...field}
+                />
+              )}
+            />
+            {plainErrors.text && (
+              <Text type="danger">{plainErrors.text.message}</Text>
+            )}
+
+            <div style={{ marginTop: 12 }}>
               <Button type="primary" htmlType="submit" block>
                 Отправить
               </Button>
-            </Form.Item>
-          </Form>
+            </div>
+          </form>
         </Card>
       </PageContainer>
     </Wrapper>

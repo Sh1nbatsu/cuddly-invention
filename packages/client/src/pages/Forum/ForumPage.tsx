@@ -1,20 +1,13 @@
-// ForumPage.tsx
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import {
-  Layout,
-  Typography,
-  List,
-  Card,
-  Form,
-  Input,
-  Button,
-  Modal,
-} from 'antd'
+import { Layout, Typography, List, Card, Button, Modal } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
+import { useForm } from 'react-hook-form'
+
 import Wrapper from '@/components/Wrapper'
 import Header from '@/components/Header'
+import { FormInput } from '@/components/FormInput/FormInput'
 import { topics, addTopic, deleteTopic, Topic } from './forumData'
 
 const { Content } = Layout
@@ -38,15 +31,31 @@ const DeleteButton = styled(Button)`
   right: 8px;
 `
 
+const TitleStyled = styled(Title)`
+  margin-bottom: 24px !important;
+`
+
+const CardContainer = styled(Card)`
+  margin-top: 40px;
+`
+
+interface NewTopic {
+  title: string
+  text: string
+}
+
 export const ForumPage: React.FC = () => {
   const navigate = useNavigate()
   const [data, setData] = useState<Topic[]>([...topics])
 
+  const { control, handleSubmit, reset } = useForm<NewTopic>()
+
   const refresh = () => setData([...topics])
 
-  const create = (v: { title: string; text: string }) => {
+  const create = (v: NewTopic) => {
     addTopic(v.title.trim(), v.text.trim())
     refresh()
+    reset()
   }
 
   const askDelete = (id: number) => {
@@ -67,9 +76,7 @@ export const ForumPage: React.FC = () => {
     <Wrapper>
       <Header />
       <PageContainer as="main">
-        <Title level={2} style={{ marginBottom: 24 }}>
-          Форум
-        </Title>
+        <TitleStyled level={2}>Форум</TitleStyled>
 
         <List
           itemLayout="vertical"
@@ -97,28 +104,32 @@ export const ForumPage: React.FC = () => {
           )}
         />
 
-        <Card title="Создать тему" style={{ marginTop: 40 }}>
-          <Form layout="vertical" onFinish={create}>
-            <Form.Item
+        <CardContainer title="Создать тему">
+          <form onSubmit={handleSubmit(create)}>
+            <FormInput
+              control={control}
               name="title"
               label="Заголовок"
-              rules={[{ required: true, message: 'Введите заголовок' }]}>
-              <Input />
-            </Form.Item>
-            <Form.Item
+              rules={{ required: 'Введите заголовок темы' }}
+              inputProps={{ placeholder: 'Заголовок темы' }}
+            />
+            <FormInput
+              control={control}
               name="text"
-              label="Текст"
-              rules={[{ required: true, message: 'Введите содержимое' }]}>
-              <Input.TextArea rows={4} />
-            </Form.Item>
-            <Form.Item>
+              label="Содержимое темы"
+              inputProps={{ placeholder: 'Содержимое темы' }}
+              rules={{ required: 'Введите содержимое темы' }}
+            />
+            <div style={{ marginTop: 16 }}>
               <Button type="primary" htmlType="submit" block>
                 Создать
               </Button>
-            </Form.Item>
-          </Form>
-        </Card>
+            </div>
+          </form>
+        </CardContainer>
       </PageContainer>
     </Wrapper>
   )
 }
+
+export default ForumPage
