@@ -1,11 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useRouteError, isRouteErrorResponse } from 'react-router-dom'
-import { Typography } from 'antd'
-import Wrapper from '@/components/Wrapper'
-import Header from '@/components/Header'
 import { CustomLink } from '@/components/CustomLink/CustomLink'
+import { Header } from '@/components/Header/Header'
+import Wrapper from '@/components/Wrapper'
 import { ErrorConfig } from '@/config/errorConfig'
+import { Typography } from 'antd'
+import React from 'react'
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Page = styled.div`
   display: flex;

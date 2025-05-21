@@ -1,10 +1,8 @@
-import Header from '@/components/Header'
+import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
 import { Canvas } from '@/components/game/Canvas'
-import { useServiceWorker } from '@/hooks/useServiceWorker'
 
 const HomePage = () => {
-  useServiceWorker()
   return (
     <Wrapper>
       <Header />
