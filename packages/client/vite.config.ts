@@ -21,35 +21,28 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
-      strategies: 'generateSW',
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-        runtimeCaching: [
+      registerType: 'prompt',
+      strategies: 'injectManifest',
+      srcDir: 'src/sw',
+      filename: 'sw.ts',
+      manifest: {
+        name: 'My Custom PWA',
+        short_name: 'CustomPWA',
+        theme_color: '#ffffff',
+        icons: [
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|ico)$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'images-cache',
-              expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60,
-              },
-            },
-          },
-          {
-            urlPattern: /\.(?:js|css)$/,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'assets-cache',
-            },
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
           },
         ],
       },
       devOptions: {
-        enabled: process.env.NODE_ENV === 'development',
-        type: 'module',
-        navigateFallback: 'index.html',
+        enabled: false,
+      },
+      injectManifest: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
     }),
   ],
