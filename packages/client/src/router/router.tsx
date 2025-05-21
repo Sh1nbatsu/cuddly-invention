@@ -5,6 +5,7 @@ import HomePage from '@/pages/game/HomePage'
 import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { Login } from '@/pages/auth/Login'
 import { Registration } from '@/pages/auth/Registration'
+import Leaderboard from '@/pages/game/leaderboard/LeaderboardPage'
 import { ForumPage } from '@/pages/Forum/ForumPage'
 import { TopicPage } from '@/pages/Forum/TopicPage'
 
@@ -45,5 +46,10 @@ export const router = createBrowserRouter([
   {
     path: '*',
     element: <ErrorPage config={NOT_FOUND_ERROR} />,
+  },
+  {
+    path: '/game/leaderboard',
+    element: <Leaderboard />,
+    errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
 ])
