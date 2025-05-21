@@ -13,30 +13,29 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({
   logo = 'Дино Кликер',
   navItems = [
+    { to: '/forum', text: 'Форум' },
     { to: '/leaderboard', text: 'Таблица лидеров' },
     { to: '/sign-up', text: 'Авторизация' },
   ],
-}) => {
-  return (
-    <header
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: '16px 0',
-      }}>
-      <CustomLink to="/" variant="retro">
-        {logo}
-      </CustomLink>
+}) => (
+  <header
+    style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      padding: '16px 0',
+    }}>
+    <CustomLink to="/" variant="retro">
+      {logo}
+    </CustomLink>
 
-      <nav style={{ display: 'flex', gap: '16px' }}>
-        {navItems.map((item, index) => (
-          <CustomLink key={index} to={item.to} variant="retro">
-            {item.text}
-          </CustomLink>
-        ))}
-      </nav>
-    </header>
-  )
-}
+    <nav style={{ display: 'flex', gap: '16px' }}>
+      {navItems.map((item, index) => (
+        <CustomLink key={index} to={item.to} variant="retro">
+          {item.text}
+        </CustomLink>
+      ))}
+    </nav>
+  </header>
+)
 
 export default Header
