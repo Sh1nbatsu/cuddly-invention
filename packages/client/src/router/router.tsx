@@ -6,10 +6,9 @@ import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { Login } from '@/pages/auth/Login'
 import { Registration } from '@/pages/auth/Registration'
 import Leaderboard from '@/pages/game/leaderboard/LeaderboardPage'
-import { ForumPage } from '@/pages/Forum/ForumPage'
-import { TopicPage } from '@/pages/Forum/TopicPage'
 
 import { authRoutes } from './auth/auth'
+import { forumRoutes } from '@/router/forum/forum'
 import { PAGE_ERROR, NOT_FOUND_ERROR } from '@/config/errorConfig'
 
 export const router = createBrowserRouter([
@@ -23,6 +22,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
   authRoutes,
+  forumRoutes,
   {
     path: '/sign-up',
     element: <Registration />,
@@ -31,16 +31,6 @@ export const router = createBrowserRouter([
   {
     path: '/sign-in',
     element: <Login />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
-  },
-  {
-    path: '/forum',
-    element: <ForumPage />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
-  },
-  {
-    path: '/forum/:topicId',
-    element: <TopicPage />,
     errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
   {
