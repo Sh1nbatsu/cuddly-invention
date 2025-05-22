@@ -28,7 +28,7 @@ swSelf.addEventListener('install', (event: ExtendableEvent) => {
   )
 })
 
-swSelf.addEventListener('fetch', (event: FetchEvent) => {
+swSelf.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       if (response) return response
@@ -41,6 +41,13 @@ swSelf.addEventListener('fetch', (event: FetchEvent) => {
         caches.open(CACHE_NAME).then(cache => {
           cache.put(event.request, responseToCache)
         })
+        console.log(
+          {
+            event: event.request,
+            responseToCache,
+          },
+          'my data'
+        )
         return response
       })
     })
