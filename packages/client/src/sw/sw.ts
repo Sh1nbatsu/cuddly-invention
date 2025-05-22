@@ -3,7 +3,7 @@
 /// <reference types="vite-plugin-pwa/info" />
 
 const CACHE_NAME = 'my-custom-cache-v1'
-const STATIC_ASSETS = ['/', '/index.html', '/manifest.json']
+const STATIC_ASSETS = ['/', '/index.html']
 
 const swSelf = self as unknown as ServiceWorkerGlobalScope
 
