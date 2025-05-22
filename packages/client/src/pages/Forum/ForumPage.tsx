@@ -1,14 +1,14 @@
+import { DeleteOutlined } from '@ant-design/icons'
+import { Button, Card, Layout, List, Modal, Typography } from 'antd'
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { Layout, Typography, List, Card, Button, Modal } from 'antd'
-import { DeleteOutlined } from '@ant-design/icons'
-import { useForm } from 'react-hook-form'
 
-import Wrapper from '@/components/Wrapper'
-import Header from '@/components/Header'
 import { FormInput } from '@/components/FormInput/FormInput'
-import { topics, addTopic, deleteTopic, Topic } from './forumData'
+import { Header } from '@/components/Header/Header'
+import Wrapper from '@/components/Wrapper'
+import { addTopic, deleteTopic, Topic, topics } from './forumData'
 
 const { Content } = Layout
 const { Title, Text } = Typography

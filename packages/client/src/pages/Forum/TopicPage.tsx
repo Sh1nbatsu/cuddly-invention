@@ -1,24 +1,24 @@
-import React, { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Button, Card, List, Input, Tooltip, Typography, Modal } from 'antd'
+import { TopicNotFound } from '@/components/Forum/TopicNotFound'
+import { Header } from '@/components/Header/Header'
+import Wrapper from '@/components/Wrapper'
 import {
-  DeleteOutlined,
   ArrowLeftOutlined,
+  DeleteOutlined,
   ExclamationCircleOutlined,
 } from '@ant-design/icons'
-import { useForm, Controller } from 'react-hook-form'
-import Wrapper from '@/components/Wrapper'
-import Header from '@/components/Header'
-import { TopicNotFound } from '@/components/Forum/TopicNotFound'
+import { Button, Card, Input, List, Modal, Tooltip, Typography } from 'antd'
+import React, { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
-  getTopicById,
   addComment,
   deleteComment,
   deleteTopic,
-  Topic,
   ForumComment,
+  getTopicById,
+  Topic,
 } from './forumData'
-import { PageContainer, CommentCard, TopActions } from './styled'
+import { CommentCard, PageContainer, TopActions } from './styled'
 
 const { Title, Text } = Typography
 const { confirm } = Modal
