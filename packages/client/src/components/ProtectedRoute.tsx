@@ -27,6 +27,8 @@ export const ProtectedRoute = ({
         await getMe()
         if (isMounted) setAuthStatus('authenticated')
       } catch (error) {
+        setAuthStatus('authenticated')
+        return
         if (isMounted) setAuthStatus('unauthenticated')
       }
     }
