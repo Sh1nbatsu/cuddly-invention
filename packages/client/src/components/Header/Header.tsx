@@ -8,6 +8,7 @@ interface HeaderProps {
 }
 
 const NAV_ITEMS = [
+  { to: '/forum', text: 'Форум' },
   { to: '/leaderboard', text: 'Таблица лидеров' },
   { to: '/sign-up', text: 'Авторизация' },
 ]
