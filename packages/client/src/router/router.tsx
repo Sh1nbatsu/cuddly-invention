@@ -31,12 +31,16 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
   {
-    path: '*',
-    element: <ErrorPage config={NOT_FOUND_ERROR} />,
+    path: '/game/leaderboard',
+    element: (
+      <ProtectedRoute>
+        <Leaderboard />
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
   {
-    path: '/game/leaderboard',
-    element: <Leaderboard />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
+    path: '*',
+    element: <ErrorPage config={NOT_FOUND_ERROR} />,
   },
 ])
