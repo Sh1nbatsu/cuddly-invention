@@ -1,9 +1,10 @@
 import {
   createContext,
-  useContext,
   useEffect,
   useState,
   ReactNode,
+  useCallback,
+  useMemo,
 } from 'react'
 import {
   login as apiLogin,
@@ -22,44 +23,65 @@ interface AuthContextValue {
   logout(): Promise<void>
 }
 
-export const AuthContext = createContext<AuthContextValue>(
-  {} as AuthContextValue
-)
+const AuthContext = createContext<AuthContextValue>({} as AuthContextValue)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    getMe()
-      .then(setUser)
-      .finally(() => setLoading(false))
+    let isMounted = true
+
+    const init = async () => {
+      try {
+        const currentUser = await getMe()
+        if (isMounted) setUser(currentUser)
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+
+    init()
+
+    return () => {
+      isMounted = false
+    }
   }, [])
 
-  const login = async (data: LoginFormData) => {
+  const login = useCallback(async (data: LoginFormData) => {
     setLoading(true)
-    const u = await apiLogin(data)
-    setUser(u)
-    setLoading(false)
-  }
+    try {
+      const u = await apiLogin(data)
+      setUser(u)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
 
-  const register = async (data: RegisterFormData) => {
+  const register = useCallback(async (data: RegisterFormData) => {
     setLoading(true)
-    const u = await apiRegister(data)
-    setUser(u)
-    setLoading(false)
-  }
+    try {
+      const u = await apiRegister(data)
+      setUser(u)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
 
-  const logout = async () => {
-    await apiLogout()
-    setUser(null)
-  }
+  const logout = useCallback(async () => {
+    setLoading(true)
+    try {
+      await apiLogout()
+      setUser(null)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
 
-  return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({ user, loading, login, register, logout }),
+    [user, loading, login, register, logout]
   )
-}
 
-export const useAuth = () => useContext(AuthContext)
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+}
