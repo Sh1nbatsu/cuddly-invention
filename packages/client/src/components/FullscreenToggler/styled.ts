@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons'
 
 export const FullscreenButton = styled.button`
   position: absolute;
@@ -11,7 +12,14 @@ export const FullscreenButton = styled.button`
   cursor: pointer;
 `
 
-export const FullscreenButtonImg = styled.img`
-  width: 40px;
-  height: 36px;
+export const FullscreenOpen = styled(FullscreenOutlined)`
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
+`
+
+export const FullscreenClose = styled(FullscreenExitOutlined)`
+  height: 32px;
+  width: 32px;
+  font-size: 32px;
 `

@@ -1,26 +1,12 @@
-import { useState } from 'react'
-
-import { FullscreenButton, FullscreenButtonImg } from './styled'
+import { useFullscreen } from '@/hooks/useFullscreen'
+import { FullscreenButton, FullscreenClose, FullscreenOpen } from './styled'
 
 export const FullscreenToggler = () => {
-  const [isFullscreen, setIsFullscreen] = useState(false)
-
-  const toggleFullscreen = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen()
-      setIsFullscreen(false)
-    } else if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen()
-      setIsFullscreen(true)
-    }
-  }
+  const { isFullscreen, toggleFullscreen } = useFullscreen()
 
   return (
     <FullscreenButton title="Toggle fullscreen" onClick={toggleFullscreen}>
-      <FullscreenButtonImg
-        src={isFullscreen ? '/fullscreen_close.svg' : '/fullscreen_open.svg'}
-        alt="toggle_fullscreen"
-      />
+      {isFullscreen ? <FullscreenClose /> : <FullscreenOpen />}
     </FullscreenButton>
   )
 }
