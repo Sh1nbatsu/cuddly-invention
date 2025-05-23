@@ -1,8 +1,8 @@
-import React from 'react'
-import { Typography } from 'antd'
+import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
-import Header from '@/components/Header'
 import { PageContainer } from '@/pages/Forum/styled'
+import { Typography } from 'antd'
+import React from 'react'
 
 const { Title } = Typography
 

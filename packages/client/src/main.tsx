@@ -1,14 +1,19 @@
+import { ConfigProvider } from 'antd'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ConfigProvider } from 'antd'
-import { ThemeProvider } from 'styled-components'
 import { RouterProvider } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
 import 'antd/dist/reset.css'
-import { defaultTheme } from './themes/defaultTheme'
-import { router } from './router/router'
 import { AuthProvider } from '@/context/AuthContext'
 import '../global.css'
+import { router } from './router/router'
+import { registerServiceWorker } from './sw/register'
+import { defaultTheme } from './themes/defaultTheme'
+
+if (import.meta.env.PROD) {
+  registerServiceWorker()
+}
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ConfigProvider theme={defaultTheme}>
