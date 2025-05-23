@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 
 export interface UserState {
   id: number | null
@@ -11,8 +10,6 @@ export interface UserState {
   avatar?: string | null
   email: string | null
 }
-
-// Не знаю является ли такая запись лучшей практикой
 
 const initialState: UserState = {
   id: null,
@@ -55,5 +52,3 @@ export const { setUser, clearUser, setAvatar, setDisplayName } =
   userSlice.actions
 
 export const userReducer = userSlice.reducer
-
-// Отдельные редюсеры для аватара и имени, так как они меняются только отдельно
