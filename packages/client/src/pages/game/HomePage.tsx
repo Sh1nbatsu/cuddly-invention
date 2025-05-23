@@ -1,12 +1,11 @@
+import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
-import Header from '@/components/Header'
 import { Canvas } from '@/components/game/Canvas'
 
 const HomePage = () => {
   return (
     <Wrapper>
       <Header />
-
       <div
         style={{
           display: 'flex',
