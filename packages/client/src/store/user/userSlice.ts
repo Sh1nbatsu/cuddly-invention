@@ -29,7 +29,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: initialState,
   reducers: {
-    setUser: (state: UserState, action: PayloadAction<UserState>) => {
+    setUser: (state: UserState, action) => {
       state.id = action.payload.id
       state.first_name = action.payload.first_name
       state.second_name = action.payload.second_name
@@ -39,20 +39,13 @@ export const userSlice = createSlice({
       state.avatar = action.payload?.avatar || null
       state.email = action.payload.email
     },
-    clearUser: (state: UserState) => {
-      state.id = null
-      state.first_name = null
-      state.second_name = null
-      state.display_name = null
-      state.phone = null
-      state.login = null
-      state.avatar = null
-      state.email = null
+    clearUser: () => {
+      return initialState
     },
-    setAvatar: (state: UserState, action: PayloadAction<string>) => {
+    setAvatar: (state: UserState, action) => {
       state.avatar = action.payload
     },
-    setDisplayName: (state: UserState, action: PayloadAction<string>) => {
+    setDisplayName: (state: UserState, action) => {
       state.display_name = action.payload
     },
   },
@@ -61,6 +54,6 @@ export const userSlice = createSlice({
 export const { setUser, clearUser, setAvatar, setDisplayName } =
   userSlice.actions
 
-export default userSlice.reducer
+export const userReducer = userSlice.reducer
 
 // Отдельные редюсеры для аватара и имени, так как они меняются только отдельно
