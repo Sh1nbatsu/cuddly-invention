@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
 
-export const FullscreenButton = styled.button`
+export const FullscreenButton = styled(Button)`
   position: absolute;
   top: 10px;
   right: 10px;
@@ -10,7 +11,10 @@ export const FullscreenButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.1s;
+  box-shadow: none;
 `
+// Box shadow можно заменить если нужно выделить кнопку
 
 export const FullscreenOpen = styled(FullscreenOutlined)`
   height: 32px;

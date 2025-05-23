@@ -5,7 +5,7 @@ export const FullscreenToggler = () => {
   const { isFullscreen, toggleFullscreen } = useFullscreen()
 
   return (
-    <FullscreenButton title="Toggle fullscreen" onClick={toggleFullscreen}>
+    <FullscreenButton title="Полноэкранный режим" onClick={toggleFullscreen}>
       {isFullscreen ? <FullscreenClose /> : <FullscreenOpen />}
     </FullscreenButton>
   )
