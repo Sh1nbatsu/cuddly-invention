@@ -8,6 +8,8 @@ import {
   CustomWrapper,
 } from './Leaderboard.styled'
 
+import { FullscreenToggler } from '@/components/FullscreenToggler/FullscreenToggler'
+
 const Leaderboard = () => {
   const loadMoreData = () => {
     console.log('Loading more data...')
@@ -15,6 +17,7 @@ const Leaderboard = () => {
 
   return (
     <CustomWrapper>
+      <FullscreenToggler />
       <ScrollableDiv id="scrollableDiv">
         <InfiniteScroll
           dataLength={20}
