@@ -5,6 +5,7 @@ import HomePage from '@/pages/game/HomePage'
 import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { Login } from '@/pages/auth/Login'
 import { Registration } from '@/pages/auth/Registration'
+import Leaderboard from '@/pages/game/leaderboard/LeaderboardPage'
 import { authRoutes } from './auth/auth'
 import { PAGE_ERROR, NOT_FOUND_ERROR } from '@/config/errorConfig'
 
@@ -32,5 +33,10 @@ export const router = createBrowserRouter([
   {
     path: '*',
     element: <ErrorPage config={NOT_FOUND_ERROR} />,
+  },
+  {
+    path: '/game/leaderboard',
+    element: <Leaderboard />,
+    errorElement: <ErrorPage config={PAGE_ERROR} />,
   },
 ])
