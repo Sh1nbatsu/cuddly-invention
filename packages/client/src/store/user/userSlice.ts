@@ -1,0 +1,54 @@
+import { createSlice } from '@reduxjs/toolkit'
+
+export interface UserState {
+  id: number | null
+  first_name: string | null
+  second_name: string | null
+  display_name?: string | null
+  phone: string | null
+  login: string | null
+  avatar?: string | null
+  email: string | null
+}
+
+const initialState: UserState = {
+  id: null,
+  first_name: null,
+  second_name: null,
+  display_name: null,
+  phone: null,
+  login: null,
+  avatar: null,
+  email: null,
+}
+
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: initialState,
+  reducers: {
+    setUser: (state: UserState, action) => {
+      state.id = action.payload.id
+      state.first_name = action.payload.first_name
+      state.second_name = action.payload.second_name
+      state.display_name = action.payload?.display_name || null
+      state.phone = action.payload.phone
+      state.login = action.payload.login
+      state.avatar = action.payload?.avatar || null
+      state.email = action.payload.email
+    },
+    clearUser: () => {
+      return initialState
+    },
+    setAvatar: (state: UserState, action) => {
+      state.avatar = action.payload
+    },
+    setDisplayName: (state: UserState, action) => {
+      state.display_name = action.payload
+    },
+  },
+})
+
+export const { setUser, clearUser, setAvatar, setDisplayName } =
+  userSlice.actions
+
+export const userReducer = userSlice.reducer
