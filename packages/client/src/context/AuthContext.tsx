@@ -23,7 +23,9 @@ interface AuthContextValue {
   logout(): Promise<void>
 }
 
-const AuthContext = createContext<AuthContextValue>({} as AuthContextValue)
+export const AuthContext = createContext<AuthContextValue>(
+  {} as AuthContextValue
+)
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null)

@@ -9,7 +9,7 @@ export const withAuth = <P extends object>(Wrapped: ComponentType<P>) => {
     const location = useLocation()
 
     if (loading) return <FullPageLoader />
-    if (!user)
+    if (!user?.id)
       return <Navigate to="/sign-in" state={{ from: location }} replace />
 
     return <Wrapped {...props} />
