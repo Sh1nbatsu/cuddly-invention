@@ -4,7 +4,6 @@ import {
   useState,
   ReactNode,
   useCallback,
-  useMemo,
 } from 'react'
 import {
   login as apiLogin,
@@ -80,10 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [])
 
-  const value = useMemo(
-    () => ({ user, loading, login, register, logout }),
-    [user, loading, login, register, logout]
-  )
+  const value: AuthContextValue = { user, loading, login, register, logout }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
