@@ -1,9 +1,10 @@
+import { useGame } from '@/hooks/useGame'
 import React, {
-  useRef,
-  useEffect,
-  useState,
   useCallback,
+  useEffect,
   useLayoutEffect,
+  useRef,
+  useState,
 } from 'react'
 
 const TARGET_RADIUS = 80
@@ -13,14 +14,11 @@ const LOCAL_STORAGE_KEY = 'score'
 
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3)
 
-export const Canvas: React.FC = () => {
+export const GameClicker = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const containerRef = useRef<HTMLDivElement | null>(null)
 
-  const [score, setScore] = useState(() => {
-    const storedScore = localStorage.getItem(LOCAL_STORAGE_KEY)
-    return storedScore ? parseInt(storedScore, 10) : 0
-  })
+  const { score, setScore } = useGame()
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
   const [radius, setRadius] = useState(TARGET_RADIUS)
@@ -90,7 +88,7 @@ export const Canvas: React.FC = () => {
       const dy = y - targetPos.current.y
 
       if (dx * dx + dy * dy <= radius * radius) {
-        setScore(prev => prev + 1)
+        setScore((prev: number) => prev + 1)
         animateRadius(TARGET_RADIUS, MIN_RADIUS, 100)
       }
     },
