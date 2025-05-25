@@ -1,6 +1,7 @@
+import { GameRootContent } from '@/components/Game/GameRootContent'
 import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
-import { Canvas } from '@/components/game/Canvas'
+import { GameProvider } from '@/context/GameContext'
 
 const HomePage = () => {
   return (
@@ -13,7 +14,9 @@ const HomePage = () => {
           alignItems: 'center',
           height: 'calc(100vh - 74px - 74px)',
         }}>
-        <Canvas />
+        <GameProvider>
+          <GameRootContent />
+        </GameProvider>
       </div>
     </Wrapper>
   )
