@@ -1,0 +1,117 @@
+type AutoclickUpgrade = {
+  id: string
+  name: string
+  baseCost: number
+  basePower: number
+  getCost: (amount: number) => number
+  getPower: (amount: number) => number
+}
+
+export function getLevel(amount: number): number {
+  return Math.floor(amount / 25)
+}
+
+function calculateUpgradeCost(
+  baseCost: number,
+  amount: number,
+  growthRate: number
+): number {
+  const level = getLevel(amount)
+  const costMultiplier = Math.pow(growthRate, amount)
+  return Math.floor(baseCost * costMultiplier * Math.pow(2, level))
+}
+
+function calculateUpgradePower(
+  basePower: number,
+  amount: number,
+  powerGrowthRate = 1.5
+): number {
+  if (amount === 0) return 0
+
+  const level = getLevel(amount)
+  const rawPower = basePower * Math.pow(powerGrowthRate, level)
+  return Number(rawPower.toFixed(2))
+}
+
+export const autoclickUpgrades: ReadonlyArray<AutoclickUpgrade> = [
+  {
+    id: 'autoclick_1',
+    name: 'Камень',
+    baseCost: 4,
+    basePower: 1,
+    getCost: amount => calculateUpgradeCost(4, amount, 1.05),
+    getPower: amount => calculateUpgradePower(1, amount),
+  },
+  {
+    id: 'autoclick_2',
+    name: 'Кактус',
+    baseCost: 60,
+    basePower: 8,
+    getCost: amount => calculateUpgradeCost(60, amount, 1.07),
+    getPower: amount => calculateUpgradePower(8, amount),
+  },
+  {
+    id: 'autoclick_3',
+    name: 'Птеродактиль',
+    baseCost: 480,
+    basePower: 48,
+    getCost: amount => calculateUpgradeCost(480, amount, 1.06),
+    getPower: amount => calculateUpgradePower(48, amount),
+  },
+  {
+    id: 'autoclick_4',
+    name: 'Тираннозавр',
+    baseCost: 3840,
+    basePower: 288,
+    getCost: amount => calculateUpgradeCost(3840, amount, 1.05),
+    getPower: amount => calculateUpgradePower(288, amount),
+  },
+  {
+    id: 'autoclick_5',
+    name: 'Кибердинозавр',
+    baseCost: 30720,
+    basePower: 1728,
+    getCost: amount => calculateUpgradeCost(30720, amount, 1.04),
+    getPower: amount => calculateUpgradePower(1728, amount),
+  },
+  {
+    id: 'autoclick_6',
+    name: 'Робозавр XT',
+    baseCost: 245760,
+    basePower: 10368,
+    getCost: amount => calculateUpgradeCost(245760, amount, 1.04),
+    getPower: amount => calculateUpgradePower(10368, amount),
+  },
+  {
+    id: 'autoclick_7',
+    name: 'Дино-Бот 3000',
+    baseCost: 1966080,
+    basePower: 62208,
+    getCost: amount => calculateUpgradeCost(1966080, amount, 1.035),
+    getPower: amount => calculateUpgradePower(62208, amount),
+  },
+  {
+    id: 'autoclick_8',
+    name: 'ДиноТрон 9000',
+    baseCost: 15728640,
+    basePower: 373248,
+    getCost: amount => calculateUpgradeCost(15728640, amount, 1.03),
+    getPower: amount => calculateUpgradePower(373248, amount),
+  },
+  {
+    id: 'autoclick_9',
+    name: 'Армагеддон',
+    baseCost: 125829120,
+    basePower: 2239488,
+    getCost: amount => calculateUpgradeCost(125829120, amount, 1.02),
+    getPower: amount => calculateUpgradePower(2239488, amount),
+  },
+  {
+    id: 'autoclick_10',
+    name: 'ДиноСингулярность v∞',
+    baseCost: 1006632960,
+    basePower: 13436928,
+    getCost: amount => calculateUpgradeCost(1006632960, amount, 1.02),
+    getPower: amount => calculateUpgradePower(13436928, amount),
+  },
+]
