@@ -1,13 +1,8 @@
-import styled from 'styled-components'
 import { GameClicker } from './GameClicker'
 import { GameEnd } from './GameEnd'
 import { GameStart } from './GameStart'
 import { useGameLogic } from './hooks/useGameLogic'
-
-const StyledWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`
+import { StyledWrapper } from './styled'
 
 export const GameRootContent = () => {
   const {
