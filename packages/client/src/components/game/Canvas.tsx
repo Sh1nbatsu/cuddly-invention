@@ -20,7 +20,7 @@ export const Canvas: React.FC<CanvasProps> = ({ score, setScore }) => {
 
   const [containerRef, dimensions] = useCanvasSize()
   const { radius, animateRadius } = useRadiusAnimation(TARGET_RADIUS)
-  const { upgrades, getUpgradesTotalPower } = useUpgradesContext()
+  const { getUpgradesTotalPower } = useUpgradesContext()
 
   useEffect(() => {
     targetPos.current = {
@@ -55,16 +55,17 @@ export const Canvas: React.FC<CanvasProps> = ({ score, setScore }) => {
     animateRadius(radius, TARGET_RADIUS, 150)
   }, [radius, animateRadius])
 
+  const power = getUpgradesTotalPower()
+
   useEffect(() => {
     const interval = setInterval(() => {
-      const power = getUpgradesTotalPower()
       if (power > 0) {
         setScore(prev => prev + power)
       }
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [upgrades, getUpgradesTotalPower, setScore])
+  }, [power])
 
   useEffect(() => {
     const canvas = canvasRef.current
