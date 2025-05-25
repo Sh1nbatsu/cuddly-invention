@@ -1,7 +1,7 @@
 import { FC, Dispatch, SetStateAction } from 'react'
 import { CustomButton } from '@/components/CustomButton/CustomButton'
-import { useUpgradesContext } from './provider/upgradesProvider'
-import { getLevel } from '@/components/game/upgrades/autoclick'
+import { useUpgradesContext } from '@/components/Game/provider/upgradesProvider'
+import { getLevel } from '@/components/Game/upgrades/autoclick'
 
 interface SidebarUpgradesProps {
   buyAmount: number

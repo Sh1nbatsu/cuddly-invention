@@ -1,26 +1,9 @@
-import { useState } from 'react'
-
+import { GameRootContent } from '@/components/Game/GameRootContent'
 import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
-
-import { Canvas } from '@/components/game/Canvas'
-import { SidebarUpgrades } from '@/components/game/SidebarUpgrades'
-import { useScore } from '@/components/game/hooks/useScore'
-import { formatNumber } from '@/components/game/utils/utils'
-
-import { UpgradesProvider } from '@/components/game/provider/upgradesProvider'
+import { GameProvider } from '@/context/GameContext'
 
 const HomePage = () => {
-  const [buyAmount, setBuyAmount] = useState(1)
-  const [score, setScoreRaw] = useScore()
-
-  const setScore = (value: number | ((prev: number) => number)) => {
-    setScoreRaw(prev => {
-      const next = typeof value === 'function' ? value(prev) : value
-      return next < 0 ? 0 : next
-    })
-  }
-
   return (
     <Wrapper>
       <Header />
@@ -31,17 +14,9 @@ const HomePage = () => {
           border: '2px solid var(--color-primary)',
           borderRadius: '4px',
         }}>
-        <UpgradesProvider>
-          <SidebarUpgrades
-            buyAmount={buyAmount}
-            setBuyAmount={setBuyAmount}
-            score={score}
-            setScore={setScore}
-            formatNumber={formatNumber}
-          />
-
-          <Canvas score={score} setScore={setScore} />
-        </UpgradesProvider>
+        <GameProvider>
+          <GameRootContent />
+        </GameProvider>
       </div>
     </Wrapper>
   )

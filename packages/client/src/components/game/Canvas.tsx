@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useCallback, MouseEvent } from 'react'
-import { useCanvasSize } from '@/components/game/hooks/useCanvasSize'
-import { useRadiusAnimation } from '@/components/game/hooks/useRadiusAnimation'
-import { useUpgradesContext } from '@/components/game/provider/upgradesProvider'
 
-import { formatNumber, getClickGain } from '@/components/game/utils/utils'
+import { useCanvasSize } from '@/components/Game/hooks/useCanvasSize'
+import { useRadiusAnimation } from '@/components/Game/hooks/useRadiusAnimation'
+import { useUpgradesContext } from '@/components/Game/provider/upgradesProvider'
+
+import { formatNumber, getClickGain } from '@/components/Game/utils/utils'
 
 const TARGET_RADIUS = 80
 const MIN_RADIUS = TARGET_RADIUS * 0.9
@@ -15,7 +16,7 @@ interface CanvasProps {
 }
 
 export const Canvas: React.FC<CanvasProps> = ({ score, setScore }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const targetPos = useRef({ x: 0, y: 0 })
 
   const [containerRef, dimensions] = useCanvasSize()

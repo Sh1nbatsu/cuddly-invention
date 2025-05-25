@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react'
-import { autoclickUpgrades } from '@/components/game/upgrades/autoclick'
+import { autoclickUpgrades } from '@/components/Game/upgrades/autoclick'
 
 type Upgrade = {
   id: string
