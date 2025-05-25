@@ -1,84 +1,36 @@
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-  useLayoutEffect,
-} from 'react'
+import React, { useRef, useEffect, useCallback, MouseEvent } from 'react'
+import { useCanvasSize } from '@/components/game/hooks/useCanvasSize'
+import { useRadiusAnimation } from '@/components/game/hooks/useRadiusAnimation'
+import { useUpgradesContext } from '@/components/game/provider/upgradesProvider'
+
+import { formatNumber, getClickGain } from '@/components/game/utils/utils'
 
 const TARGET_RADIUS = 80
 const MIN_RADIUS = TARGET_RADIUS * 0.9
 const TEXT_OFFSET = 50
-const LOCAL_STORAGE_KEY = 'score'
 
-const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3)
+interface CanvasProps {
+  score: number
+  setScore: React.Dispatch<React.SetStateAction<number>>
+}
 
-export const Canvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-
-  const [score, setScore] = useState(() => {
-    const storedScore = localStorage.getItem(LOCAL_STORAGE_KEY)
-    return storedScore ? parseInt(storedScore, 10) : 0
-  })
-
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-  const [radius, setRadius] = useState(TARGET_RADIUS)
-
-  const animationFrameId = useRef<number | null>(null)
+export const Canvas: React.FC<CanvasProps> = ({ score, setScore }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
   const targetPos = useRef({ x: 0, y: 0 })
 
+  const [containerRef, dimensions] = useCanvasSize()
+  const { radius, animateRadius } = useRadiusAnimation(TARGET_RADIUS)
+  const { upgrades, getUpgradesTotalPower } = useUpgradesContext()
+
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, score.toString())
-  }, [score])
-
-  useLayoutEffect(() => {
-    const updateSize = () => {
-      if (!containerRef.current) return
-      const width = containerRef.current.clientWidth
-      const height = containerRef.current.clientHeight
-      setDimensions({ width, height })
-      targetPos.current = { x: width / 2, y: height / 2 }
+    targetPos.current = {
+      x: dimensions.width / 2,
+      y: dimensions.height / 2,
     }
-
-    updateSize()
-    const observer = new ResizeObserver(updateSize)
-    containerRef.current && observer.observe(containerRef.current)
-
-    return () => observer.disconnect()
-  }, [])
-
-  const animateRadius = useCallback(
-    (from: number, to: number, duration: number) => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current)
-      }
-
-      const startTime = performance.now()
-
-      const animate = (now: number) => {
-        const elapsed = now - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        const eased = easeOutCubic(progress)
-
-        const current = from + (to - from) * eased
-        setRadius(current)
-
-        if (progress < 1) {
-          animationFrameId.current = requestAnimationFrame(animate)
-        } else {
-          setRadius(to)
-          animationFrameId.current = null
-        }
-      }
-
-      animationFrameId.current = requestAnimationFrame(animate)
-    },
-    []
-  )
+  }, [dimensions])
 
   const handleMouseDown = useCallback(
-    (e: React.MouseEvent<HTMLCanvasElement>) => {
+    (e: MouseEvent<HTMLCanvasElement>) => {
       const canvas = canvasRef.current
       if (!canvas) return
 
@@ -88,13 +40,15 @@ export const Canvas: React.FC = () => {
 
       const dx = x - targetPos.current.x
       const dy = y - targetPos.current.y
+      const distanceSquared = dx * dx + dy * dy
 
-      if (dx * dx + dy * dy <= radius * radius) {
-        setScore(prev => prev + 1)
-        animateRadius(TARGET_RADIUS, MIN_RADIUS, 100)
-      }
+      if (distanceSquared > radius * radius) return
+
+      const gain = getClickGain(score)
+      setScore(prev => prev + gain)
+      animateRadius(TARGET_RADIUS, MIN_RADIUS, 100)
     },
-    [radius, animateRadius]
+    [radius, score, animateRadius, setScore]
   )
 
   const handleMouseUp = useCallback(() => {
@@ -102,11 +56,20 @@ export const Canvas: React.FC = () => {
   }, [radius, animateRadius])
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      const power = getUpgradesTotalPower()
+      if (power > 0) {
+        setScore(prev => prev + power)
+      }
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [upgrades, getUpgradesTotalPower, setScore])
+
+  useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
-
-    if (!canvas || !ctx || dimensions.width === 0 || dimensions.height === 0)
-      return
+    if (!canvas || !ctx || !dimensions.width || !dimensions.height) return
 
     canvas.width = dimensions.width
     canvas.height = dimensions.height
@@ -118,16 +81,24 @@ export const Canvas: React.FC = () => {
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(
-      `${score}`,
+      formatNumber(score),
       targetPos.current.x,
-      targetPos.current.y - TARGET_RADIUS - TEXT_OFFSET
+      targetPos.current.y - TARGET_RADIUS - TEXT_OFFSET - 20
+    )
+
+    ctx.font = '20px Nunito'
+    ctx.fillStyle = '#333'
+    ctx.fillText(
+      `${formatNumber(getUpgradesTotalPower())} / сек.`,
+      targetPos.current.x,
+      targetPos.current.y - TARGET_RADIUS - TEXT_OFFSET + 20
     )
 
     ctx.beginPath()
     ctx.arc(targetPos.current.x, targetPos.current.y, radius, 0, Math.PI * 2)
     ctx.fillStyle = 'black'
     ctx.fill()
-  }, [score, radius, dimensions])
+  }, [score, radius, dimensions, getUpgradesTotalPower])
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
