@@ -4,7 +4,6 @@ import { Canvas } from './Canvas'
 import { GameEnd } from './GameEnd'
 import { GameStart } from './GameStart'
 import { useGameLogic } from './hooks/useGameLogic'
-import { StyledWrapper } from './styled'
 
 import { SidebarUpgrades } from '@/components/Game/SidebarUpgrades'
 import { useScore } from '@/components/Game/hooks/useScore'
@@ -33,10 +32,11 @@ export const GameRootContent = () => {
   }
 
   return (
-    <StyledWrapper>
+    <>
       {showStart && (
         <GameStart visible={!isGameStarted} onStartPlay={onStartPlay} />
       )}
+
       {isGameStarted && (
         <UpgradesProvider>
           <SidebarUpgrades
@@ -51,6 +51,6 @@ export const GameRootContent = () => {
         </UpgradesProvider>
       )}
       {showEnd && <GameEnd visible={isGameOver} onContinue={onContinue} />}
-    </StyledWrapper>
+    </>
   )
 }
