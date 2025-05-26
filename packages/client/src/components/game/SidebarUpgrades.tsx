@@ -1,7 +1,18 @@
-import { FC, Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { CustomButton } from '@/components/CustomButton/CustomButton'
 import { useUpgradesContext } from '@/components/Game/provider/upgradesProvider'
 import { getLevel } from '@/components/Game/upgrades/autoclick'
+
+import {
+  StyledSidebar,
+  StyledBuyButtonsContainer,
+  StyledUpgradesList,
+  LockedUpgradeButton,
+  UpgradeButton,
+  UpgradeLevelText,
+  UpgradeCostText,
+  UpgradeEffectText,
+} from '@/components/Game/styled' // путь скорректируй по структуре проекта
 
 interface SidebarUpgradesProps {
   buyAmount: number
@@ -11,36 +22,31 @@ interface SidebarUpgradesProps {
   formatNumber: (num: number) => string
 }
 
-export const SidebarUpgrades: FC<SidebarUpgradesProps> = ({
+const BUY_AMOUNTS = [1, 10, 100]
+
+export const SidebarUpgrades = ({
   buyAmount,
   setBuyAmount,
   score,
   setScore,
   formatNumber,
-}) => {
+}: SidebarUpgradesProps) => {
   const { upgrades, buyUpgrade, getUpgradeTotalCost, getUpgradeTotalPower } =
     useUpgradesContext()
 
-  const lastPurchasedIndex = upgrades
-    .map((upg, i) => (upg.amount > 0 ? i : -1))
-    .filter(i => i >= 0)
-    .reduce((max, i) => (i > max ? i : max), -1)
+  const lastPurchasedIndex = upgrades.reduce(
+    (max, upg, i) => (upg.amount > 0 && i > max ? i : max),
+    -1
+  )
 
   const nextIndex = lastPurchasedIndex + 1
 
   return (
-    <div
-      style={{
-        minWidth: 320,
-        maxHeight: '-webkit-fill-available',
-        padding: 12,
-        borderRight: '2px solid var(--color-primary)',
-        overflow: 'auto',
-      }}>
+    <StyledSidebar>
       <h4 style={{ marginTop: 0 }}>Усиления</h4>
 
-      <div style={{ marginBottom: 12, display: 'flex', gap: 8 }}>
-        {[1, 10, 100].map(amount => (
+      <StyledBuyButtonsContainer>
+        {BUY_AMOUNTS.map(amount => (
           <CustomButton
             key={amount}
             onClick={() => setBuyAmount(amount)}
@@ -49,37 +55,15 @@ export const SidebarUpgrades: FC<SidebarUpgradesProps> = ({
             x{amount}
           </CustomButton>
         ))}
-      </div>
+      </StyledBuyButtonsContainer>
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 12,
-        }}>
+      <StyledUpgradesList>
         {upgrades.map((upg, i) => {
           const isUnlocked =
             i === 0 || i <= lastPurchasedIndex || i === nextIndex
 
           if (!isUnlocked) {
-            return (
-              <button
-                key={upg.id}
-                style={{
-                  background: '#fff',
-                  border: '1px dashed #ccc',
-                  padding: 16,
-                  borderRadius: 6,
-                  opacity: 0.5,
-                  fontSize: 24,
-                  fontWeight: 'bold',
-                  userSelect: 'none',
-                  cursor: 'not-allowed',
-                }}
-                disabled>
-                ?
-              </button>
-            )
+            return <LockedUpgradeButton key={upg.id}>?</LockedUpgradeButton>
           }
 
           const totalCost = getUpgradeTotalCost(
@@ -87,12 +71,11 @@ export const SidebarUpgrades: FC<SidebarUpgradesProps> = ({
             upg.amount,
             buyAmount
           )
-
           const canAfford = score >= totalCost
 
           let effectText = ''
-          let effectColor = '#666'
           let levelText = ''
+          let effectActive = false
 
           if (upg.id.startsWith('autoclick_')) {
             const effectValue = getUpgradeTotalPower(upg.id)
@@ -101,44 +84,29 @@ export const SidebarUpgrades: FC<SidebarUpgradesProps> = ({
             effectText = `+${formatNumber(effectValue)} / сек.`
             levelText = `Уровень: ${level}`
 
-            if (upg.amount > 0) effectColor = '#007700'
+            if (upg.amount > 0) effectActive = true
           }
 
           return (
-            <button
+            <UpgradeButton
               key={upg.id}
-              style={{
-                background: '#fff',
-                border: canAfford
-                  ? '1px solid var(--color-primary)'
-                  : '1px dashed #ccc',
-                padding: 8,
-                borderRadius: 6,
-                textAlign: 'left',
-                cursor: canAfford ? 'pointer' : 'not-allowed',
-                opacity: canAfford ? 1 : 0.5,
-                transition: 'border-color 0.3s ease',
-              }}
               onClick={() => buyUpgrade(upg.id, score, setScore, buyAmount)}
-              disabled={!canAfford}>
+              disabled={!canAfford}
+              $canAfford={canAfford}>
               <div>
                 <strong>
                   {upg.name} ({upg.amount})
                 </strong>
               </div>
-              {levelText && (
-                <div style={{ fontSize: 12, color: '#666' }}>{levelText}</div>
-              )}
-              <div style={{ fontSize: 12, color: '#666' }}>
-                Цена: {formatNumber(totalCost)}
-              </div>
-              <div style={{ fontSize: 12, color: effectColor }}>
+              {levelText && <UpgradeLevelText>{levelText}</UpgradeLevelText>}
+              <UpgradeCostText>Цена: {formatNumber(totalCost)}</UpgradeCostText>
+              <UpgradeEffectText $active={effectActive}>
                 {effectText}
-              </div>
-            </button>
+              </UpgradeEffectText>
+            </UpgradeButton>
           )
         })}
-      </div>
-    </div>
+      </StyledUpgradesList>
+    </StyledSidebar>
   )
 }
