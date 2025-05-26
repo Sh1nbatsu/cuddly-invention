@@ -12,7 +12,7 @@ export const GameStart = ({ visible, onStartPlay }: GameStartProps) => {
   const { score } = useGame()
   return (
     <StyledGameWrapper $visible={visible}>
-      <StyledGameImage src={dinoSticker} alt="sticker" />
+      <StyledGameImage onClick={onStartPlay} src={dinoSticker} alt="sticker" />
       <StyledGameTitle onClick={onStartPlay} level={2}>
         {score >= 1 ? 'Продолжить игру' : 'Начать игру'}
       </StyledGameTitle>
