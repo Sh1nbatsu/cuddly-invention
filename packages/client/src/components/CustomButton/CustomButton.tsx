@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
-import styles from './CustomButton.module.css'
+import { StyledButton } from './CustomButton.styled'
 
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
@@ -11,17 +11,16 @@ export const CustomButton = ({
   children,
   variant = 'default',
   active = false,
+  disabled,
   ...rest
 }: CustomButtonProps) => {
-  const className = [
-    styles.button,
-    styles[variant],
-    active ? styles.active : '',
-  ].join(' ')
-
   return (
-    <button className={className} {...rest}>
+    <StyledButton
+      $variant={variant}
+      $active={active}
+      disabled={disabled}
+      {...rest}>
       {children}
-    </button>
+    </StyledButton>
   )
 }
