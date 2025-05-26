@@ -24,6 +24,10 @@ interface SidebarUpgradesProps {
 
 const BUY_AMOUNTS = [1, 10, 100]
 
+function formatTwoDecimals(num: number): string {
+  return parseFloat(num.toFixed(2)).toString()
+}
+
 export const SidebarUpgrades = ({
   buyAmount,
   setBuyAmount,
@@ -78,12 +82,12 @@ export const SidebarUpgrades = ({
           let effectActive = false
 
           if (upg.id.startsWith('autoclick_')) {
-            const effectValue = getUpgradeTotalPower(upg.id)
             const level = getLevel(upg.amount)
-
-            effectText = `+${formatNumber(effectValue)} / сек.`
             levelText = `Уровень: ${level}`
 
+            const effectValue = getUpgradeTotalPower(upg.id)
+            const formattedEffectValue = formatTwoDecimals(effectValue)
+            effectText = `+${formattedEffectValue} / сек.`
             if (upg.amount > 0) effectActive = true
           }
 
