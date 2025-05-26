@@ -1,4 +1,3 @@
-import React from 'react'
 import { ForumPage } from '@/pages/Forum/ForumPage'
 import { TopicPage } from '@/pages/Forum/TopicPage'
 import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
