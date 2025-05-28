@@ -7,6 +7,7 @@ import {
   NavigationDiv,
   CustomWrapper,
 } from './Leaderboard.styled'
+import { Header } from '@/components/Header/Header'
 
 const Leaderboard = () => {
   const loadMoreData = () => {
@@ -15,6 +16,7 @@ const Leaderboard = () => {
 
   return (
     <CustomWrapper>
+      <Header />
       <ScrollableDiv id="scrollableDiv">
         <InfiniteScroll
           dataLength={20}

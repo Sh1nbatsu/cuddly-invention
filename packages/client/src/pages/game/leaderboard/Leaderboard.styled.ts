@@ -46,5 +46,6 @@ export const NavigationDiv = styled.div`
 
 export const CustomWrapper = styled(Wrapper)`
   display: flex;
-  padding: 16px !important;
+  padding: 0 16px !important;
+  flex-direction: column;
 `
