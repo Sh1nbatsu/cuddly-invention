@@ -1,9 +1,18 @@
 import { api } from '@/libs/axios'
-import { LoginFormData, RegisterFormData } from '../pages/auth/schemas'
+import { LoginFormData, RegisterFormData } from '@/pages/auth/schemas'
 
-type LoginData = (data: LoginFormData) => Promise<void>
-type RegisterData = (data: RegisterFormData) => Promise<any>
+export type User = { id: number; username: string; email: string }
 
-export const login: LoginData = data => api.post('/auth/signin', data)
-export const register: RegisterData = data => api.post('/auth/signup', data)
-export const getMe = () => api.get('auth/user')
+type LoginData = (data: LoginFormData) => Promise<User>
+type RegisterData = (data: RegisterFormData) => Promise<User>
+
+export const login: LoginData = data =>
+  api.post('/auth/signin', data).then(res => res.data)
+
+export const register: RegisterData = data =>
+  api.post('/auth/signup', data).then(res => res.data)
+
+export const getMe = (): Promise<User> =>
+  api.get('/auth/user').then(res => res.data)
+
+export const logout = () => api.post('/auth/logout')

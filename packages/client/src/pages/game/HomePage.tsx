@@ -1,6 +1,7 @@
+import { GameRootContent } from '@/components/Game/GameRootContent'
 import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
-import { Canvas } from '@/components/game/Canvas'
+import { GameProvider } from '@/context/GameContext'
 
 const HomePage = () => {
   return (
@@ -9,11 +10,14 @@ const HomePage = () => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
           height: 'calc(100vh - 74px - 74px)',
+          border: '2px solid var(--color-primary)',
+          borderRadius: '4px',
+          position: 'relative',
         }}>
-        <Canvas />
+        <GameProvider>
+          <GameRootContent />
+        </GameProvider>
       </div>
     </Wrapper>
   )
