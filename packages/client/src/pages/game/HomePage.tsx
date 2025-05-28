@@ -2,6 +2,7 @@ import { GameRootContent } from '@/components/Game/GameRootContent'
 import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
 import { GameProvider } from '@/context/GameContext'
+import { LogoutButton } from '@/components/LogoutButton/LogoutButton'
 
 const HomePage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage = () => {
           <GameRootContent />
         </GameProvider>
       </div>
+      <LogoutButton />
     </Wrapper>
   )
 }
