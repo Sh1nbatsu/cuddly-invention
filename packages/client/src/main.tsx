@@ -15,14 +15,19 @@ if (import.meta.env.PROD) {
   registerServiceWorker()
 }
 
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from './store/store'
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <ConfigProvider theme={defaultTheme}>
-    <ThemeProvider theme={defaultTheme}>
-      <React.StrictMode>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </React.StrictMode>
-    </ThemeProvider>
-  </ConfigProvider>
+  <ReduxProvider store={store}>
+    <ConfigProvider theme={defaultTheme}>
+      <ThemeProvider theme={defaultTheme}>
+        <React.StrictMode>
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </React.StrictMode>
+      </ThemeProvider>
+    </ConfigProvider>
+  </ReduxProvider>
 )
