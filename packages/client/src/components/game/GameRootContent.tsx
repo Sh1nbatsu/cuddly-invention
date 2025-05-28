@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Canvas } from './Canvas'
 import { GameEnd } from './GameEnd'
 import { GameStart } from './GameStart'
-import { useGameLogic } from './hooks/useGameLogic'
+import { useGameControl } from './hooks/useGameControl'
 
 import { SidebarUpgrades } from '@/components/Game/SidebarUpgrades'
 import { useScore } from '@/components/Game/hooks/useScore'
@@ -19,7 +19,7 @@ export const GameRootContent = () => {
     showEnd,
     onContinue,
     onStartPlay,
-  } = useGameLogic()
+  } = useGameControl()
 
   const [buyAmount, setBuyAmount] = useState(1)
   const [score, setScoreRaw] = useScore()
