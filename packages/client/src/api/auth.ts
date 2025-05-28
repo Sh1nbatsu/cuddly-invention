@@ -12,7 +12,7 @@ export const login: LoginData = data =>
 export const register: RegisterData = data =>
   api.post('/auth/signup', data).then(res => res.data)
 
-export const getMe = (): Promise<User> =>
-  api.get('/auth/user').then(res => res.data)
+// Исправить any
+export const getMe = (): Promise<any> => api.get('/auth/user').then(res => res)
 
 export const logout = () => api.post('/auth/logout')

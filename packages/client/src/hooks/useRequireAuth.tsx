@@ -1,9 +1,10 @@
-import { useLocation, Navigate } from 'react-router-dom'
-import { useAuth } from '@/hooks/useAuth'
 import { FullPageLoader } from '@/components/FullPageLoader'
+import { useAppSelector } from '@/store/store'
+import { selectUser } from '@/store/user/user.selector'
+import { Navigate, useLocation } from 'react-router-dom'
 
 export const useRequireAuth = () => {
-  const { user, loading } = useAuth()
+  const { user, loading } = useAppSelector(selectUser)
   const location = useLocation()
 
   if (loading) return <FullPageLoader />

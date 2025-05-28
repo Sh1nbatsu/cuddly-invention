@@ -1,3 +1,6 @@
+import { logout } from '@/api/auth'
+import { useAppSelector } from '@/store/store'
+import { selectUser } from '@/store/user/user.selector'
 import React from 'react'
 import { CustomLink } from '../CustomLink/CustomLink'
 import { OfflineBadge } from './OfflineBadge'
@@ -7,24 +10,39 @@ interface HeaderProps {
   logo?: React.ReactNode
 }
 
-const NAV_ITEMS = [
-  { to: '/forum', text: 'Форум' },
-  { to: '/leaderboard', text: 'Таблица лидеров' },
-  { to: '/sign-up', text: 'Авторизация' },
-]
-
 export const Header = ({ logo = 'Дино Кликер' }: HeaderProps) => {
+  const { user } = useAppSelector(selectUser)
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+    } catch (error) {
+      console.error('Ошибка при выходе:', error)
+    }
+  }
+
   return (
     <StyledHeader>
       <CustomLink to="/" variant="retro">
         {logo}
       </CustomLink>
       <StyledNav>
-        {NAV_ITEMS.map((item, index) => (
-          <CustomLink key={index} to={item.to} variant="retro">
-            {item.text}
+        <CustomLink to="/forum" variant="retro">
+          Форум
+        </CustomLink>
+        <CustomLink to="/leaderboard" variant="retro">
+          Таблица лидеров
+        </CustomLink>
+
+        {!user ? (
+          <CustomLink to="sign-up" variant="retro">
+            Авторизация
           </CustomLink>
-        ))}
+        ) : (
+          <CustomLink onClick={handleLogout} to="sign-up" variant="retro">
+            Выйти
+          </CustomLink>
+        )}
       </StyledNav>
       <OfflineBadge />
     </StyledHeader>
