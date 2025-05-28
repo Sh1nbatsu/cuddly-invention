@@ -1,6 +1,5 @@
-import { FormInput } from '@/components/FormInput/FormInput'
-
 import { register } from '@/api/auth'
+import { FormInput } from '@/components/FormInput/FormInput'
 import Wrapper from '@/components/Wrapper'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -38,7 +37,7 @@ export const Registration = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await register(data)
-      navigate('sign-in')
+      navigate('/')
     } catch (error) {
       console.error('error', error)
     }
