@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { Link, LinkProps, useLocation } from 'react-router-dom'
-import styles from './CustomLink.module.css'
+import { LinkProps, useLocation } from 'react-router-dom'
+import { StyledLink } from './CustomLink.styled'
 
 type LinkVariant = 'default' | 'retro'
 
@@ -20,16 +20,14 @@ export const CustomLink = ({
   const location = useLocation()
   const isActive = location.pathname === to
 
-  const className = [
-    styles.link,
-    styles[variant],
-    disabled ? styles.disabled : '',
-    isActive ? styles.active : '',
-  ].join(' ')
-
   return (
-    <Link className={className} to={to} {...rest}>
+    <StyledLink
+      to={to}
+      $variant={variant}
+      $disabled={disabled}
+      $active={isActive}
+      {...rest}>
       {children}
-    </Link>
+    </StyledLink>
   )
 }

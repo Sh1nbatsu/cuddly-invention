@@ -10,9 +10,10 @@ const HomePage = () => {
       <div
         style={{
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
           height: 'calc(100vh - 74px - 74px)',
+          border: '2px solid var(--color-primary)',
+          borderRadius: '4px',
+          position: 'relative',
         }}>
         <GameProvider>
           <GameRootContent />
