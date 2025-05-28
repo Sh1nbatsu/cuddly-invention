@@ -1,7 +1,7 @@
 import { useGame } from '@/hooks/useGame'
 import { useCallback, useEffect, useState } from 'react'
 
-export const useGameLogic = () => {
+export const useGameControl = () => {
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [showStart, setShowStart] = useState(true)
   const [isGameOver, setIsGameOver] = useState(false)
