@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
 import 'antd/dist/reset.css'
-import { AuthProvider } from '@/context/AuthContext'
+
 import '../global.css'
 import { router } from './router/router'
 import { registerServiceWorker } from './sw/register'
@@ -23,9 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <ConfigProvider theme={defaultTheme}>
       <ThemeProvider theme={defaultTheme}>
         <React.StrictMode>
-          <AuthProvider>
-            <RouterProvider router={router} />
-          </AuthProvider>
+          <RouterProvider router={router} />
         </React.StrictMode>
       </ThemeProvider>
     </ConfigProvider>
