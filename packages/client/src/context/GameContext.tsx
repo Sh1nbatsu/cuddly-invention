@@ -1,4 +1,5 @@
 import { useScore } from '@/entities/game/hooks/useScore'
+import { StyledGamePageWrapper } from '@/pages/game/game-page.styled'
 import { createContext, ReactNode } from 'react'
 
 interface GameContextType {
@@ -18,8 +19,10 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <GameContext.Provider value={{ score, setScore, resetScore }}>
-      {children}
-    </GameContext.Provider>
+    <StyledGamePageWrapper>
+      <GameContext.Provider value={{ score, setScore, resetScore }}>
+        {children}
+      </GameContext.Provider>
+    </StyledGamePageWrapper>
   )
 }
