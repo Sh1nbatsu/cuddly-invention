@@ -1,6 +1,7 @@
-import { useAppDispatch, useAppSelector } from '@/store/store'
-import { selectUser } from '@/store/user/user.selector'
-import { fetchMe } from '@/store/user/user.slice'
+import { selectUser } from '@/entities/user/model/user.selector'
+import { fetchMe } from '@/entities/user/model/user.thunk'
+import { useAppDispatch, useAppSelector } from '@/providers/store/store.hooks'
+
 import { GameRootContent } from '@/widgets/game/game-feed.ui'
 import { useEffect } from 'react'
 

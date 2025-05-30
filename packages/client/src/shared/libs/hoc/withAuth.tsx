@@ -1,6 +1,6 @@
 import { FullPageLoader } from '@/components/FullPageLoader'
+import { selectUser } from '@/entities/user/model/user.selector'
 import { useAppSelector } from '@/store/store'
-import { selectUser } from '@/store/user/user.selector'
 import { ComponentType } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 

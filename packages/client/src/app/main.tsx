@@ -13,8 +13,8 @@ if (import.meta.env.PROD) {
 }
 
 import { routerConfig } from '@/providers/router/router.config'
+import { store } from '@/providers/store/store'
 import { defaultTheme } from '@/shared/themes/defaultTheme'
-import { store } from '@/store/store'
 import { registerServiceWorker } from '@/sw/register'
 import { Provider as ReduxProvider } from 'react-redux'
 

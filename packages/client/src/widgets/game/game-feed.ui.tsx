@@ -1,6 +1,6 @@
 import { UpgradesProvider } from '@/entities/game/game-upgrades/game-upgrades.context'
 import { GameProvider } from '@/entities/game/game.context'
-import { useGameControl } from '@/entities/game/hooks/useGameControl'
+import { useGameControl } from '@/entities/game/model/hooks/useGameControl'
 import { GameCanvas } from '@/features/game/game-canvas/game-canvas.ui'
 import { GameEnd } from '@/features/game/game-end/game-end.ui'
 import { GameStart } from '@/features/game/game-start/game-start.ui'
@@ -27,7 +27,6 @@ export const GameRootContent = () => {
       {showStart && (
         <GameStart visible={!isGameStarted} onStartPlay={onStartPlay} />
       )}
-
       {isGameStarted && (
         <UpgradesProvider>
           <GameUpgradesSidebar

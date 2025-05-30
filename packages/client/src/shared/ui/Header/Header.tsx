@@ -1,6 +1,5 @@
 import { logout } from '@/api/auth'
-import { useAppSelector } from '@/store/store'
-import { selectUser } from '@/store/user/user.selector'
+import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import React from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
 import { OfflineBadge } from './OfflineBadge'
@@ -11,7 +10,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ logo = 'Дино Кликер' }: HeaderProps) => {
-  const { user } = useAppSelector(selectUser)
+  const { user } = useCurrentUser()
 
   const handleLogout = async () => {
     try {

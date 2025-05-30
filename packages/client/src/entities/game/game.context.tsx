@@ -1,6 +1,6 @@
-import { useScore } from '@/entities/game/hooks/useScore'
 import { StyledGamePageWrapper } from '@/pages/game/game-page.styled'
 import { createContext, ReactNode } from 'react'
+import { useScore } from './model/hooks/useScore'
 
 interface GameContextType {
   score: number

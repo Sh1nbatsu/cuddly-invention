@@ -1,7 +1,6 @@
-import { api } from '@/libs/axios'
 import { LoginFormData, RegisterFormData } from '@/pages/auth/schemas'
-
-export type User = { id: number; username: string; email: string }
+import { api } from '@/shared/libs/axios'
+import { User } from '@/shared/types/User'
 
 type LoginData = (data: LoginFormData) => Promise<User>
 type RegisterData = (data: RegisterFormData) => Promise<User>

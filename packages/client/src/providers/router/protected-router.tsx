@@ -1,5 +1,4 @@
-import { useAppSelector } from '@/store/store'
-import { selectUser } from '@/store/user/user.selector'
+import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import { ReactElement } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { RouterLoader } from './router-loader'
@@ -9,7 +8,7 @@ interface Props {
 }
 
 export const ProtectedRoute = ({ children }: Props) => {
-  const { user, loading } = useAppSelector(selectUser)
+  const { user, loading } = useCurrentUser()
 
   const location = useLocation()
 

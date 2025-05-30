@@ -3,7 +3,7 @@ import {
   StyledGameTitle,
   StyledGameWrapper,
 } from '@/entities/game/game.styled'
-import { useGame } from '@/entities/game/hooks/useGame'
+import { useGame } from '@/entities/game/model/hooks/useGame'
 import dinoSticker from '/dino-sticker.jpg'
 
 interface GameStartProps {
