@@ -2,8 +2,8 @@ import { logout } from '@/api/auth'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import React from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
-import { OfflineBadge } from './OfflineBadge'
-import { StyledHeader, StyledNav } from './styled'
+import { OfflineBadge } from './header-offline-badge.ui'
+import { StyledHeader, StyledNav } from './header.styled'
 
 interface HeaderProps {
   logo?: React.ReactNode
