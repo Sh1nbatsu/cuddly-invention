@@ -21,6 +21,9 @@ export const Header = () => {
         Главная
       </CustomLink>
       <StyledNav>
+        <CustomLink to="/game" variant="retro">
+          {logo}
+        </CustomLink>
         <CustomLink to="/forum" variant="retro">
           Форум
         </CustomLink>
