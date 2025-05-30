@@ -1,4 +1,4 @@
-import { useOnline } from '@/hooks/useOnline'
+import { useOnline } from '@/shared/hooks/useOnline'
 import { Popover } from 'antd'
 import { StyledBadge, StyledBadgeIcon } from './styled'
 
