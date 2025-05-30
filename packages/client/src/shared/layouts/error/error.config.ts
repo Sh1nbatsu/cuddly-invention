@@ -1,9 +1,4 @@
-export interface ErrorConfig {
-  title: string
-  message: string
-  showStatus?: boolean
-  showStatusText?: boolean
-}
+import { ErrorConfig } from './error.types'
 
 export const PAGE_ERROR: ErrorConfig = {
   title: 'Упс! Не удалось загрузить страницу',

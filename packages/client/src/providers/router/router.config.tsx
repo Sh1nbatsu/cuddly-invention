@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import { NOT_FOUND_ERROR, PAGE_ERROR } from '@/config/errorConfig'
 import { gameRoute } from '@/pages/game/game-route'
-import { ErrorLayout } from '@/shared/layouts/error-layout.ui'
+import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
 import { MainLayout } from '@/shared/layouts/main-layout.ui'
 import { ProtectedRoute } from './protected-router'
 import { authRoutes } from './router-auth'

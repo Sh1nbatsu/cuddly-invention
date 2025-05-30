@@ -1,5 +1,5 @@
 import { PAGE_ERROR } from '@/config/errorConfig'
-import { ErrorLayout } from '@/shared/layouts/error-layout.ui'
+import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
 import { ForumPage } from './forum-page.ui'
 
 export const forumRoute = {
