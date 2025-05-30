@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { FormInput } from '@/components/FormInput/FormInput'
-import { Header } from '@/components/Header/Header'
+import { FormInput } from '@/shared/ui/form-input/form-input.ui'
 import { addTopic, deleteTopic, Topic, topics } from './forumData'
 
 const { Content } = Layout
@@ -72,62 +71,59 @@ export const ForumPage: React.FC = () => {
   }
 
   return (
-    <Wrapper>
-      <Header />
-      <PageContainer as="main">
-        <TitleStyled level={2}>Форум</TitleStyled>
+    <PageContainer as="main">
+      <TitleStyled level={2}>Форум</TitleStyled>
 
-        <List
-          itemLayout="vertical"
-          dataSource={data}
-          locale={{ emptyText: 'Тем нет' }}
-          renderItem={t => (
-            <List.Item key={t.id} style={{ position: 'relative' }}>
-              <DeleteButton
-                type="text"
-                danger
-                icon={<DeleteOutlined />}
-                onClick={() => askDelete(t.id)}
-              />
-              <ClickableLink to={`/forum/${t.id}`}>
-                <Card hoverable>
-                  <Title level={4} style={{ margin: 0 }}>
-                    {t.title}
-                  </Title>
-                  <Text type="secondary">
-                    Автор — {t.author} | {t.date}
-                  </Text>
-                </Card>
-              </ClickableLink>
-            </List.Item>
-          )}
-        />
+      <List
+        itemLayout="vertical"
+        dataSource={data}
+        locale={{ emptyText: 'Тем нет' }}
+        renderItem={t => (
+          <List.Item key={t.id} style={{ position: 'relative' }}>
+            <DeleteButton
+              type="text"
+              danger
+              icon={<DeleteOutlined />}
+              onClick={() => askDelete(t.id)}
+            />
+            <ClickableLink to={`/forum/${t.id}`}>
+              <Card hoverable>
+                <Title level={4} style={{ margin: 0 }}>
+                  {t.title}
+                </Title>
+                <Text type="secondary">
+                  Автор — {t.author} | {t.date}
+                </Text>
+              </Card>
+            </ClickableLink>
+          </List.Item>
+        )}
+      />
 
-        <CardContainer title="Создать тему">
-          <form onSubmit={handleSubmit(create)}>
-            <FormInput
-              control={control}
-              name="title"
-              label="Заголовок"
-              rules={{ required: 'Введите заголовок темы' }}
-              inputProps={{ placeholder: 'Заголовок темы' }}
-            />
-            <FormInput
-              control={control}
-              name="text"
-              label="Содержимое темы"
-              inputProps={{ placeholder: 'Содержимое темы' }}
-              rules={{ required: 'Введите содержимое темы' }}
-            />
-            <div style={{ marginTop: 16 }}>
-              <Button type="primary" htmlType="submit" block>
-                Создать
-              </Button>
-            </div>
-          </form>
-        </CardContainer>
-      </PageContainer>
-    </Wrapper>
+      <CardContainer title="Создать тему">
+        <form onSubmit={handleSubmit(create)}>
+          <FormInput
+            control={control}
+            name="title"
+            label="Заголовок"
+            rules={{ required: 'Введите заголовок темы' }}
+            inputProps={{ placeholder: 'Заголовок темы' }}
+          />
+          <FormInput
+            control={control}
+            name="text"
+            label="Содержимое темы"
+            inputProps={{ placeholder: 'Содержимое темы' }}
+            rules={{ required: 'Введите содержимое темы' }}
+          />
+          <div style={{ marginTop: 16 }}>
+            <Button type="primary" htmlType="submit" block>
+              Создать
+            </Button>
+          </div>
+        </form>
+      </CardContainer>
+    </PageContainer>
   )
 }
 

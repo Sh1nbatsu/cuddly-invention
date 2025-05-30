@@ -1,5 +1,4 @@
-import { TopicNotFound } from '@/components/Forum/TopicNotFound'
-import { Header } from '@/components/Header/Header'
+import { TopicNotFound } from '@/shared/ui/Forum/TopicNotFound'
 import {
   ArrowLeftOutlined,
   DeleteOutlined,
@@ -168,70 +167,67 @@ export const TopicPage = () => {
   )
 
   return (
-    <Wrapper>
-      <Header />
-      <PageContainer as="main">
-        <TopActions>
-          <Button icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>
-            Назад
-          </Button>
-          <Button danger icon={<DeleteOutlined />} onClick={askDeleteTopic}>
-            Удалить тему
-          </Button>
-        </TopActions>
+    <PageContainer as="main">
+      <TopActions>
+        <Button icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}>
+          Назад
+        </Button>
+        <Button danger icon={<DeleteOutlined />} onClick={askDeleteTopic}>
+          Удалить тему
+        </Button>
+      </TopActions>
 
-        <Title level={2} style={{ marginBottom: 12 }}>
-          {topic.title}
+      <Title level={2} style={{ marginBottom: 12 }}>
+        {topic.title}
+      </Title>
+
+      <Card style={{ marginBottom: 24 }}>
+        <Title level={5} style={{ marginBottom: 8 }}>
+          Автор — {topic.author} | {topic.date}
         </Title>
+        <Text>{topic.text}</Text>
+      </Card>
 
-        <Card style={{ marginBottom: 24 }}>
-          <Title level={5} style={{ marginBottom: 8 }}>
-            Автор — {topic.author} | {topic.date}
-          </Title>
-          <Text>{topic.text}</Text>
-        </Card>
+      <Title level={4}>Комментарии</Title>
 
-        <Title level={4}>Комментарии</Title>
+      {topic.comments.length ? (
+        <List
+          dataSource={topic.comments}
+          renderItem={item => <List.Item>{renderComment(item)}</List.Item>}
+          itemLayout="vertical"
+          split={false}
+        />
+      ) : (
+        <Text type="secondary">Комментариев нет</Text>
+      )}
 
-        {topic.comments.length ? (
-          <List
-            dataSource={topic.comments}
-            renderItem={item => <List.Item>{renderComment(item)}</List.Item>}
-            itemLayout="vertical"
-            split={false}
-          />
-        ) : (
-          <Text type="secondary">Комментариев нет</Text>
-        )}
-
-        <Card
-          title="Добавить комментарий"
-          style={{ width: '100%', marginTop: 32 }}>
-          <form onSubmit={handlePlainSubmit(addPlain)}>
-            <Controller
-              name="text"
-              control={plainControl}
-              rules={{ required: 'Введите текст комментария' }}
-              render={({ field }) => (
-                <Input.TextArea
-                  rows={4}
-                  placeholder="Введите текст…"
-                  {...field}
-                />
-              )}
-            />
-            {plainErrors.text && (
-              <Text type="danger">{plainErrors.text.message}</Text>
+      <Card
+        title="Добавить комментарий"
+        style={{ width: '100%', marginTop: 32 }}>
+        <form onSubmit={handlePlainSubmit(addPlain)}>
+          <Controller
+            name="text"
+            control={plainControl}
+            rules={{ required: 'Введите текст комментария' }}
+            render={({ field }) => (
+              <Input.TextArea
+                rows={4}
+                placeholder="Введите текст…"
+                {...field}
+              />
             )}
+          />
+          {plainErrors.text && (
+            <Text type="danger">{plainErrors.text.message}</Text>
+          )}
 
-            <div style={{ marginTop: 12 }}>
-              <Button type="primary" htmlType="submit" block>
-                Отправить
-              </Button>
-            </div>
-          </form>
-        </Card>
-      </PageContainer>
-    </Wrapper>
+          <div style={{ marginTop: 12 }}>
+            <Button type="primary" htmlType="submit" block>
+              Отправить
+            </Button>
+          </div>
+        </form>
+      </Card>
+    </PageContainer>
   )
 }

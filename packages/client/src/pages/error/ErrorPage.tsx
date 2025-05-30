@@ -1,6 +1,5 @@
-import { CustomLink } from '@/components/CustomLink/CustomLink'
-import { Header } from '@/components/Header/Header'
 import { ErrorConfig } from '@/config/errorConfig'
+import { CustomLink } from '@/shared/ui/custom-link/custom-link.ui'
 import { Typography } from 'antd'
 import React from 'react'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
@@ -37,25 +36,22 @@ export const ErrorPage: React.FC<ErrorPageProps> = ({ config }) => {
   const statusText = isRouteError ? error.statusText : undefined
 
   return (
-    <Wrapper>
-      <Header />
-      <Page>
-        <Content>
-          <Typography.Title level={2}>{config.title}</Typography.Title>
-          <Typography.Paragraph>{config.message}</Typography.Paragraph>
-          {config.showStatus && status != null && (
-            <Typography.Paragraph>
-              Код ошибки: <strong>{status}</strong>
-            </Typography.Paragraph>
-          )}
-          {config.showStatusText && statusText && (
-            <Typography.Text>{statusText}</Typography.Text>
-          )}
-          <CustomLink to="/" variant="retro">
-            На главную
-          </CustomLink>
-        </Content>
-      </Page>
-    </Wrapper>
+    <Page>
+      <Content>
+        <Typography.Title level={2}>{config.title}</Typography.Title>
+        <Typography.Paragraph>{config.message}</Typography.Paragraph>
+        {config.showStatus && status != null && (
+          <Typography.Paragraph>
+            Код ошибки: <strong>{status}</strong>
+          </Typography.Paragraph>
+        )}
+        {config.showStatusText && statusText && (
+          <Typography.Text>{statusText}</Typography.Text>
+        )}
+        <CustomLink to="/" variant="retro">
+          На главную
+        </CustomLink>
+      </Content>
+    </Page>
   )
 }
