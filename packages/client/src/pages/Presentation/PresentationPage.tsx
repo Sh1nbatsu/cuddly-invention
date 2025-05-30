@@ -2,6 +2,7 @@ import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
 import { CustomLink } from '../../components/CustomLink/CustomLink'
 import {
+  StyledPresentationContainer,
   StyledPresentationTitle,
   StyledPresentationSubtitle,
   StyledPresentationText,
@@ -13,17 +14,8 @@ export const PresentationPage = () => {
   return (
     <Wrapper>
       <Header />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-          height: 'calc(100vh - 74px - 74px)',
-          borderRadius: '4px',
-          padding: '2rem',
-        }}>
+
+      <StyledPresentationContainer>
         <StyledPresentationTitle>Дино Кликер</StyledPresentationTitle>
         <StyledPresentationSubtitle>
           Учебный проект студентов <span>Я</span>.Практикума
@@ -51,7 +43,7 @@ export const PresentationPage = () => {
         <CustomLink to="/game" variant="retro">
           Играть
         </CustomLink>
-      </div>
+      </StyledPresentationContainer>
     </Wrapper>
   )
 }

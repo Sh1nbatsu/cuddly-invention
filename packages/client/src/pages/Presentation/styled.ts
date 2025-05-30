@@ -1,6 +1,17 @@
 import { Typography } from 'antd'
 import styled from 'styled-components'
 
+export const StyledPresentationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: calc(100vh - 74px - 74px);
+  border-radius: 4px;
+  padding: 2rem;
+`
+
 export const StyledPresentationTitle = styled(Typography.Title)`
   && {
     font-family: 'PressStart2P', monospace;
@@ -35,7 +46,6 @@ export const StyledPresentationListElement = styled.li`
   list-style-type: disc;
 
   &::marker {
-    content: '➤ '; // любой символ, например emoji
     font-size: 12px;
   }
 `
