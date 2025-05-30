@@ -1,7 +1,10 @@
-import { useGame } from '@/hooks/useGame'
+import {
+  StyledGameImage,
+  StyledGameTitle,
+  StyledGameWrapper,
+} from '@/entities/game/game.styled'
+import { useGame } from '@/entities/game/hooks/useGame'
 import dinoSticker from '/dino-sticker.jpg'
-
-import { StyledGameImage, StyledGameTitle, StyledGameWrapper } from './styled'
 
 interface GameStartProps {
   visible: boolean

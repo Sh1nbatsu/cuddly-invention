@@ -1,4 +1,4 @@
-import { useGame } from '@/hooks/useGame'
+import { useGame } from '@/entities/game/hooks/useGame'
 import { useCallback, useEffect, useState } from 'react'
 
 export const useGameControl = () => {

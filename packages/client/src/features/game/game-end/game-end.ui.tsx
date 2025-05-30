@@ -3,7 +3,7 @@ import {
   StyledGameImage,
   StyledGameTitle,
   StyledGameWrapper,
-} from './game-end.styled'
+} from '@/entities/game/game.styled'
 import dinoSticker from '/dino-sticker.jpg'
 
 interface GameEndProps {
