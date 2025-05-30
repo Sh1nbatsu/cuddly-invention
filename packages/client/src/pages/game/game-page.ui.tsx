@@ -4,8 +4,9 @@ import { selectUser } from '@/store/user/user.selector'
 import { fetchMe } from '@/store/user/user.slice'
 import { GameRootContent } from '@/widgets/game/game-feed.ui'
 import { useEffect } from 'react'
+import { StyledGamePageWrapper } from './game-page.styled'
 
-const HomePage = () => {
+export const GamePage = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector(selectUser)
   useEffect(() => {
@@ -15,19 +16,10 @@ const HomePage = () => {
   }, [user?.id, dispatch])
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        height: 'calc(100vh - 74px - 74px)',
-        border: '2px solid var(--color-primary)',
-        borderRadius: '4px',
-        position: 'relative',
-      }}>
+    <StyledGamePageWrapper>
       <GameProvider>
         <GameRootContent />
       </GameProvider>
-    </div>
+    </StyledGamePageWrapper>
   )
 }
-
-export default HomePage

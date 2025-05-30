@@ -1,4 +1,4 @@
-import { useUpgradesContext } from '@/entities/game-upgrades/game-upgrades.context'
+import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
 import { TARGET_RADIUS } from '@/entities/game/game.constants'
 import { useCanvasRender } from '@/entities/game/hooks/useCanvasRender'
 import { useCanvasSize } from '@/entities/game/hooks/useCanvasSize'

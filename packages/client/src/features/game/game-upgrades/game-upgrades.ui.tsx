@@ -13,7 +13,7 @@ import {
   UpgradeLevelText,
 } from '@/features/game/game-upgrades/game-upgrades.styled'
 
-import { useUpgradesContext } from '@/entities/game-upgrades/game-upgrades.context'
+import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
 import { formatNumber, getLevel } from '../../../entities/game/game.lib'
 
 interface SidebarUpgradesProps {

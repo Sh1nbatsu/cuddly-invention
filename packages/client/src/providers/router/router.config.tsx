@@ -1,9 +1,9 @@
 import { ErrorPage } from '@/pages/error/ErrorPage'
-import HomePage from '@/pages/game/HomePage'
-import Leaderboard from '@/pages/game/leaderboard/LeaderboardPage'
+import Leaderboard from '@/pages/leaderboard/LeaderboardPage'
 import { createBrowserRouter } from 'react-router-dom'
 
 import { NOT_FOUND_ERROR, PAGE_ERROR } from '@/config/errorConfig'
+import { GamePage } from '@/pages/game/game-page.ui'
 import { MainLayout } from '@/shared/layouts/main-layout.ui'
 import { ProtectedRoute } from './protected-router'
 import { authRoutes } from './router-auth'
@@ -17,7 +17,7 @@ export const routerConfig = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <GamePage />,
       },
       {
         path: 'leaderboard',

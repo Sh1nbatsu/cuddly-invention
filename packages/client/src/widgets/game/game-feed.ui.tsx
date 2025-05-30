@@ -1,4 +1,4 @@
-import { UpgradesProvider } from '@/entities/game-upgrades/game-upgrades.context'
+import { UpgradesProvider } from '@/entities/game/game-upgrades/game-upgrades.context'
 import { useGameControl } from '@/entities/game/hooks/useGameControl'
 import { GameCanvas } from '@/features/game/game-canvas/game-canvas.ui'
 import { GameEnd } from '@/features/game/game-end/game-end.ui'
