@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from 'react'
+import { useScore } from '@/components/Game/hooks/useScore'
+import { createContext, ReactNode } from 'react'
 
 interface GameContextType {
   score: number
@@ -9,10 +10,7 @@ interface GameContextType {
 export const GameContext = createContext<GameContextType | undefined>(undefined)
 
 export const GameProvider = ({ children }: { children: ReactNode }) => {
-  const [score, setScore] = useState(() => {
-    const saved = localStorage.getItem('score')
-    return saved ? parseInt(saved, 10) : 0
-  })
+  const [score, setScore] = useScore()
 
   const resetScore = () => {
     setScore(0)

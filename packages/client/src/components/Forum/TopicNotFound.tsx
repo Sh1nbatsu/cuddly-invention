@@ -1,6 +1,6 @@
 import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
-import { PageContainer } from '@/pages/Forum/styled'
+import { PageContainer } from '@/pages/forum/styled'
 import { Typography } from 'antd'
 import React from 'react'
 

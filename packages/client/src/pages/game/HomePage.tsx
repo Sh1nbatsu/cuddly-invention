@@ -1,4 +1,4 @@
-import { GameRootContent } from '@/components/game/GameRootContent'
+import { GameRootContent } from '@/components/Game/GameRootContent'
 import { Header } from '@/components/Header/Header'
 import Wrapper from '@/components/Wrapper'
 import { GameProvider } from '@/context/GameContext'

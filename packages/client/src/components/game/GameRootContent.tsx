@@ -6,7 +6,6 @@ import { GameStart } from './GameStart'
 import { useGameControl } from './hooks/useGameControl'
 
 import { SidebarUpgrades } from '@/components/Game/SidebarUpgrades'
-import { useScore } from '@/components/Game/hooks/useScore'
 import { formatNumber } from '@/components/Game/utils/utils'
 
 import { UpgradesProvider } from '@/components/Game/provider/upgradesProvider'
@@ -19,17 +18,11 @@ export const GameRootContent = () => {
     showEnd,
     onContinue,
     onStartPlay,
+    score,
+    setScore,
   } = useGameControl()
 
   const [buyAmount, setBuyAmount] = useState(1)
-  const [score, setScoreRaw] = useScore()
-
-  const setScore = (value: number | ((prev: number) => number)) => {
-    setScoreRaw(prev => {
-      const next = typeof value === 'function' ? value(prev) : value
-      return next < 0 ? 0 : next
-    })
-  }
 
   return (
     <>

@@ -7,7 +7,8 @@ export const useGameControl = () => {
   const [isGameOver, setIsGameOver] = useState(false)
   const [showEnd, setShowEnd] = useState(false)
 
-  const { score } = useGame()
+  const { score, setScore } = useGame()
+
   const hasSeenEnding = localStorage.getItem('hasSeenEnding') === 'true'
 
   const onStartPlay = useCallback(() => {
@@ -48,7 +49,9 @@ export const useGameControl = () => {
     isGameStarted,
     isGameOver,
     showEnd,
+    score,
     onStartPlay,
     onContinue,
+    setScore,
   }
 }

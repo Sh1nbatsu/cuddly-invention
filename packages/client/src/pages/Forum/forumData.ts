@@ -1,4 +1,5 @@
-import type { ForumComment, Topic, StoredData } from '@/types/forumData'
+import type { ForumComment, StoredData } from '@/types/Forum'
+import { Topic } from '@/types/Topic'
 
 const LS_KEY = 'forumData'
 
@@ -288,4 +289,4 @@ export const deleteComment = (topicId: number, commentId: number): boolean => {
 }
 
 export { topics }
-export type { Topic, ForumComment }
+export type { ForumComment, Topic }

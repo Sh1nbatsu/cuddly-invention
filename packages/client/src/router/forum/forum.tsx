@@ -1,7 +1,7 @@
-import { ForumPage } from '@/pages/Forum/ForumPage'
-import { TopicPage } from '@/pages/Forum/TopicPage'
-import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { PAGE_ERROR } from '@/config/errorConfig'
+import { ErrorPage } from '@/pages/error/ErrorPage'
+import { ForumPage } from '@/pages/forum/ForumPage'
+import { TopicPage } from '@/pages/forum/TopicPage'
 
 export const forumRoutes = {
   path: '/',

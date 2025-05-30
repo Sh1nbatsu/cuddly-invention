@@ -1,12 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
+import { ErrorPage } from '@/pages/error/ErrorPage'
 import HomePage from '@/pages/game/HomePage'
-import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import Leaderboard from '@/pages/game/leaderboard/LeaderboardPage'
+import { createBrowserRouter } from 'react-router-dom'
 
+import { NOT_FOUND_ERROR, PAGE_ERROR } from '@/config/errorConfig'
 import { authRoutes } from '@/router/auth/auth'
 import { forumRoutes } from '@/router/forum/forum'
-import { PAGE_ERROR, NOT_FOUND_ERROR } from '@/config/errorConfig'
 
 export const router = createBrowserRouter([
   {
