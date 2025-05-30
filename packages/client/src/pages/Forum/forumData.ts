@@ -1,5 +1,5 @@
-import type { ForumComment, StoredData } from '@/types/Forum'
-import { Topic } from '@/types/Topic'
+import type { ForumComment, StoredData } from '@/shared/types/Forum'
+import { Topic } from '@/shared/types/Topic'
 
 const LS_KEY = 'forumData'
 
