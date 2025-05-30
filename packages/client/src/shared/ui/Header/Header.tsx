@@ -2,7 +2,7 @@ import { logout } from '@/api/auth'
 import { useAppSelector } from '@/store/store'
 import { selectUser } from '@/store/user/user.selector'
 import React from 'react'
-import { CustomLink } from '../CustomLink/CustomLink'
+import { CustomLink } from '../custom-link/custom-link.ui'
 import { OfflineBadge } from './OfflineBadge'
 import { StyledHeader, StyledNav } from './styled'
 

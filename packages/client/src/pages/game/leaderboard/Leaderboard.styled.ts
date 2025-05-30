@@ -1,7 +1,5 @@
-import { Table as AntTable } from 'antd'
-import { Button as AntButton } from 'antd'
+import { Button as AntButton, Table as AntTable } from 'antd'
 import styled from 'styled-components'
-import Wrapper from '@/components/Wrapper'
 
 export const CustomTable = styled(AntTable)`
   &&& {

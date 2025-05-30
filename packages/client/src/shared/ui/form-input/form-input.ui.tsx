@@ -6,7 +6,7 @@ import {
   FieldValues,
   RegisterOptions,
 } from 'react-hook-form'
-import { StyledFormItem } from './styled'
+import { StyledFormItem } from './form-input.styled'
 
 interface FormInputProps<TFieldValues extends FieldValues = FieldValues> {
   control: Control<TFieldValues>

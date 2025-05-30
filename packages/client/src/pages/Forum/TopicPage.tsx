@@ -1,6 +1,5 @@
 import { TopicNotFound } from '@/components/Forum/TopicNotFound'
 import { Header } from '@/components/Header/Header'
-import Wrapper from '@/components/Wrapper'
 import {
   ArrowLeftOutlined,
   DeleteOutlined,

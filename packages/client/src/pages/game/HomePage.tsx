@@ -1,10 +1,10 @@
-import { GameRootContent } from '@/components/Game/GameRootContent'
-import { Header } from '@/components/Header/Header'
-import Wrapper from '@/components/Wrapper'
 import { GameProvider } from '@/context/GameContext'
+import { Header } from '@/shared/ui/Header/Header'
+import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 import { useAppDispatch, useAppSelector } from '@/store/store'
 import { selectUser } from '@/store/user/user.selector'
 import { fetchMe } from '@/store/user/user.slice'
+import { GameRootContent } from '@/widgets/game/game-feed.ui'
 import { useEffect } from 'react'
 
 const HomePage = () => {
@@ -17,7 +17,7 @@ const HomePage = () => {
   }, [user?.id, dispatch])
 
   return (
-    <Wrapper>
+    <PageWrapper>
       <Header />
       <div
         style={{
@@ -31,7 +31,7 @@ const HomePage = () => {
           <GameRootContent />
         </GameProvider>
       </div>
-    </Wrapper>
+    </PageWrapper>
   )
 }
 

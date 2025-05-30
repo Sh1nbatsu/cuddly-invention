@@ -7,7 +7,6 @@ import styled from 'styled-components'
 
 import { FormInput } from '@/components/FormInput/FormInput'
 import { Header } from '@/components/Header/Header'
-import Wrapper from '@/components/Wrapper'
 import { addTopic, deleteTopic, Topic, topics } from './forumData'
 
 const { Content } = Layout

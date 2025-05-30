@@ -1,6 +1,5 @@
 import { CustomLink } from '@/components/CustomLink/CustomLink'
 import { Header } from '@/components/Header/Header'
-import Wrapper from '@/components/Wrapper'
 import { ErrorConfig } from '@/config/errorConfig'
 import { Typography } from 'antd'
 import React from 'react'

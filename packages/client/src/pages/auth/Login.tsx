@@ -1,6 +1,6 @@
 import { login } from '@/api/auth'
-import { FormInput } from '@/components/FormInput/FormInput'
-import Wrapper from '@/components/Wrapper'
+import { FormInput } from '@/shared/ui/form-input/form-input.ui'
+import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -46,7 +46,7 @@ export const Login = () => {
   }
 
   return (
-    <Wrapper>
+    <PageWrapper>
       <AuthForm onFinish={onFinish} layout="vertical" autoComplete="off">
         <AuthTitle level={2}>Вход</AuthTitle>
         <FormInput control={control} name="login" label="Логин" />
@@ -73,6 +73,6 @@ export const Login = () => {
           </AuthFooterText>
         </AuthSpace>
       </AuthForm>
-    </Wrapper>
+    </PageWrapper>
   )
 }

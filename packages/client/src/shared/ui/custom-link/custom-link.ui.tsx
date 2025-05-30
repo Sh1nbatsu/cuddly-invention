@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { LinkProps, useLocation } from 'react-router-dom'
-import { StyledLink } from './CustomLink.styled'
+import { StyledLink } from './custom-link.styled'
 
 type LinkVariant = 'default' | 'retro'
 

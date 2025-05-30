@@ -1,4 +1,4 @@
-import { useScore } from '@/components/Game/hooks/useScore'
+import { useScore } from '@/entities/game/hooks/useScore'
 import { createContext, ReactNode } from 'react'
 
 interface GameContextType {
