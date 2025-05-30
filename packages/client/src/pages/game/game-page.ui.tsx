@@ -1,4 +1,3 @@
-import { GameProvider } from '@/context/GameContext'
 import { useAppDispatch, useAppSelector } from '@/store/store'
 import { selectUser } from '@/store/user/user.selector'
 import { fetchMe } from '@/store/user/user.slice'
@@ -14,9 +13,5 @@ export const GamePage = () => {
     }
   }, [user?.id, dispatch])
 
-  return (
-    <GameProvider>
-      <GameRootContent />
-    </GameProvider>
-  )
+  return <GameRootContent />
 }
