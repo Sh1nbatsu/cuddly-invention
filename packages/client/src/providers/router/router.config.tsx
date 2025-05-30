@@ -3,7 +3,7 @@ import Leaderboard from '@/pages/leaderboard/LeaderboardPage'
 import { createBrowserRouter } from 'react-router-dom'
 
 import { NOT_FOUND_ERROR, PAGE_ERROR } from '@/config/errorConfig'
-import { GamePage } from '@/pages/game/game-page.ui'
+import { gameRoute } from '@/pages/game/game-route'
 import { MainLayout } from '@/shared/layouts/main-layout.ui'
 import { ProtectedRoute } from './protected-router'
 import { authRoutes } from './router-auth'
@@ -15,10 +15,7 @@ export const routerConfig = createBrowserRouter([
     element: <MainLayout />,
     errorElement: <ErrorPage config={PAGE_ERROR} />,
     children: [
-      {
-        index: true,
-        element: <GamePage />,
-      },
+      gameRoute,
       {
         path: 'leaderboard',
         element: (

@@ -1,4 +1,4 @@
-import { PageContainer } from '@/pages/forum/styled'
+import { PageContainer } from '@/entities/topic/topic.styled'
 import { Typography } from 'antd'
 import React from 'react'
 

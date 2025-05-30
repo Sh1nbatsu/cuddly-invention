@@ -205,7 +205,7 @@ if (!stored) saveToLS({ topics, nextTopicId, nextCommentId })
 
 const commit = () => saveToLS({ topics, nextTopicId, nextCommentId })
 
-export const getTopicById = (id: number) =>
+export const getTopicById = (id?: number) =>
   topics.find(t => t.id === id) || null
 
 export const addTopic = (
