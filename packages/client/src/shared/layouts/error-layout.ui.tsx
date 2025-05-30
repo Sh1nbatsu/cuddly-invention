@@ -1,20 +1,16 @@
 import { ErrorConfig } from '@/config/errorConfig'
 import { CustomLink } from '@/shared/ui/custom-link/custom-link.ui'
 import { Typography } from 'antd'
-import React from 'react'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Page = styled.div`
+const PageContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
   width: 100%;
   height: calc(100vh - 148px);
-`
-
-const Content = styled.div`
   max-width: 480px;
   text-align: center;
   padding: 2rem;
@@ -25,33 +21,31 @@ const Content = styled.div`
   font-weight: 600;
 `
 
-export interface ErrorPageProps {
+export interface ErrorLayoutProps {
   config: ErrorConfig
 }
 
-export const ErrorPage: React.FC<ErrorPageProps> = ({ config }) => {
+export const ErrorLayout = ({ config }: ErrorLayoutProps) => {
   const error = useRouteError()
   const isRouteError = isRouteErrorResponse(error)
   const status = isRouteError ? error.status : undefined
   const statusText = isRouteError ? error.statusText : undefined
 
   return (
-    <Page>
-      <Content>
-        <Typography.Title level={2}>{config.title}</Typography.Title>
-        <Typography.Paragraph>{config.message}</Typography.Paragraph>
-        {config.showStatus && status != null && (
-          <Typography.Paragraph>
-            Код ошибки: <strong>{status}</strong>
-          </Typography.Paragraph>
-        )}
-        {config.showStatusText && statusText && (
-          <Typography.Text>{statusText}</Typography.Text>
-        )}
-        <CustomLink to="/" variant="retro">
-          На главную
-        </CustomLink>
-      </Content>
-    </Page>
+    <PageContent>
+      <Typography.Title level={2}>{config.title}</Typography.Title>
+      <Typography.Paragraph>{config.message}</Typography.Paragraph>
+      {config.showStatus && status != null && (
+        <Typography.Paragraph>
+          Код ошибки: <strong>{status}</strong>
+        </Typography.Paragraph>
+      )}
+      {config.showStatusText && statusText && (
+        <Typography.Text>{statusText}</Typography.Text>
+      )}
+      <CustomLink to="/" variant="retro">
+        На главную
+      </CustomLink>
+    </PageContent>
   )
 }

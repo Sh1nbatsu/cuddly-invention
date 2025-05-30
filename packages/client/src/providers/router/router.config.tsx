@@ -1,9 +1,9 @@
-import { ErrorPage } from '@/pages/error/ErrorPage'
 import Leaderboard from '@/pages/leaderboard/LeaderboardPage'
 import { createBrowserRouter } from 'react-router-dom'
 
 import { NOT_FOUND_ERROR, PAGE_ERROR } from '@/config/errorConfig'
 import { gameRoute } from '@/pages/game/game-route'
+import { ErrorLayout } from '@/shared/layouts/error-layout.ui'
 import { MainLayout } from '@/shared/layouts/main-layout.ui'
 import { ProtectedRoute } from './protected-router'
 import { authRoutes } from './router-auth'
@@ -13,7 +13,7 @@ export const routerConfig = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
+    errorElement: <ErrorLayout config={PAGE_ERROR} />,
     children: [
       gameRoute,
       {
@@ -30,6 +30,6 @@ export const routerConfig = createBrowserRouter([
   authRoutes,
   {
     path: '*',
-    element: <ErrorPage config={NOT_FOUND_ERROR} />,
+    element: <ErrorLayout config={NOT_FOUND_ERROR} />,
   },
 ])
