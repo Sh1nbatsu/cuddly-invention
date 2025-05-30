@@ -1,16 +1,7 @@
-import { Login } from '@/pages/auth/Login'
-import { Registration } from '@/pages/auth/Registration'
+import { loginRoute } from '@/pages/login/login.route'
+import { registrationRoute } from '@/pages/registration/registration.route'
 
 export const authRoutes = {
   path: '/',
-  children: [
-    {
-      path: '/sign-up',
-      element: <Registration />,
-    },
-    {
-      path: '/sign-in',
-      element: <Login />,
-    },
-  ],
+  children: [registrationRoute, loginRoute],
 }

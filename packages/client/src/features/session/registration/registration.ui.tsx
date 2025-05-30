@@ -1,9 +1,4 @@
-import { register } from '@/api/auth'
-import { FormInput } from '@/components/FormInput/FormInput'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import { RegisterFormData, RegisterSchema } from './schemas'
+import { RegisterSchema } from '@/entities/session/session.contract'
 import {
   AuthFooterText,
   AuthForm,
@@ -11,7 +6,14 @@ import {
   AuthSpace,
   AuthSubmitButton,
   AuthTitle,
-} from './styled'
+} from '@/entities/session/session.styled'
+import { RegisterFormData } from '@/entities/session/session.types'
+import { register } from '@/entities/user/model/user.thunk'
+import { FormInput } from '@/shared/ui/form-input/form-input.ui'
+import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 const DEFAULT_VALUES = {
   first_name: '',
@@ -47,16 +49,12 @@ export const Registration = () => {
   }
 
   return (
-    <Wrapper>
+    <PageWrapper>
       <AuthForm onFinish={onFinish} layout="vertical" autoComplete="off">
         <AuthTitle level={2}>Регистрация</AuthTitle>
-
         <FormInput control={control} name="first_name" label="Имя" />
-
         <FormInput control={control} name="second_name" label="Фамилия" />
-
         <FormInput control={control} name="login" label="Логин" />
-
         <FormInput
           control={control}
           name="email"
@@ -98,6 +96,6 @@ export const Registration = () => {
           </AuthFooterText>
         </AuthSpace>
       </AuthForm>
-    </Wrapper>
+    </PageWrapper>
   )
 }

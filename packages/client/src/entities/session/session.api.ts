@@ -1,17 +1,17 @@
-import { LoginFormData, RegisterFormData } from '@/pages/auth/schemas'
 import { api } from '@/shared/libs/axios'
 import { User } from '@/shared/types/User'
+import { LoginFormData, RegisterFormData } from './session.types'
 
 type LoginData = (data: LoginFormData) => Promise<User>
 type RegisterData = (data: RegisterFormData) => Promise<User>
+type GetMe = () => Promise<User>
 
-export const login: LoginData = data =>
+export const loginUserApi: LoginData = data =>
   api.post('/auth/signin', data).then(res => res.data)
 
-export const register: RegisterData = data =>
+export const registerUserApi: RegisterData = data =>
   api.post('/auth/signup', data).then(res => res.data)
 
-// Исправить any
-export const getMe = (): Promise<any> => api.get('/auth/user').then(res => res)
+export const getMeApi: GetMe = () => api.get('/auth/user')
 
-export const logout = () => api.post('/auth/logout')
+export const logoutUserApi = () => api.post('/auth/logout')

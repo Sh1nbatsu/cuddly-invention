@@ -41,8 +41,6 @@ export const RegisterSchema = z.object({
     .regex(/^\+?[0-9]+$/, 'Телефон может содержать только цифры и знак +'),
 })
 
-export type RegisterFormData = z.infer<typeof RegisterSchema>
-
 export const LoginSchema = z.object({
   login: z.string().max(50, 'Email не должен превышать 50 символов'),
 
@@ -53,5 +51,3 @@ export const LoginSchema = z.object({
     .regex(/[A-Z]/, 'Пароль должен содержать хотя бы одну заглавную букву')
     .regex(/[0-9]/, 'Пароль должен содержать хотя бы одну цифру'),
 })
-
-export type LoginFormData = z.infer<typeof LoginSchema>

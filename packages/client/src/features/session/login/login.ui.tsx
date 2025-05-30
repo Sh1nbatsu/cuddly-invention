@@ -1,10 +1,10 @@
-import { login } from '@/api/auth'
 import { FormInput } from '@/shared/ui/form-input/form-input.ui'
 import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { LoginFormData, LoginSchema } from './schemas'
+
+import { LoginSchema } from '@/entities/session/session.contract'
 import {
   AuthFooterText,
   AuthForm,
@@ -12,7 +12,9 @@ import {
   AuthSpace,
   AuthSubmitButton,
   AuthTitle,
-} from './styled'
+} from '@/entities/session/session.styled'
+import { LoginFormData } from '@/entities/session/session.types'
+import { login } from '@/entities/user/model/user.thunk'
 
 const DEFAULT_VALUES = {
   login: '',

@@ -31,7 +31,6 @@ export const routerConfig = createBrowserRouter([
     ],
   },
   authRoutes,
-
   {
     path: '*',
     element: <ErrorPage config={NOT_FOUND_ERROR} />,

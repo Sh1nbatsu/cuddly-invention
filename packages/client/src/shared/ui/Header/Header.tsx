@@ -1,4 +1,4 @@
-import { logout } from '@/api/auth'
+import { logout } from '@/entities/user/model/user.thunk'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import React from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
