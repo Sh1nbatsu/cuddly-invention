@@ -1,39 +1,10 @@
-type AutoclickUpgrade = {
-  id: string
-  name: string
-  baseCost: number
-  basePower: number
-  getCost: (amount: number) => number
-  getPower: (amount: number) => number
-}
+import {
+  calculateUpgradeCost,
+  calculateUpgradePower,
+} from '@/entities/game/game.lib'
+import { AutoclickUpgrade } from './game-upgrades.types'
 
-export function getLevel(amount: number): number {
-  return Math.floor(amount / 25)
-}
-
-function calculateUpgradeCost(
-  baseCost: number,
-  amount: number,
-  growthRate: number
-): number {
-  const level = getLevel(amount)
-  const costMultiplier = Math.pow(growthRate, amount)
-  return Math.floor(baseCost * costMultiplier * Math.pow(2, level))
-}
-
-function calculateUpgradePower(
-  basePower: number,
-  amount: number,
-  powerGrowthRate = 1.5
-): number {
-  if (amount === 0) return 0
-
-  const level = getLevel(amount)
-  const rawPower = basePower * Math.pow(powerGrowthRate, level)
-  return Number(rawPower.toFixed(2))
-}
-
-export const autoclickUpgrades: ReadonlyArray<AutoclickUpgrade> = [
+export const upgradesConfig: ReadonlyArray<AutoclickUpgrade> = [
   {
     id: 'autoclick_1',
     name: 'Камень',

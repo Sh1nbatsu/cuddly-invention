@@ -1,12 +1,12 @@
+import { upgradesConfig } from '@/features/game/game-upgrades/game-upgrades.config'
 import React, {
   createContext,
-  useContext,
   ReactNode,
-  useState,
-  useEffect,
   useCallback,
+  useContext,
+  useEffect,
+  useState,
 } from 'react'
-import { autoclickUpgrades } from '@/components/Game/upgrades/autoclick'
 
 type Upgrade = {
   id: string
@@ -57,7 +57,7 @@ export const UpgradesProvider: React.FC<UpgradesProviderProps> = ({
           Upgrade,
           'getCost' | 'getPower'
         >[]
-        return autoclickUpgrades.map(upg => {
+        return upgradesConfig.map(upg => {
           const savedUpg = parsed.find(u => u.id === upg.id)
           return {
             ...upg,
@@ -65,10 +65,10 @@ export const UpgradesProvider: React.FC<UpgradesProviderProps> = ({
           }
         })
       } catch {
-        return autoclickUpgrades.map(upg => ({ ...upg, amount: 0 }))
+        return upgradesConfig.map(upg => ({ ...upg, amount: 0 }))
       }
     }
-    return autoclickUpgrades.map(upg => ({ ...upg, amount: 0 }))
+    return upgradesConfig.map(upg => ({ ...upg, amount: 0 }))
   })
 
   useEffect(() => {

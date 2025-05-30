@@ -1,19 +1,18 @@
-import { useRef, Dispatch, SetStateAction } from 'react'
+import { useUpgradesContext } from '@/entities/game-upgrades/game-upgrades.context'
+import { TARGET_RADIUS } from '@/entities/game/game.constants'
+import { useCanvasRender } from '@/entities/game/hooks/useCanvasRender'
+import { useCanvasSize } from '@/entities/game/hooks/useCanvasSize'
+import { useClickLogic } from '@/entities/game/hooks/useClickLogic'
+import { usePassiveIncome } from '@/entities/game/hooks/usePassiveIncome'
+import { useRadiusAnimation } from '@/entities/game/hooks/useRadiusAnimation'
+import { Dispatch, SetStateAction, useRef } from 'react'
 
-import { useUpgradesContext } from '@/components/Game/provider/upgradesProvider'
-import { useCanvasSize } from '@/components/Game/hooks/useCanvasSize'
-import { useRadiusAnimation } from '@/components/Game/hooks/useRadiusAnimation'
-import { useClickLogic } from '@/components/Game/hooks/useClickLogic'
-import { usePassiveIncome } from '@/components/Game/hooks/usePassiveIncome'
-import { useCanvasRender } from '@/components/Game/hooks/useCanvasRender'
-import { TARGET_RADIUS } from '@/components/Game/utils/utils'
-
-interface CanvasProps {
+interface GameCanvasProps {
   score: number
   setScore: Dispatch<SetStateAction<number>>
 }
 
-export const Canvas = ({ score, setScore }: CanvasProps) => {
+export const GameCanvas = ({ score, setScore }: GameCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [containerRef, dimensions] = useCanvasSize()
   const { radius, animateRadius } = useRadiusAnimation(TARGET_RADIUS)

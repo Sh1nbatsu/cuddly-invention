@@ -1,9 +1,6 @@
-import { useEffect, RefObject } from 'react'
-import {
-  formatNumber,
-  TARGET_RADIUS,
-  TEXT_OFFSET,
-} from '@/components/Game/utils/utils'
+import { RefObject, useEffect } from 'react'
+import { TARGET_RADIUS, TEXT_OFFSET } from '../game.constants'
+import { formatNumber } from '../game.lib'
 
 interface Dimensions {
   width: number

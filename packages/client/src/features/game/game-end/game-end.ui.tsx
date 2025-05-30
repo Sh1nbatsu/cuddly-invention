@@ -3,7 +3,7 @@ import {
   StyledGameImage,
   StyledGameTitle,
   StyledGameWrapper,
-} from './styled'
+} from './game-end.styled'
 import dinoSticker from '/dino-sticker.jpg'
 
 interface GameEndProps {

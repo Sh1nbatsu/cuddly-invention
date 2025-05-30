@@ -7,16 +7,16 @@ import { ThemeProvider } from 'styled-components'
 import 'antd/dist/reset.css'
 
 import '../global.css'
-import { router } from './router/router'
-import { registerServiceWorker } from './sw/register'
-import { defaultTheme } from './themes/defaultTheme'
 
 if (import.meta.env.PROD) {
   registerServiceWorker()
 }
 
+import { store } from '@/store/store'
+import { registerServiceWorker } from '@/sw/register'
+import { defaultTheme } from '@/themes/defaultTheme'
 import { Provider as ReduxProvider } from 'react-redux'
-import { store } from './store/store'
+import { router } from './router/router'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ReduxProvider store={store}>

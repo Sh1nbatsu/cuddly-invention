@@ -1,15 +1,12 @@
 import {
-  useCallback,
-  RefObject,
   Dispatch,
-  SetStateAction,
   MouseEvent,
+  RefObject,
+  SetStateAction,
+  useCallback,
 } from 'react'
-import {
-  getClickGain,
-  TARGET_RADIUS,
-  MIN_RADIUS,
-} from '@/components/Game/utils/utils'
+import { MIN_RADIUS, TARGET_RADIUS } from '../game.constants'
+import { getClickGain } from '../game.lib'
 
 type AnimateRadius = (from: number, to: number, duration: number) => void
 

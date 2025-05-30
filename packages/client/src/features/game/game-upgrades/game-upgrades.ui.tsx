@@ -1,25 +1,26 @@
-import { Dispatch, SetStateAction } from 'react'
 import { CustomButton } from '@/components/CustomButton/CustomButton'
-import { useUpgradesContext } from '@/components/Game/provider/upgradesProvider'
-import { getLevel } from '@/components/Game/upgrades/autoclick'
+
+import { Dispatch, SetStateAction } from 'react'
 
 import {
-  StyledSidebar,
-  StyledBuyButtonsContainer,
-  StyledUpgradesList,
   LockedUpgradeButton,
+  StyledUpgradeBuyButtonsContainer,
+  StyledUpgradeSidebar,
+  StyledUpgradesList,
   UpgradeButton,
-  UpgradeLevelText,
   UpgradeCostText,
   UpgradeEffectText,
-} from '@/components/Game/styled' // путь скорректируй по структуре проекта
+  UpgradeLevelText,
+} from '@/features/game/game-upgrades/game-upgrades.styled'
+
+import { useUpgradesContext } from '@/entities/game-upgrades/game-upgrades.context'
+import { formatNumber, getLevel } from '../../../entities/game/game.lib'
 
 interface SidebarUpgradesProps {
   buyAmount: number
   setBuyAmount: (amount: number) => void
   score: number
   setScore: Dispatch<SetStateAction<number>>
-  formatNumber: (num: number) => string
 }
 
 const BUY_AMOUNTS = [1, 10, 100]
@@ -28,12 +29,11 @@ function formatTwoDecimals(num: number): string {
   return parseFloat(num.toFixed(2)).toString()
 }
 
-export const SidebarUpgrades = ({
+export const GameUpgradesSidebar = ({
   buyAmount,
   setBuyAmount,
   score,
   setScore,
-  formatNumber,
 }: SidebarUpgradesProps) => {
   const { upgrades, buyUpgrade, getUpgradeTotalCost, getUpgradeTotalPower } =
     useUpgradesContext()
@@ -46,10 +46,10 @@ export const SidebarUpgrades = ({
   const nextIndex = lastPurchasedIndex + 1
 
   return (
-    <StyledSidebar>
+    <StyledUpgradeSidebar>
       <h4 style={{ marginTop: 0 }}>Усиления</h4>
 
-      <StyledBuyButtonsContainer>
+      <StyledUpgradeBuyButtonsContainer>
         {BUY_AMOUNTS.map(amount => (
           <CustomButton
             key={amount}
@@ -59,7 +59,7 @@ export const SidebarUpgrades = ({
             x{amount}
           </CustomButton>
         ))}
-      </StyledBuyButtonsContainer>
+      </StyledUpgradeBuyButtonsContainer>
 
       <StyledUpgradesList>
         {upgrades.map((upg, i) => {
@@ -111,6 +111,6 @@ export const SidebarUpgrades = ({
           )
         })}
       </StyledUpgradesList>
-    </StyledSidebar>
+    </StyledUpgradeSidebar>
   )
 }

@@ -1,14 +1,11 @@
+import { UpgradesProvider } from '@/entities/game-upgrades/game-upgrades.context'
+import { useGameControl } from '@/entities/game/hooks/useGameControl'
+import { GameCanvas } from '@/features/game/game-canvas/game-canvas.ui'
+import { GameEnd } from '@/features/game/game-end/game-end.ui'
+import { GameStart } from '@/features/game/game-start/game-start.ui'
+import { GameUpgradesSidebar } from '@/features/game/game-upgrades/game-upgrades.ui'
+
 import { useState } from 'react'
-
-import { Canvas } from './Canvas'
-import { GameEnd } from './GameEnd'
-import { GameStart } from './GameStart'
-import { useGameControl } from './hooks/useGameControl'
-
-import { SidebarUpgrades } from '@/components/Game/SidebarUpgrades'
-import { formatNumber } from '@/components/Game/utils/utils'
-
-import { UpgradesProvider } from '@/components/Game/provider/upgradesProvider'
 
 export const GameRootContent = () => {
   const {
@@ -32,15 +29,13 @@ export const GameRootContent = () => {
 
       {isGameStarted && (
         <UpgradesProvider>
-          <SidebarUpgrades
+          <GameUpgradesSidebar
             buyAmount={buyAmount}
             setBuyAmount={setBuyAmount}
             score={score}
             setScore={setScore}
-            formatNumber={formatNumber}
           />
-
-          <Canvas score={score} setScore={setScore} />
+          <GameCanvas score={score} setScore={setScore} />
         </UpgradesProvider>
       )}
       {showEnd && <GameEnd visible={isGameOver} onContinue={onContinue} />}
