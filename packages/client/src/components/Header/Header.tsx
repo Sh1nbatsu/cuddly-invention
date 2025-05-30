@@ -24,9 +24,12 @@ export const Header = ({ logo = 'Дино Кликер' }: HeaderProps) => {
   return (
     <StyledHeader>
       <CustomLink to="/" variant="retro">
-        {logo}
+        Главная
       </CustomLink>
       <StyledNav>
+        <CustomLink to="/game" variant="retro">
+          {logo}
+        </CustomLink>
         <CustomLink to="/forum" variant="retro">
           Форум
         </CustomLink>
