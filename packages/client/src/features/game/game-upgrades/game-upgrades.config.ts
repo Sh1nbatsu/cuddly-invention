@@ -1,7 +1,7 @@
 import {
   calculateUpgradeCost,
   calculateUpgradePower,
-} from '@/entities/game/game.lib'
+} from '@/entities/game/model/game.lib'
 import { AutoclickUpgrade } from './game-upgrades.types'
 
 export const upgradesConfig: ReadonlyArray<AutoclickUpgrade> = [

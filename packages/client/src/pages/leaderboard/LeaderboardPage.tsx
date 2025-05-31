@@ -8,7 +8,7 @@ import {
   CustomWrapper,
 } from './Leaderboard.styled'
 
-import { FullscreenToggler } from '@/components/FullscreenToggler/FullscreenToggler'
+import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
 
 const Leaderboard = () => {
   const loadMoreData = () => {

@@ -1,5 +1,5 @@
-import { useGame } from '@/entities/game/hooks/useGame'
 import { useCallback, useEffect, useState } from 'react'
+import { useGame } from './useGame'
 
 export const useGameControl = () => {
   const [isGameStarted, setIsGameStarted] = useState(false)

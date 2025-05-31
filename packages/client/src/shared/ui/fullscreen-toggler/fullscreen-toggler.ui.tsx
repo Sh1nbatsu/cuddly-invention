@@ -1,5 +1,9 @@
-import { useFullscreen } from '@/hooks/useFullscreen'
-import { FullscreenButton, FullscreenClose, FullscreenOpen } from './styled'
+import { useFullscreen } from '@/shared/hooks/useFullscreen'
+import {
+  FullscreenButton,
+  FullscreenClose,
+  FullscreenOpen,
+} from './fullscreen-toggler.styled'
 
 export const FullscreenToggler = () => {
   const { isFullscreen, toggleFullscreen } = useFullscreen()

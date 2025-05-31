@@ -1,5 +1,6 @@
 import { Button as AntButton, Table as AntTable } from 'antd'
 import styled from 'styled-components'
+import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 
 export const CustomTable = styled(AntTable)`
   &&& {
@@ -42,7 +43,7 @@ export const NavigationDiv = styled.div`
   gap: 2rem;
 `
 
-export const CustomWrapper = styled(Wrapper)`
+export const CustomWrapper = styled(PageWrapper)`
   display: flex;
   padding: 16px !important;
 `

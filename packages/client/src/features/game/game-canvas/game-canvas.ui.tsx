@@ -1,10 +1,10 @@
 import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
-import { useCanvasRender } from '@/entities/game/hooks/useCanvasRender'
-import { useCanvasSize } from '@/entities/game/hooks/useCanvasSize'
-import { useClickLogic } from '@/entities/game/hooks/useClickLogic'
-import { usePassiveIncome } from '@/entities/game/hooks/usePassiveIncome'
-import { useRadiusAnimation } from '@/entities/game/hooks/useRadiusAnimation'
 import { TARGET_RADIUS } from '@/entities/game/model/game.constants'
+import { useCanvasRender } from '@/entities/game/model/hooks/useCanvasRender'
+import { useCanvasSize } from '@/entities/game/model/hooks/useCanvasSize'
+import { useClickLogic } from '@/entities/game/model/hooks/useClickLogic'
+import { usePassiveIncome } from '@/entities/game/model/hooks/usePassiveIncome'
+import { useRadiusAnimation } from '@/entities/game/model/hooks/useRadiusAnimation'
 import { Dispatch, SetStateAction, useRef } from 'react'
 
 interface GameCanvasProps {
