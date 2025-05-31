@@ -19,7 +19,7 @@ export const PresentationPage = () => {
 
       <StyledPresentationList>
         <StyledPresentationListElement>
-          Механика клика и апдейтов
+          Механика клика и апгрейдов
         </StyledPresentationListElement>
         <StyledPresentationListElement>
           Авторизация и регистрация
