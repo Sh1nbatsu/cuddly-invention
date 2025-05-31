@@ -2,10 +2,11 @@ import { List, Avatar } from 'antd'
 import { dataSource } from './mockData'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {
-  CustomButton,
   ScrollableDiv,
   NavigationDiv,
   CustomWrapper,
+  CustomButton,
+  CustomTitle,
 } from './Leaderboard.styled'
 
 import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
@@ -45,7 +46,7 @@ const Leaderboard = () => {
                       // В данный момент не буду загружать статику для аватаров, так что будет жаловаться на отсутствие поля
                     />
                   }
-                  title={<p>{item.username}</p>}
+                  title={<CustomTitle>{item.username}</CustomTitle>}
                   description={item.date}
                 />
                 <div>
@@ -57,10 +58,7 @@ const Leaderboard = () => {
         </InfiniteScroll>
       </ScrollableDiv>
       <NavigationDiv>
-        <CustomButton type="primary">Restart?</CustomButton>
-        <CustomButton type="link" color="cyan" variant="solid">
-          Forum
-        </CustomButton>
+        <CustomButton variant="retro">Ещё раз?</CustomButton>
       </NavigationDiv>
     </CustomWrapper>
   )
