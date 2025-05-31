@@ -46,6 +46,7 @@ export const StyledPresentationListElement = styled.li`
   list-style-type: disc;
 
   &::marker {
+    content: '➤ '; // любой символ, например emoji
     font-size: 12px;
   }
 `
