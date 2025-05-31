@@ -1,3 +1,4 @@
+import { GameProvider } from '@/entities/game/game.context'
 import { selectUser } from '@/entities/user/model/user.selector'
 import { fetchMe } from '@/entities/user/model/user.thunk'
 import { useAppDispatch, useAppSelector } from '@/providers/store/store.hooks'
@@ -14,5 +15,9 @@ export const GamePage = () => {
     }
   }, [user?.id, dispatch])
 
-  return <GameRootContent />
+  return (
+    <GameProvider>
+      <GameRootContent />
+    </GameProvider>
+  )
 }

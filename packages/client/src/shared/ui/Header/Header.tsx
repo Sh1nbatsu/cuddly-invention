@@ -1,15 +1,10 @@
 import { logout } from '@/entities/user/model/user.thunk'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
-import React from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
 import { OfflineBadge } from './header-offline-badge.ui'
 import { StyledHeader, StyledNav } from './header.styled'
 
-interface HeaderProps {
-  logo?: React.ReactNode
-}
-
-export const Header = ({ logo = 'Дино Кликер' }: HeaderProps) => {
+export const Header = () => {
   const { user } = useCurrentUser()
 
   const handleLogout = async () => {
@@ -26,16 +21,15 @@ export const Header = ({ logo = 'Дино Кликер' }: HeaderProps) => {
         Главная
       </CustomLink>
       <StyledNav>
-        <CustomLink to="/game" variant="retro">
-          {logo}
-        </CustomLink>
         <CustomLink to="/forum" variant="retro">
           Форум
         </CustomLink>
         <CustomLink to="/leaderboard" variant="retro">
           Таблица лидеров
         </CustomLink>
-
+        <CustomLink to="/presentation" variant="retro">
+          О нас
+        </CustomLink>
         {!user ? (
           <CustomLink to="sign-up" variant="retro">
             Авторизация
