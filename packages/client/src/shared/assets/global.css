@@ -1,6 +1,6 @@
 /* TODO: Нужно будет тоже скачать по примеру с press-start. */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
-@import url('./src/fonts/press-start.css');
+@import url('./fonts/press-start.css');
 
 * {
   margin: 0;

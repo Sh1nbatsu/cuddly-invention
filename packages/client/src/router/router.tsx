@@ -1,38 +1,40 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ProtectedRoute } from '@/components/ProtectedRoute'
-import HomePage from '@/pages/game/HomePage'
-import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
-import Leaderboard from '@/pages/game/leaderboard/LeaderboardPage'
-import { PresentationPage } from '@/pages/Presentation/PresentationPage'
+import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
+import { MainLayout } from '@/shared/layouts/main-layout.ui'
+import {
+  PAGE_ERROR,
+  NOT_FOUND_ERROR,
+} from '@/shared/layouts/error/error.config'
+import { GamePage } from '@/pages/game/game-page.ui'
+import Leaderboard from '@/pages/leaderboard/LeaderboardPage'
+import { ProtectedRoute } from '@/providers/router/protected-router'
+import { forumRoutes } from '@/providers/router/router-form'
+import { authRoutes } from '@/providers/router/router-auth'
 
-import { authRoutes } from '@/router/auth/auth'
-import { forumRoutes } from '@/router/forum/forum'
-import { PAGE_ERROR, NOT_FOUND_ERROR } from '@/config/errorConfig'
-
-export const router = createBrowserRouter([
+export const routerConfig = createBrowserRouter([
   {
     path: '/',
-    element: <PresentationPage />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
-  },
-  {
-    path: 'game',
-    element: <HomePage />,
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
+    element: <MainLayout />,
+    errorElement: <ErrorLayout config={PAGE_ERROR} />,
+    children: [
+      {
+        index: true,
+        element: <GamePage />,
+      },
+      {
+        path: 'leaderboard',
+        element: (
+          <ProtectedRoute>
+            <Leaderboard />
+          </ProtectedRoute>
+        ),
+      },
+      forumRoutes,
+    ],
   },
   authRoutes,
-  forumRoutes,
-  {
-    path: 'leaderboard',
-    element: (
-      <ProtectedRoute>
-        <Leaderboard />
-      </ProtectedRoute>
-    ),
-    errorElement: <ErrorPage config={PAGE_ERROR} />,
-  },
   {
     path: '*',
-    element: <ErrorPage config={NOT_FOUND_ERROR} />,
+    element: <ErrorLayout config={NOT_FOUND_ERROR} />,
   },
 ])

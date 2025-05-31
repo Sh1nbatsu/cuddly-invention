@@ -1,4 +1,4 @@
-import { ONE_PERCENT, UNIT_MAP } from './model/game.constants'
+import { ONE_PERCENT, UNIT_MAP } from './game.constants'
 
 export const formatNumber = (num: number): string => {
   if (num < 1000) return num.toString()

@@ -1,5 +1,3 @@
-import { CustomButton } from '@/components/CustomButton/CustomButton'
-
 import { Dispatch, SetStateAction } from 'react'
 
 import {
@@ -14,7 +12,8 @@ import {
 } from '@/features/game/game-upgrades/game-upgrades.styled'
 
 import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
-import { formatNumber, getLevel } from '../../../entities/game/game.lib'
+import { formatNumber, getLevel } from '@/entities/game/model/game.lib'
+import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
 
 interface SidebarUpgradesProps {
   buyAmount: number
