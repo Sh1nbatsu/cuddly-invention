@@ -1,4 +1,3 @@
-import { CustomLink } from '@/shared/ui/custom-link/custom-link.ui'
 import {
   StyledPresentationContainer,
   StyledPresentationList,
@@ -6,7 +5,9 @@ import {
   StyledPresentationSubtitle,
   StyledPresentationText,
   StyledPresentationTitle,
-} from './styled'
+} from '@/entities/presintation/presintation.styled'
+
+import { CustomLink } from '@/shared/ui/custom-link/custom-link.ui'
 
 export const PresentationPage = () => {
   return (
