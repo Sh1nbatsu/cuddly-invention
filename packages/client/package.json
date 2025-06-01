@@ -8,8 +8,8 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "jest ./ --passWithNoTests"
-  },
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
+    },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@reduxjs/toolkit": "^2.7.0",
