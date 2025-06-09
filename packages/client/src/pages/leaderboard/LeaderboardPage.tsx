@@ -9,11 +9,26 @@ import {
 } from './Leaderboard.styled'
 
 import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
+import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
+import { useEffect, useState } from 'react'
+import { LeaderData } from '@/shared/types/Leaderboard'
 
 const Leaderboard = () => {
+  const [leaderData, setLeaderData] = useState<[{ data: LeaderData }]>([])
+
   const loadMoreData = () => {
     console.log('Loading more data...')
   }
+
+  useEffect(() => {
+    const fetchLeaderboard = async (cursor: number) => {
+      const data = await getLeaderboardHandler(cursor)
+      setLeaderData(data as [{ data: LeaderData }])
+      console.log(leaderData)
+    }
+
+    fetchLeaderboard(0)
+  }, [])
 
   return (
     <CustomWrapper>
@@ -31,9 +46,9 @@ const Leaderboard = () => {
           }
           scrollableTarget="scrollableDiv">
           <List
-            dataSource={dataSource}
+            dataSource={leaderData}
             renderItem={item => (
-              <List.Item key={item.username}>
+              <List.Item key={item.data.username}>
                 <List.Item.Meta
                   avatar={
                     <Avatar
@@ -45,11 +60,11 @@ const Leaderboard = () => {
                       // В данный момент не буду загружать статику для аватаров, так что будет жаловаться на отсутствие поля
                     />
                   }
-                  title={<p>{item.username}</p>}
-                  description={item.date}
+                  title={<p>{item.data.username}</p>}
+                  description={item.data.date}
                 />
                 <div>
-                  <h3>{item.score}</h3>
+                  <h3>{item.data.undefScore12}</h3>
                 </div>
               </List.Item>
             )}
