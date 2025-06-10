@@ -1,4 +1,6 @@
 import { routerConfig } from '@/providers/router/router.config'
+import { antdTheme, styledTheme } from '@/shared/themes/defaultTheme'
+import { ConfigProvider } from 'antd'
 import { Request as ExpressRequest } from 'express'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
@@ -9,7 +11,7 @@ import {
   createStaticRouter,
   StaticRouterProvider,
 } from 'react-router-dom'
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet, ThemeProvider } from 'styled-components'
 import { createFetchRequest } from './entry-server.utils'
 
 export async function render(req: ExpressRequest) {
@@ -29,11 +31,15 @@ export async function render(req: ExpressRequest) {
   try {
     const appHtml = ReactDOMServer.renderToString(
       sheet.collectStyles(
-        <HelmetProvider context={helmetContext}>
-          <React.StrictMode>
-            <StaticRouterProvider router={router} context={context} />
-          </React.StrictMode>
-        </HelmetProvider>
+        <React.StrictMode>
+          <HelmetProvider context={helmetContext}>
+            <ConfigProvider theme={antdTheme}>
+              <ThemeProvider theme={styledTheme}>
+                <StaticRouterProvider router={router} context={context} />
+              </ThemeProvider>
+            </ConfigProvider>
+          </HelmetProvider>
+        </React.StrictMode>
       )
     )
 
