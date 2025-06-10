@@ -1,20 +1,15 @@
-import React, { ReactNode } from 'react'
+import { useClient } from '@/shared/hooks/useClient'
+import { ReactNode } from 'react'
 import { StyledPageWrapper } from './page-wrapper.styled'
 
 interface PageWrapperProps {
   children: ReactNode
-  className?: string
-  style?: React.CSSProperties
 }
 
-export const PageWrapper = ({
-  children,
-  className = '',
-  style = {},
-}: PageWrapperProps) => {
-  return (
-    <StyledPageWrapper className={`container ${className}`} style={style}>
-      {children}
-    </StyledPageWrapper>
-  )
+export const PageWrapper = ({ children }: PageWrapperProps) => {
+  const isClientMounted = useClient()
+
+  if (!isClientMounted) return null
+
+  return <StyledPageWrapper>{children}</StyledPageWrapper>
 }
