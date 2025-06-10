@@ -1,11 +1,14 @@
 import express, { NextFunction, Request, Response } from 'express'
 import fs from 'fs/promises'
 import path from 'path'
+import { HelmetData } from 'react-helmet'
 import { createServer } from 'vite'
 
 // Типизации для функции packages/client/src/entries/entry-server.tsx
 type RenderFn = (req: Request) => Promise<{
   appHtml: string
+  helmet: HelmetData
+  styleTags: string
 }>
 
 export async function setupSSR(app: express.Express, clientPath: string) {
@@ -32,9 +35,14 @@ export async function setupSSR(app: express.Express, clientPath: string) {
         path.join(clientPath, 'src/entries/entry-server.tsx')
       )) as { render: RenderFn }
 
-      const { appHtml } = await mod.render(req)
+      const { appHtml, styleTags, helmet } = await mod.render(req)
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace('<!--styles-->', styleTags)
+        .replace('<!--helmet-title-->', helmet.title.toString())
+        .replace('<!--helmet-meta-->', helmet.meta.toString())
+        .replace('<!--helmet-link-->', helmet.link.toString())
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {
