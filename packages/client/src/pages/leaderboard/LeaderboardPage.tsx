@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
 import { LeaderData } from '@/shared/types/Leaderboard'
 
 const Leaderboard = () => {
-  const [leaderData, setLeaderData] = useState<[{ data: LeaderData }]>([])
+  const [leaderData, setLeaderData] = useState<[{ data: LeaderData }]>()
 
   const loadMoreData = () => {
     console.log('Loading more data...')

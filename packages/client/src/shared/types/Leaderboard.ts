@@ -8,6 +8,7 @@ export type LeaderData = {
   username: string
   date: string
   undefScore12: number
+  avatar?: string
 }
 
 export type Leader = {

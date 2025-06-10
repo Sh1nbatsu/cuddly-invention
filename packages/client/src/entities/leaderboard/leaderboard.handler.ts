@@ -4,6 +4,8 @@ import { LeaderData } from '@/shared/types/Leaderboard'
 
 const RATING_FIELD_NAME = 'undefScore12'
 
+// Тестовый рейтинг филд, потом можно поменять на underScore, или любой другой нужный кроме score.
+
 export const getLeaderboardHandler = async (cursor: number) => {
   try {
     const data = await getLeaderboardApi({
@@ -21,7 +23,8 @@ export const getLeaderboardHandler = async (cursor: number) => {
 export const addLeaderHandler = async (
   username: string,
   score: number,
-  date: string
+  date: string,
+  avatar?: string
 ) => {
   try {
     const data = await addLeaderApi({
@@ -29,6 +32,7 @@ export const addLeaderHandler = async (
         undefScore12: score,
         date,
         username,
+        avatar: avatar || '',
       },
       ratingFieldName: RATING_FIELD_NAME,
       teamName: 'string',
