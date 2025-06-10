@@ -1,4 +1,4 @@
-export type LeaderboardData = {
+export type LeaderboardRequestData = {
   ratingFieldName: string
   cursor: number
   limit: number
@@ -16,3 +16,5 @@ export type Leader = {
   ratingFieldName: string
   teamName: string
 }
+
+export type LeaderboardResponse = [{ data: LeaderData }]

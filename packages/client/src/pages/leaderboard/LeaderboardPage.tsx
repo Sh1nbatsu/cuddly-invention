@@ -1,5 +1,4 @@
 import { List, Avatar } from 'antd'
-import { dataSource } from './mockData'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {
   CustomButton,
@@ -10,11 +9,11 @@ import {
 
 import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
 import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
+import { LeaderboardResponse } from '@/shared/types/Leaderboard'
 import { useEffect, useState } from 'react'
-import { LeaderData } from '@/shared/types/Leaderboard'
 
 const Leaderboard = () => {
-  const [leaderData, setLeaderData] = useState<[{ data: LeaderData }]>()
+  const [leaderData, setLeaderData] = useState<LeaderboardResponse>()
 
   const loadMoreData = () => {
     console.log('Loading more data...')
@@ -23,7 +22,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async (cursor: number) => {
       const data = await getLeaderboardHandler(cursor)
-      setLeaderData(data as [{ data: LeaderData }])
+      setLeaderData(data)
       console.log(leaderData)
     }
 
