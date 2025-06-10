@@ -1,4 +1,4 @@
-import { forumRoute } from '@/pages/Forum/forum.route'
+import { forumRoute } from '@/pages/forum/forum.route'
 import { topicRoute } from '@/pages/topic/topic.route'
 
 export const forumRoutes = {
