@@ -18,6 +18,12 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    outDir: path.join(__dirname, 'dist/client'),
+  },
+  ssr: {
+    format: 'cjs',
+  },
   plugins: [
     react(),
     VitePWA({
