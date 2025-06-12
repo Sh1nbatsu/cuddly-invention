@@ -29,7 +29,7 @@ export const CustomButton = styled(AntButton)`
 `
 
 export const ScrollableDiv = styled.div`
-  height: calc(100vh - 32px);
+  height: calc(100vh - 100px);
   overflow: auto;
   padding: 0 16px;
   border: 1px solid rgba(140, 140, 140, 0.35);
@@ -43,8 +43,8 @@ export const NavigationDiv = styled.div`
   gap: 2rem;
 `
 
-export const CustomWrapper = styled(PageWrapper)`
+export const CustomWrapper = styled.div`
   display: flex;
   padding: 16px;
-  min-height: 10vh;
+  height: 90vh;
 `
