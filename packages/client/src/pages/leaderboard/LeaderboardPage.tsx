@@ -1,10 +1,11 @@
 import { List, Avatar } from 'antd'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {
-  CustomButton,
   ScrollableDiv,
   NavigationDiv,
   CustomWrapper,
+  CustomButton,
+  CustomTitle,
 } from './Leaderboard.styled'
 
 import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
@@ -71,10 +72,7 @@ const Leaderboard = () => {
         </InfiniteScroll>
       </ScrollableDiv>
       <NavigationDiv>
-        <CustomButton type="primary">Restart?</CustomButton>
-        <CustomButton type="link" color="cyan" variant="solid">
-          Forum
-        </CustomButton>
+        <CustomButton variant="retro">Ещё раз?</CustomButton>
       </NavigationDiv>
     </CustomWrapper>
   )

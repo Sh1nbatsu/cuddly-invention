@@ -1,3 +1,4 @@
+import { useClient } from '@/shared/hooks/useClient'
 import { CustomLink } from '@/shared/ui/custom-link/custom-link.ui'
 import { Typography } from 'antd'
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
@@ -9,10 +10,16 @@ export interface ErrorLayoutProps {
 }
 
 export const ErrorLayout = ({ config }: ErrorLayoutProps) => {
+  const mountedClient = useClient()
+
   const error = useRouteError()
   const isRouteError = isRouteErrorResponse(error)
   const status = isRouteError ? error.status : undefined
   const statusText = isRouteError ? error.statusText : undefined
+
+  if (!mountedClient) {
+    return null
+  }
 
   return (
     <PageContent>

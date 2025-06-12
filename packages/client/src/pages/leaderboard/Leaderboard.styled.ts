@@ -1,35 +1,20 @@
-import { Button as AntButton, Table as AntTable } from 'antd'
 import styled from 'styled-components'
-import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
+import { CustomButton as RetroButton } from '@/shared/ui/custom-button/custom-button.ui'
+import { Avatar } from 'antd'
 
-export const CustomTable = styled(AntTable)`
+export const CustomButton = styled(RetroButton)`
   &&& {
-    width: 40%;
-  }
-
-  .ant-spin-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-  }
-
-  .ant-pagination {
-    align-self: flex-start;
-  }
-`
-
-export const CustomButton = styled(AntButton)`
-  &&& {
-    width: 160px;
+    width: 200px;
     height: 60px;
     font-size: 20px;
     font-weight: 500;
+    font-family: 'PressStart2P', monospace;
+    background-color: rgb(186, 255, 217);
   }
 `
 
 export const ScrollableDiv = styled.div`
-  height: calc(100vh - 100px);
+  height: calc(100vh - 98px);
   overflow: auto;
   padding: 0 16px;
   border: 1px solid rgba(140, 140, 140, 0.35);
@@ -47,4 +32,10 @@ export const CustomWrapper = styled.div`
   display: flex;
   padding: 16px;
   height: 90vh;
+`
+
+export const CustomTitle = styled.p`
+  &&& {
+    font-weight: 700;
+  }
 `

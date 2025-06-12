@@ -1,28 +1,25 @@
+// styled.d.ts
 import 'styled-components'
 
 declare module 'styled-components' {
   export interface DefaultTheme {
-    token: {
-      borderRadius: number
-      colorBgBase: string
-      colorBgPrimary: string
-      colorError: string
-      colorInfo: string
-      colorLink: string
-      colorPrimary: string
-      colorSuccess: string
-      colorTextBase: string
-      colorWarning: string
-      controlHeight: number
-      fontFamily: string
-      fontFamilyCode: string
-      fontSize: number
-      lineType: 'solid' | 'dashed' | 'dotted' | string
-      lineWidth: number
+    borderRadius: number
+    colors: {
+      backgroundBase: string
+      backgroundPrimary: string
+      error: string
+      info: string
+      link: string
+      primary: string
+      success: string
+      textBase: string
+      warning: string
     }
-    components: {
-      Button: Record<string, unknown>
-      Input: Record<string, unknown>
-    }
+    controlHeight: number
+    fontFamily: string
+    fontFamilyCode: string
+    fontSize: number
+    lineType: string
+    lineWidth: number
   }
 }
