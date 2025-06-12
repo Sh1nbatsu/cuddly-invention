@@ -15,18 +15,18 @@ import { useEffect, useState } from 'react'
 const Leaderboard = () => {
   const [leaderData, setLeaderData] = useState<LeaderboardResponse>()
 
-  const loadMoreData = () => {
-    console.log('Loading more data...')
+  let currCursor = 0
+
+  const fetchLeaderboard = async (cursor: number) => {
+    const data = await getLeaderboardHandler(cursor)
+    setLeaderData(data)
+    currCursor += 1
+    console.log('loading')
+    return
   }
 
   useEffect(() => {
-    const fetchLeaderboard = async (cursor: number) => {
-      const data = await getLeaderboardHandler(cursor)
-      setLeaderData(data)
-      console.log(leaderData)
-    }
-
-    fetchLeaderboard(0)
+    fetchLeaderboard(currCursor)
   }, [])
 
   return (
@@ -35,7 +35,7 @@ const Leaderboard = () => {
       <ScrollableDiv id="scrollableDiv">
         <InfiniteScroll
           dataLength={20}
-          next={loadMoreData}
+          next={() => fetchLeaderboard(currCursor)}
           hasMore={false}
           loader={<h4>Loading...</h4>}
           endMessage={

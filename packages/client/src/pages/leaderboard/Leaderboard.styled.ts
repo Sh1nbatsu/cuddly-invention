@@ -45,5 +45,6 @@ export const NavigationDiv = styled.div`
 
 export const CustomWrapper = styled(PageWrapper)`
   display: flex;
-  padding: 16px !important;
+  padding: 16px;
+  min-height: 10vh;
 `

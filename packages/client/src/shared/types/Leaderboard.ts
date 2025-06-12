@@ -11,7 +11,7 @@ export type LeaderData = {
   avatar?: string
 }
 
-export type Leader = {
+export type LeaderRequestData = {
   data: LeaderData
   ratingFieldName: string
   teamName: string

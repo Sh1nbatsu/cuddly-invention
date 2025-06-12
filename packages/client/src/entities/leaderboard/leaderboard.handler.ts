@@ -4,7 +4,7 @@ import { LeaderboardResponse } from '@/shared/types/Leaderboard'
 
 const RATING_FIELD_NAME = 'undefScore12'
 
-// Тестовый рейтинг филд, потом можно поменять на underScore, или любой другой нужный кроме score.
+// Тестовый рейтинг филд, потом можно поменять на underScore, или любой другой нужный кроме score
 
 export const getLeaderboardHandler = async (
   cursor: number
