@@ -1,5 +1,4 @@
 import { List, Avatar } from 'antd'
-import { dataSource } from './mockData'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {
   ScrollableDiv,
@@ -10,11 +9,26 @@ import {
 } from './Leaderboard.styled'
 
 import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
+import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
+import { LeaderboardResponse } from '@/shared/types/Leaderboard'
+import { useEffect, useState } from 'react'
 
 const Leaderboard = () => {
-  const loadMoreData = () => {
-    console.log('Loading more data...')
+  const [leaderData, setLeaderData] = useState<LeaderboardResponse>()
+
+  let currCursor = 0
+
+  const fetchLeaderboard = async (cursor: number) => {
+    const data = await getLeaderboardHandler(cursor)
+    setLeaderData(data)
+    currCursor += 1
+    console.log('loading')
+    return
   }
+
+  useEffect(() => {
+    fetchLeaderboard(currCursor)
+  }, [])
 
   return (
     <CustomWrapper>
@@ -22,7 +36,7 @@ const Leaderboard = () => {
       <ScrollableDiv id="scrollableDiv">
         <InfiniteScroll
           dataLength={20}
-          next={loadMoreData}
+          next={() => fetchLeaderboard(currCursor)}
           hasMore={false}
           loader={<h4>Loading...</h4>}
           endMessage={
@@ -32,9 +46,9 @@ const Leaderboard = () => {
           }
           scrollableTarget="scrollableDiv">
           <List
-            dataSource={dataSource}
+            dataSource={leaderData}
             renderItem={item => (
-              <List.Item key={item.username}>
+              <List.Item key={item.data.username}>
                 <List.Item.Meta
                   avatar={
                     <Avatar
@@ -46,11 +60,11 @@ const Leaderboard = () => {
                       // В данный момент не буду загружать статику для аватаров, так что будет жаловаться на отсутствие поля
                     />
                   }
-                  title={<CustomTitle>{item.username}</CustomTitle>}
-                  description={item.date}
+                  title={<p>{item.data.username}</p>}
+                  description={item.data.date}
                 />
                 <div>
-                  <h3>{item.score}</h3>
+                  <h3>{item.data.undefScore12}</h3>
                 </div>
               </List.Item>
             )}

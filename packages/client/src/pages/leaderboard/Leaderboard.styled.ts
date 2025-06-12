@@ -30,7 +30,8 @@ export const NavigationDiv = styled.div`
 
 export const CustomWrapper = styled.div`
   display: flex;
-  padding: 16px !important;
+  padding: 16px;
+  height: 90vh;
 `
 
 export const CustomTitle = styled.p`
