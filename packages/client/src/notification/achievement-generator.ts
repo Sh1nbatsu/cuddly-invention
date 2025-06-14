@@ -34,7 +34,7 @@ const FUN_MILESTONE_MESSAGES: Record<number, string[]> = {
   1000000000: ['{n}! Конец игры.', 'Миллиард! Абсолютный топ.'],
 }
 
-function generateScoreMilestones(max: number = 1_000_000_000): number[] {
+function generateScoreMilestones(max = 1_000_000_000): number[] {
   const base: number[] = [1, 10, 100, 200]
   let v = 1000
   while (v <= max) {
