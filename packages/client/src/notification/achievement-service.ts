@@ -14,13 +14,19 @@ class AchievementService {
   private readonly unlocked: Set<AchievementId> = new Set<AchievementId>()
 
   private constructor() {
-    if (typeof window !== 'undefined') {
+    if (typeof window === 'undefined') {
+      return
+    }
+    try {
       const stored = window.localStorage.getItem(this.storageKey)
       if (stored) {
-        for (const id of JSON.parse(stored) as AchievementId[]) {
+        const parsed = JSON.parse(stored) as AchievementId[]
+        for (const id of parsed) {
           this.unlocked.add(id)
         }
       }
+    } catch (error) {
+      console.error('Ошибка при загрузке сохранённых достижений:', error)
     }
   }
 
@@ -34,11 +40,20 @@ class AchievementService {
   public processScore(score: number): void {
     for (const threshold of SCORE_MILESTONES) {
       const id = `score-${threshold}` as AchievementId
-      if (score >= threshold && !this.unlocked.has(id)) {
+      if (score < threshold || this.unlocked.has(id)) {
+        continue
+      }
+      try {
         const { title, body } = generateAchievementMessage(threshold)
-        void notificationService.sendNotification(title, { body })
+        void notificationService
+          .sendNotification(title, { body })
+          .catch(err =>
+            console.error('Ошибка при отправке уведомления о достижении:', err)
+          )
         this.unlocked.add(id)
         this.persist()
+      } catch (error) {
+        console.error('Ошибка при обработке достижения по очкам:', error)
       }
     }
   }
@@ -50,14 +65,23 @@ class AchievementService {
   ): void {
     for (const threshold of PURCHASE_THRESHOLDS) {
       const id = `purchase-${upgradeId}-${threshold}` as AchievementId
-      if (totalOwned >= threshold && !this.unlocked.has(id)) {
+      if (totalOwned < threshold || this.unlocked.has(id)) {
+        continue
+      }
+      try {
         const { title, body } = generatePurchaseAchievementMessage(
           upgradeName,
           threshold
         )
-        void notificationService.sendNotification(title, { body })
+        void notificationService
+          .sendNotification(title, { body })
+          .catch(err =>
+            console.error('Ошибка при отправке уведомления о покупке:', err)
+          )
         this.unlocked.add(id)
         this.persist()
+      } catch (error) {
+        console.error('Ошибка при обработке достижения по покупке:', error)
       }
     }
   }
@@ -72,11 +96,16 @@ class AchievementService {
   }
 
   private persist(): void {
-    if (typeof window !== 'undefined') {
+    if (typeof window === 'undefined') {
+      return
+    }
+    try {
       window.localStorage.setItem(
         this.storageKey,
         JSON.stringify(Array.from(this.unlocked))
       )
+    } catch (error) {
+      console.error('Ошибка при сохранении достижений:', error)
     }
   }
 }
