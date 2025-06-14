@@ -50,9 +50,6 @@ export const Registration = () => {
 
   return (
     <PageWrapper>
-      <YandexLoginButton />
-
-      <AuthSpace />
       <AuthForm layout="vertical" autoComplete="off" onFinish={onFinish}>
         <AuthTitle level={2}>Регистрация</AuthTitle>
 
@@ -91,6 +88,7 @@ export const Registration = () => {
             Уже есть аккаунт? <AuthLink to="/sign-in">Войти</AuthLink>
           </AuthFooterText>
         </AuthSpace>
+        <YandexLoginButton />
       </AuthForm>
     </PageWrapper>
   )

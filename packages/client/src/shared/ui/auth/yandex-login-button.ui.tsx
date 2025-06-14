@@ -1,8 +1,13 @@
 import { memo, useCallback } from 'react'
+import styled from 'styled-components'
 import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
 
 const CLIENT_ID = import.meta.env.VITE_YANDEX_CLIENT_ID as string
 const ORIGIN = window.location.origin
+
+const StyledButton = styled(CustomButton)`
+  margin-top: 16px;
+`
 
 export const YandexLoginButton = memo(() => {
   const handleClick = useCallback(() => {
@@ -17,8 +22,8 @@ export const YandexLoginButton = memo(() => {
   }, [])
 
   return (
-    <CustomButton variant="retro" onClick={handleClick}>
+    <StyledButton variant="retro" onClick={handleClick}>
       Войти через Яндекс
-    </CustomButton>
+    </StyledButton>
   )
 })
