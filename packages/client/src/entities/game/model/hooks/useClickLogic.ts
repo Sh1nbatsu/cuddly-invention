@@ -5,8 +5,10 @@ import {
   SetStateAction,
   useCallback,
 } from 'react'
+import { useEffect } from 'react'
 import { MIN_RADIUS, TARGET_RADIUS } from '../game.constants'
 import { getClickGain } from '../game.lib'
+import { achievementService } from '@/notification/achievement-service'
 
 type AnimateRadius = (from: number, to: number, duration: number) => void
 
@@ -20,6 +22,10 @@ export function useClickLogic(
   handleMouseDown: (e: MouseEvent<HTMLCanvasElement>) => void
   handleMouseUp: () => void
 } {
+  useEffect(() => {
+    achievementService.processScore(score)
+  }, [score])
+
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLCanvasElement>) => {
       const canvas = canvasRef.current
@@ -32,9 +38,7 @@ export function useClickLogic(
       const centerY = canvas.height / 2
       const dx = x - centerX
       const dy = y - centerY
-      const distanceSquared = dx * dx + dy * dy
-
-      if (distanceSquared > radius * radius) return
+      if (dx * dx + dy * dy > radius * radius) return
 
       const gain = getClickGain(score)
       setScore(prev => prev + gain)
