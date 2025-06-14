@@ -1,12 +1,13 @@
 import { memo, useCallback } from 'react'
 import styled from 'styled-components'
-import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
+import { AuthSubmitButton } from '@/entities/session/session.styled'
 
 const CLIENT_ID = import.meta.env.VITE_YANDEX_CLIENT_ID as string
 const ORIGIN = window.location.origin
 
-const StyledButton = styled(CustomButton)`
+const StyledAuthButton = styled(AuthSubmitButton)`
   margin-top: 16px;
+  margin-bottom: 16px;
 `
 
 export const YandexLoginButton = memo(() => {
@@ -22,8 +23,12 @@ export const YandexLoginButton = memo(() => {
   }, [])
 
   return (
-    <StyledButton variant="retro" onClick={handleClick}>
+    <StyledAuthButton
+      variant="outlined"
+      htmlType="button"
+      size="large"
+      onClick={handleClick}>
       Войти через Яндекс
-    </StyledButton>
+    </StyledAuthButton>
   )
 })

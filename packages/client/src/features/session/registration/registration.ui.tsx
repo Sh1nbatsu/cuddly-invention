@@ -82,13 +82,13 @@ export const Registration = () => {
           size="large">
           Зарегистрироваться
         </AuthSubmitButton>
+        <YandexLoginButton />
 
         <AuthSpace direction="horizontal">
           <AuthFooterText>
             Уже есть аккаунт? <AuthLink to="/sign-in">Войти</AuthLink>
           </AuthFooterText>
         </AuthSpace>
-        <YandexLoginButton />
       </AuthForm>
     </PageWrapper>
   )

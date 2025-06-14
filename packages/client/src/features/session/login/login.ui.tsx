@@ -69,13 +69,13 @@ export const Login = () => {
           size="large">
           Войти
         </AuthSubmitButton>
+        <YandexLoginButton />
 
         <AuthSpace direction="horizontal">
           <AuthFooterText>
             Нет аккаунта? <AuthLink to="/sign-up">Зарегистрироваться</AuthLink>
           </AuthFooterText>
         </AuthSpace>
-        <YandexLoginButton />
       </AuthForm>
     </PageWrapper>
   )
