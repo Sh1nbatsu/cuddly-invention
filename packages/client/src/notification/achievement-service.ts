@@ -3,7 +3,7 @@ import {
   generateAchievementMessage,
   PURCHASE_THRESHOLDS,
   generatePurchaseAchievementMessage,
-} from 'entities/achievements'
+} from '../entities/achievements'
 import { notificationService } from '@/notification/notification-service'
 
 type AchievementId = `score-${number}` | `purchase-${string}-${number}`
