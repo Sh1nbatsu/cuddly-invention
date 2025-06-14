@@ -109,7 +109,7 @@ const PURCHASE_TITLES: Record<number, string[]> = {
 }
 
 const PURCHASE_MILESTONE_MESSAGES: Record<number, string[]> = {
-  1: ['Первая сделка! Начало великого пути.', 'Купил первый {upgrade}!'],
+  1: ['Купил первый {upgrade}!'],
   5: ['Целых {qty} штук! Любишь прикупить.', '{qty} × {upgrade}? Шопоголик.'],
   10: ['Десяток {upgrade}! Переходим на опт.', '{qty} покупок — скидку бы.'],
   42: ['{qty} {upgrade}… Ответ найден.', 'Вселенная довольна {qty} покупками.'],
