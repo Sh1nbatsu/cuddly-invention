@@ -48,7 +48,8 @@ export async function initAuth(): Promise<void> {
     }
 
     store.dispatch(setUser(user))
-  } catch {
+  } catch (err) {
+    console.error(err)
     localStorage.removeItem('ya_token')
   }
 }
