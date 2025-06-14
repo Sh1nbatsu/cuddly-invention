@@ -1,0 +1,54 @@
+import { store } from '@/providers/store/store'
+import { setUser } from '@/entities/user/model/user.slice'
+import { User } from '@/shared/types/User'
+import { YandexInfoResponse } from '@/shared/types/YandexInfoResponse'
+
+export async function initAuth(): Promise<void> {
+  let token: string | null = localStorage.getItem('ya_token')
+
+  if (window.location.hash.startsWith('#')) {
+    const hashParams = new URLSearchParams(window.location.hash.slice(1))
+    const incoming = hashParams.get('access_token')
+    if (incoming) {
+      localStorage.setItem('ya_token', incoming)
+      history.replaceState(
+        null,
+        '',
+        window.location.pathname + window.location.search
+      )
+      token = incoming
+    }
+  }
+
+  if (!token) {
+    return
+  }
+
+  try {
+    const res = await fetch(
+      `https://login.yandex.ru/info?format=json&oauth_token=${encodeURIComponent(
+        token
+      )}`
+    )
+    if (!res.ok) {
+      throw new Error('Yandex OAuth request failed')
+    }
+
+    const p = (await res.json()) as YandexInfoResponse
+
+    const user: User = {
+      id: Number(p.id),
+      username: p.login ?? p.default_email?.split('@')[0] ?? '',
+      email: p.default_email ?? '',
+      first_name: p.first_name ?? '',
+      second_name: p.last_name ?? '',
+      avatar: p.default_avatar_id
+        ? `https://avatars.yandex.net/get-yapic/${p.default_avatar_id}/islands-200`
+        : null,
+    }
+
+    store.dispatch(setUser(user))
+  } catch {
+    localStorage.removeItem('ya_token')
+  }
+}
