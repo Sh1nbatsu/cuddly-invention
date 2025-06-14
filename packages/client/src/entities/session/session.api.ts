@@ -14,4 +14,7 @@ export const registerUserApi: RegisterData = data =>
 
 export const getMeApi: GetMe = () => api.get('/auth/user')
 
-export const logoutUserApi = () => api.post('/auth/logout')
+export const logoutUserApi = () => {
+  localStorage.removeItem('ya_token')
+  return api.post('/auth/logout')
+}
