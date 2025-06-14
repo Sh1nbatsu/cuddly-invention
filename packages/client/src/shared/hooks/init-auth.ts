@@ -3,20 +3,20 @@ import { setUser } from '@/entities/user/model/user.slice'
 import { User } from '@/shared/types/User'
 import { YandexInfoResponse } from '@/shared/types/YandexInfoResponse'
 
-export async function initAuth(): Promise<void> {
+export async function foundYandexUser(): Promise<void> {
   let token: string | null = localStorage.getItem('ya_token')
 
   if (window.location.hash.startsWith('#')) {
     const hashParams = new URLSearchParams(window.location.hash.slice(1))
-    const incoming = hashParams.get('access_token')
-    if (incoming) {
-      localStorage.setItem('ya_token', incoming)
+    const yandexAccessToken = hashParams.get('access_token')
+    if (yandexAccessToken) {
+      localStorage.setItem('ya_token', yandexAccessToken)
       history.replaceState(
         null,
         '',
         window.location.pathname + window.location.search
       )
-      token = incoming
+      token = yandexAccessToken
     }
   }
 
@@ -34,16 +34,19 @@ export async function initAuth(): Promise<void> {
       throw new Error('Yandex OAuth request failed')
     }
 
-    const p = (await res.json()) as YandexInfoResponse
+    const yandexInfoResponse = (await res.json()) as YandexInfoResponse
 
     const user: User = {
-      id: Number(p.id),
-      username: p.login ?? p.default_email?.split('@')[0] ?? '',
-      email: p.default_email ?? '',
-      first_name: p.first_name ?? '',
-      second_name: p.last_name ?? '',
-      avatar: p.default_avatar_id
-        ? `https://avatars.yandex.net/get-yapic/${p.default_avatar_id}/islands-200`
+      id: Number(yandexInfoResponse.id),
+      username:
+        yandexInfoResponse.login ??
+        yandexInfoResponse.default_email?.split('@')[0] ??
+        '',
+      email: yandexInfoResponse.default_email ?? '',
+      first_name: yandexInfoResponse.first_name ?? '',
+      second_name: yandexInfoResponse.last_name ?? '',
+      avatar: yandexInfoResponse.default_avatar_id
+        ? `https://avatars.yandex.net/get-yapic/${yandexInfoResponse.default_avatar_id}/islands-200`
         : null,
     }
 

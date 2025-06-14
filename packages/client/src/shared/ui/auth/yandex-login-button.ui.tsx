@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 import styled from 'styled-components'
 import { AuthSubmitButton } from '@/entities/session/session.styled'
 
@@ -11,7 +11,7 @@ const StyledAuthButton = styled(AuthSubmitButton)`
 `
 
 export const YandexLoginButton = memo(() => {
-  const handleClick = useCallback(() => {
+  function handleClick(): void {
     const params = new URLSearchParams({
       response_type: 'token',
       client_id: CLIENT_ID,
@@ -20,7 +20,7 @@ export const YandexLoginButton = memo(() => {
       state: crypto.randomUUID(),
     })
     window.location.href = `https://oauth.yandex.ru/authorize?${params.toString()}`
-  }, [])
+  }
 
   return (
     <StyledAuthButton
