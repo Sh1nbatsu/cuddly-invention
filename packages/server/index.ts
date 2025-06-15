@@ -8,9 +8,7 @@ const CLIENT_PATH = path.resolve('../client')
 async function startServer() {
   const app = express()
 
-  if (process.env.NODE_ENV === 'development') {
-    await setupSSR(app, CLIENT_PATH)
-  }
+  await setupSSR(app, CLIENT_PATH)
 
   app.listen(PORT, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${PORT}`)
