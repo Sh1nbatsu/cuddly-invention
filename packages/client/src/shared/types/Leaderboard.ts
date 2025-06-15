@@ -17,4 +17,4 @@ export type LeaderRequestData = {
   teamName: string
 }
 
-export type LeaderboardResponse = [{ data: LeaderData }]
+export type LeaderboardResponse = Array<{ data: LeaderData }>

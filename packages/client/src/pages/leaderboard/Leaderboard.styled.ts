@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { CustomButton as RetroButton } from '@/shared/ui/custom-button/custom-button.ui'
-import { Avatar } from 'antd'
 
 export const CustomButton = styled(RetroButton)`
   &&& {

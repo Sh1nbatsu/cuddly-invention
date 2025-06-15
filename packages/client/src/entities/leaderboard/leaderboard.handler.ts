@@ -23,11 +23,11 @@ export const getLeaderboardHandler = async (
 }
 
 export const addLeaderHandler = async (
-  username: string,
   score: number,
-  date: string,
+  username: string,
   avatar?: string
 ): Promise<string> => {
+  const date = new Date().toLocaleDateString()
   try {
     const data = await addLeaderApi({
       data: {
