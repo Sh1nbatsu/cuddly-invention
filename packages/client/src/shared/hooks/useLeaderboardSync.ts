@@ -1,14 +1,13 @@
 import { useEffect } from 'react'
 import { useScore } from '@/entities/game/model/hooks/useScore'
-import { useSelector } from 'react-redux'
-import { selectUser } from '@/entities/user/model/user.selector'
 import { useLocation } from 'react-router-dom'
 import { addLeaderHandler } from '@/entities/leaderboard/leaderboard.handler'
+import { useCurrentUser } from './useCurrentUser'
 
 const URL = 'https://ya-praktikum.tech/api/v2/leaderboard'
 
 export const useLeaderboardSync = () => {
-  const user = useSelector(selectUser)
+  const user = useCurrentUser()
   const username = user.user?.login || 'undefined'
   const [score] = useScore()
   const location = useLocation()
