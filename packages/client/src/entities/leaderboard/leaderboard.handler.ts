@@ -2,7 +2,7 @@ import { getLeaderboardApi, addLeaderApi } from './leaderboard.api'
 
 import { LeaderboardResponse } from '@/shared/types/Leaderboard'
 
-const RATING_FIELD_NAME = 'undefScore12'
+export const RATING_FIELD_NAME = 'undefScore12'
 
 // Тестовый рейтинг филд, потом можно поменять на underScore, или любой другой нужный кроме score
 
