@@ -1,6 +1,6 @@
-import { connectDB } from '@db/db'
 import express from 'express'
 import path from 'path'
+import { connectDB } from './db/db'
 import { setupSSR } from './ssr/render'
 
 const PORT = 3000

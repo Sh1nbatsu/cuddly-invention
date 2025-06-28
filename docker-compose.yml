@@ -28,6 +28,7 @@ services:
     restart: always
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
+    env_file: .env  
     environment:
       SERVER_PORT: ${SERVER_PORT}
     depends_on:

@@ -1,14 +1,18 @@
 import { Sequelize } from 'sequelize-typescript'
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env
+const {
+  POSTGRES_USER,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_CONTAINER_PORT,
+} = process.env
 
 export const sequelize = new Sequelize({
   database: POSTGRES_DB,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
-  host: 'localhost',
-  port: Number(POSTGRES_PORT),
+  host: 'postgres',
+  port: Number(POSTGRES_CONTAINER_PORT),
   dialect: 'postgres',
   models: [__dirname + '/models/*.model.ts'],
 })
