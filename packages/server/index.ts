@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import { connectDB } from './db/db'
+import { connectDB } from './api/db/db'
 import { setupSSR } from './ssr/render'
 
 const PORT = 3000
@@ -8,6 +8,7 @@ const CLIENT_PATH = path.resolve('../client')
 
 async function startServer() {
   const app = express()
+
   await connectDB()
   await setupSSR(app, CLIENT_PATH)
 

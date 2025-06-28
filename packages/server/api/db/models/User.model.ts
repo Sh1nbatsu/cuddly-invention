@@ -4,7 +4,7 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript'
   tableName: 'users',
   timestamps: true,
 })
-export class User extends Model<User> {
+class User extends Model<User> {
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -93,3 +93,5 @@ export class User extends Model<User> {
   })
   declare phone: string
 }
+
+export default User

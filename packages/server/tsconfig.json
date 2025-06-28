@@ -23,7 +23,7 @@
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
-      "@db/*": ["db/*"]
+      "@db/*": ["api/db/*"]
     },
     "outDir": "dist"
   }
