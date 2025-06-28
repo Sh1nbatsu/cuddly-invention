@@ -12,6 +12,8 @@
     "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
@@ -21,7 +23,7 @@
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
-      "*": ["types/*"]
+      "@db/*": ["db/*"]
     },
     "outDir": "dist"
   }

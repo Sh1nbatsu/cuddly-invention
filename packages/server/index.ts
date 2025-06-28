@@ -1,3 +1,4 @@
+import { connectDB } from '@db/db'
 import express from 'express'
 import path from 'path'
 import { setupSSR } from './ssr/render'
@@ -7,7 +8,7 @@ const CLIENT_PATH = path.resolve('../client')
 
 async function startServer() {
   const app = express()
-
+  await connectDB()
   await setupSSR(app, CLIENT_PATH)
 
   app.listen(PORT, () => {
