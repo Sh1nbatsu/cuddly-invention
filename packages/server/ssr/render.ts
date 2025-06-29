@@ -5,6 +5,13 @@ import { HelmetData } from 'react-helmet'
 import { createServer, ViteDevServer } from 'vite'
 
 export async function setupSSR(app: express.Express, clientPath: string) {
+  console.log('process.cwd():', process.cwd())
+  console.log('__dirname:', __dirname)
+  console.log('CLIENT_PATH:', clientPath)
+  console.log(
+    'Trying to read index.html at:',
+    path.join(clientPath, 'index.html')
+  )
   const isDev = process.env.NODE_ENV === 'development'
   let vite: ViteDevServer | undefined
   if (isDev) {
@@ -42,13 +49,13 @@ export async function setupSSR(app: express.Express, clientPath: string) {
           ).render
         } else {
           template = await fs.readFile(
-            path.join(clientPath, 'dist/client/index.html'),
+            path.join(clientPath, 'index.html'),
             'utf-8'
           )
 
-          const pathToServer = path.join(
+          const pathToServer = path.resolve(
             clientPath,
-            'dist/server/entry-server.js'
+            '../server/entry-server.js'
           )
 
           render = (await import(pathToServer)).render

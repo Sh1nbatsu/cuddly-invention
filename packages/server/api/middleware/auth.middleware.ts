@@ -9,7 +9,9 @@ export const authMiddleware = (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies.token || req.headers.authorization?.split(' ')[1]
+    console.log('authMiddleware triggered')
+    const token =
+      req.cookies['auth-token'] || req.headers.authorization?.split(' ')[1]
     if (!token) {
       throw new AppError('Необходима авторизация', ErrorsCode.Unauthorized)
     }
@@ -19,6 +21,7 @@ export const authMiddleware = (
 
     next()
   } catch (error) {
+    console.log(error, 'error')
     next(error)
   }
 }

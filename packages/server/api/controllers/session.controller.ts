@@ -55,7 +55,7 @@ export const signIn = async (
 export const signUp = async (
   req: RequestWithValidateData<RegisterFormData>,
   res: Response,
-  next: Function
+  next: NextFunction
 ): Promise<void> => {
   try {
     const { first_name, login, password, phone, email, second_name } = req.body
@@ -77,7 +77,7 @@ export const signUp = async (
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    await User.create({
+    const user = await User.create({
       email,
       password: hashedPassword,
       first_name,
@@ -86,7 +86,24 @@ export const signUp = async (
       login,
     })
 
-    res.json({ message: 'Пользователь успешно создан!' })
+    const token = jwt.sign(
+      {
+        id: user.id,
+        login: user.login,
+        email: user.email,
+      },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    )
+
+    res.cookie('auth-token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'lax',
+    })
+
+    res.json({ message: 'Пользователь успешно создан!', token })
   } catch (error) {
     next(error)
   }

@@ -15,6 +15,7 @@ export function errorHandler(
   res: Response,
   _next: NextFunction
 ) {
+  console.error('Global error:', err)
   const statusCode = err.status || 500
   const message = err.message || 'Внутренняя ошибка сервера'
 
