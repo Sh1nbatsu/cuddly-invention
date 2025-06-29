@@ -1,4 +1,5 @@
 import { logout } from '@/entities/user/model/user.thunk'
+import { useAppDispatch } from '@/providers/store/store.hooks'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import { CustomLink } from '../custom-link/custom-link.ui'
 import { OfflineBadge } from './header-offline-badge.ui'
@@ -6,10 +7,10 @@ import { StyledHeader, StyledNav } from './header.styled'
 
 export const Header = () => {
   const { user } = useCurrentUser()
-
+  const dispatch = useAppDispatch()
   const handleLogout = async () => {
     try {
-      await logout()
+      await dispatch(logout())
     } catch (error) {
       console.error('Ошибка при выходе:', error)
     }

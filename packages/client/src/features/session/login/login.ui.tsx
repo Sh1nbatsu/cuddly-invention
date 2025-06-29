@@ -15,6 +15,7 @@ import {
 } from '@/entities/session/session.styled'
 import { LoginFormData } from '@/entities/session/session.types'
 import { login } from '@/entities/user/model/user.thunk'
+import { useAppDispatch } from '@/providers/store/store.hooks'
 
 const DEFAULT_VALUES = {
   login: '',
@@ -33,10 +34,10 @@ export const Login = () => {
   })
 
   const navigate = useNavigate()
-
+  const dispatch = useAppDispatch()
   const onSubmit = async (data: LoginFormData) => {
     try {
-      await login(data)
+      await dispatch(login(data))
       navigate('/')
     } catch (error) {
       console.error('Произошла ошибка:', error)
