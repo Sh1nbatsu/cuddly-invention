@@ -1,3 +1,4 @@
+import { errorHandler } from 'api/middleware/error.middleware'
 import express, { Router } from 'express'
 import path from 'path'
 import { connectDB } from './api/db/db'
@@ -18,6 +19,9 @@ async function startServer() {
   router.use('/auth', sessionRouter)
 
   app.use(router)
+
+  app.use(errorHandler)
+
   app.listen(PORT, () => {
     console.log(
       `  ➜ 🎸 Server is listening on port: ${process.env.SERVER_PORT}`
