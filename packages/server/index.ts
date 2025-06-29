@@ -6,7 +6,8 @@ import { connectDB } from './api/db/db'
 import apiRouter from './api/routes/api.route'
 import sessionRouter from './api/routes/session.route'
 
-// const CLIENT_PATH = path.resolve('../client/dist/client')
+// const CLIENT_PATH = path.resolve(__dirname, '../client/dist/client')
+
 const PORT = process.env.SERVER_PORT
 
 async function startServer() {
