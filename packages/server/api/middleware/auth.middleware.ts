@@ -5,7 +5,7 @@ import { AppError } from './error.middleware'
 
 export const authMiddleware = (
   req: Request & { user?: any },
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) => {
   try {

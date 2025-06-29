@@ -3,7 +3,7 @@ import { AppError } from 'api/middleware/error.middleware'
 import { LoginFormData, RegisterFormData } from 'api/schemas/session.schema'
 import { RequestWithValidateData } from 'api/types/request'
 import bcrypt from 'bcrypt'
-import { Response } from 'express'
+import { NextFunction, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { Op } from 'sequelize'
 
@@ -13,7 +13,7 @@ const JWT_EXPIRES_IN = '7d'
 export const signIn = async (
   req: RequestWithValidateData<LoginFormData>,
   res: Response,
-  next: Function
+  next: NextFunction
 ): Promise<void> => {
   try {
     const { login, password } = req.body
@@ -46,7 +46,7 @@ export const signIn = async (
       sameSite: 'lax',
     })
 
-    res.json({ message: 'Успешный вход в систему' })
+    res.json({ message: 'Успешный вход в систему', token })
   } catch (error) {
     next(error)
   }
