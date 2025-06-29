@@ -1,17 +1,27 @@
 import { errorHandler } from 'api/middleware/error.middleware'
+import cors from 'cors'
 import express from 'express'
+import path from 'path'
 import { connectDB } from './api/db/db'
 import apiRouter from './api/routes/api.route'
 import sessionRouter from './api/routes/session.route'
-// import { setupSSR } from './ssr/render'
-// const CLIENT_PATH = path.resolve('../client')
+import { setupSSR } from './ssr/render'
+
+const CLIENT_PATH = path.resolve('../client')
 const PORT = process.env.SERVER_PORT
 
 async function startServer() {
   const app = express()
 
   await connectDB()
-  // await setupSSR(app, CLIENT_PATH)
+  await setupSSR(app, CLIENT_PATH)
+
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      credentials: true,
+    })
+  )
 
   app.use(express.json())
 
