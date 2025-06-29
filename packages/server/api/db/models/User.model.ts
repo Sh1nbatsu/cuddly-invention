@@ -1,6 +1,6 @@
 import { Optional } from 'sequelize'
 import { Column, DataType, Model, Table } from 'sequelize-typescript'
-interface UserAttributes {
+export interface UserAttributes {
   id?: number
   first_name: string
   second_name: string

@@ -1,24 +1,26 @@
+import { authMiddleware } from 'api/middleware/auth.middleware'
 import { errorHandler } from 'api/middleware/error.middleware'
-import express, { Router } from 'express'
+import express from 'express'
 import path from 'path'
 import { connectDB } from './api/db/db'
+import apiRouter from './api/routes/api.route'
 import sessionRouter from './api/routes/session.route'
 import { setupSSR } from './ssr/render'
-
 const CLIENT_PATH = path.resolve('../client')
 const PORT = process.env.SERVER_PORT
 
 async function startServer() {
   const app = express()
-  const router = Router()
 
   await connectDB()
   await setupSSR(app, CLIENT_PATH)
   app.use(express.json())
 
-  router.use('/auth', sessionRouter)
+  app.use('/auth', sessionRouter)
 
-  app.use(router)
+  app.use(authMiddleware)
+
+  app.use('/api', apiRouter)
 
   app.use(errorHandler)
 
