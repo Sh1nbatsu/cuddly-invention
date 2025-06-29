@@ -12,7 +12,7 @@ const JWT_EXPIRES_IN = '7d'
 export const signIn = async (
   req: RequestWithValidateData<LoginFormData>,
   res: Response
-) => {
+): Promise<void> => {
   const { login, password } = req.body
 
   const user = await User.findOne({
@@ -20,12 +20,14 @@ export const signIn = async (
   })
 
   if (!user) {
-    return res.status(401).json({ message: 'Пользователь не найден' })
+    res.status(401).json({ message: 'Пользователь не найден' })
+    return
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password)
   if (!isPasswordValid) {
-    return res.status(401).json({ message: 'Неверный пароль' })
+    res.status(401).json({ message: 'Неверный пароль' })
+    return
   }
 
   const token = jwt.sign(
