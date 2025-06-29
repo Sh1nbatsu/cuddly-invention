@@ -1,10 +1,25 @@
+import { Optional } from 'sequelize'
 import { Column, DataType, Model, Table } from 'sequelize-typescript'
+interface UserAttributes {
+  id?: number
+  first_name: string
+  second_name: string
+  login: string
+  email: string
+  password: string
+  phone: string
+}
+
+interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 @Table({
   tableName: 'users',
   timestamps: true,
 })
-class User extends Model<User> {
+class User
+  extends Model<UserAttributes, UserCreationAttributes>
+  implements UserAttributes
+{
   @Column({
     type: DataType.STRING,
     allowNull: false,
