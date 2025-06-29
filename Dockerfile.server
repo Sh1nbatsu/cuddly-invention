@@ -22,7 +22,7 @@ COPY . .
 CMD ["nodemon", \
     "--watch", "/app/packages/server", \
     "--ext", "ts,js,json", \
-    "--exec", "ts-node -r tsconfig-paths/register /app/packages/server/index.ts", \
+    "--exec", "ts-node -r tsconfig-paths/register -P packages/server/tsconfig.json packages/server/index.ts", \
     "--delay", "1"]
 
 EXPOSE $SERVER_PORT
