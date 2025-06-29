@@ -39,7 +39,7 @@ export const signIn = async (
       { expiresIn: JWT_EXPIRES_IN }
     )
 
-    res.cookie('token', token, {
+    res.cookie('auth-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 7 * 24 * 60 * 60 * 1000,

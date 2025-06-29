@@ -1,4 +1,5 @@
 import { errorHandler } from 'api/middleware/error.middleware'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
@@ -24,6 +25,7 @@ async function startServer() {
   )
 
   app.use(express.json())
+  app.use(cookieParser())
 
   app.use('/auth', sessionRouter)
 
