@@ -1,4 +1,5 @@
 import { z } from 'zod'
-import { CreateComment } from './topic.contract'
+import { CreateComment, TopicSchema } from './topic.contract'
 
 export type CreateCommentData = z.infer<typeof CreateComment>
+export type TopicSchemaData = z.infer<typeof TopicSchema>

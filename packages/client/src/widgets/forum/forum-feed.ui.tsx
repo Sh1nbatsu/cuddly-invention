@@ -1,19 +1,23 @@
-import { useForumLogic } from '@/entities/forum/forum.hooks'
 import {
   StyledForumPageContainer,
   StyledForumTitle,
 } from '@/entities/forum/forum.styled'
-import { ForumCard } from '@/features/forum/forum-card/forum-card.ui'
-import { ForumList } from '@/features/forum/forum-list/forum-list.ui'
+import { TopicSchema } from '@/entities/topic/topic.contract'
+import { TopicSchemaData } from '@/entities/topic/topic.types'
+import { TopicList } from '@/features/topic/topic-list/topic-list.ui'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
 export const ForumWidget = () => {
-  const { data } = useForumLogic()
-
+  const methods = useForm<TopicSchemaData>({
+    mode: 'onSubmit',
+    resolver: zodResolver(TopicSchema),
+  })
   return (
     <StyledForumPageContainer>
       <StyledForumTitle level={2}>Форум</StyledForumTitle>
-      <ForumList dataSource={data} />
-      <ForumCard />
+      <TopicList />
+      {/* <ForumCard /> */}
     </StyledForumPageContainer>
   )
 }

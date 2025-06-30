@@ -34,7 +34,7 @@ export const PresentationPage = () => {
         фарма очков, благодаря покупке улучшений!
       </StyledPresentationText>
 
-      <CustomLink to="/game" variant="retro">
+      <CustomLink to="/" variant="retro">
         Играть
       </CustomLink>
     </StyledPresentationContainer>
