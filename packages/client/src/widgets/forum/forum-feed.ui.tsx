@@ -1,8 +1,8 @@
+import { TopicSchema } from '@/entities/topic/topic.contract'
 import {
   StyledForumPageContainer,
   StyledForumTitle,
-} from '@/entities/forum/forum.styled'
-import { TopicSchema } from '@/entities/topic/topic.contract'
+} from '@/entities/topic/topic.styled'
 import { TopicSchemaData } from '@/entities/topic/topic.types'
 import { TopicList } from '@/features/topic/topic-list/topic-list.ui'
 import { zodResolver } from '@hookform/resolvers/zod'

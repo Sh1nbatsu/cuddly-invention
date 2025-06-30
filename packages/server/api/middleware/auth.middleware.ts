@@ -9,7 +9,6 @@ export const authMiddleware = (
   next: NextFunction
 ) => {
   try {
-    console.log('authMiddleware triggered')
     const token =
       req.cookies['auth-token'] || req.headers.authorization?.split(' ')[1]
     if (!token) {

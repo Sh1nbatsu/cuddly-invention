@@ -1,5 +1,6 @@
 import { Optional } from 'sequelize'
-import { Column, DataType, Model, Table } from 'sequelize-typescript'
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript'
+import Topic from './Topic.model'
 export interface UserAttributes {
   id?: number
   first_name: string
@@ -107,6 +108,9 @@ class User
     },
   })
   declare phone: string
+
+  @HasMany(() => Topic)
+  declare topics: Topic[]
 }
 
 export default User

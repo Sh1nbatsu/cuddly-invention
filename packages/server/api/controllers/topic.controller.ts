@@ -66,10 +66,12 @@ export const createTopic = async (
   next: NextFunction
 ) => {
   try {
+    const currentUser = (req as any).user
     const { description, title } = req.body
     const createdTopic = await Topic.create({
       description,
       title,
+      author: currentUser,
     })
     res.json(createdTopic)
   } catch (error) {
