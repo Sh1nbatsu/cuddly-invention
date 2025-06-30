@@ -53,5 +53,5 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
 
-  volumes: 
-    postgres_data:
+volumes: 
+  postgres_data:

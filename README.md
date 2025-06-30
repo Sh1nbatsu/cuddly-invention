@@ -79,7 +79,7 @@
 
 Перед запуском создайте .env.dev по шаблону из .env.example
 
-Для запуска используйте `docker-compose -f docker-compose.dev.yml --env-file .env.dev up --build`
+Для запуска используйте `docker compose -f docker-compose.dev.yml --env-file .env.dev up --build`
 
 ## Механика игры
 
