@@ -1,4 +1,4 @@
-import { ErrorsCode } from 'api/constants/errorsCode'
+import { ErrorsCode } from 'api/constants/statusCode'
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { AppError } from './error.middleware'

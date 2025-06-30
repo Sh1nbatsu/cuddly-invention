@@ -43,6 +43,31 @@ class Comment
 
   @HasMany(() => Comment, 'parentCommentId')
   declare replies: Comment[]
+
+  static async getCommentTree(topicId: number): Promise<CommentAttributes[]> {
+    const comments = await this.findAll({
+      where: { topic: { id: topicId } },
+      order: [['createdAt', 'ASC']],
+      include: [
+        {
+          model: Comment,
+          as: 'replies',
+          required: false,
+        },
+      ],
+    })
+
+    const buildTree = (parentId: number | null): CommentAttributes[] => {
+      return comments
+        .filter(comment => comment.parentCommentId === parentId)
+        .map(comment => ({
+          ...comment.toJSON(),
+          replies: buildTree(comment.id),
+        }))
+    }
+
+    return buildTree(null)
+  }
 }
 
 export default Comment
