@@ -1,7 +1,7 @@
 import { logout } from '@/entities/user/model/user.thunk'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import { CustomLink } from '../custom-link/custom-link.ui'
-import { OfflineBadge } from './header-offline-badge.ui'
+import { OfflineBadge } from './offline-badge.ui'
 import { StyledHeader, StyledNav } from './header.styled'
 
 export const Header = () => {
