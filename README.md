@@ -75,6 +75,12 @@
 Если вам понадобится только один сервис, просто уточните какой в команде
 `docker compose up {sevice_name}`, например `docker compose up server`
 
+## Dev окружение в докере
+
+Перед запуском создайте .env.dev по шаблону из .env.example
+
+Для запуска используйте `docker-compose -f docker-compose.dev.yml --env-file .env.dev up --build`
+
 ## Механика игры
 
 1. Осуществите нажатие
