@@ -1,4 +1,4 @@
-import { ErrorsCode } from 'api/constants/statusCode'
+import { StatusCode } from 'api/constants/statusCode'
 import User from 'api/db/models/User.model'
 import { AppError } from 'api/middleware/error.middleware'
 import { RequestWithUser } from 'api/types/request'
@@ -13,7 +13,7 @@ export const getCurrentUser = async (
     if (!req.user) {
       throw new AppError(
         'Пользователь не вошел в систему',
-        ErrorsCode.Unauthorized
+        StatusCode.Unauthorized
       )
     }
 
