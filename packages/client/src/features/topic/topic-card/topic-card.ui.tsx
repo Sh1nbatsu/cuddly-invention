@@ -1,5 +1,9 @@
 import { Topic } from '@/shared/types/Topic'
-import { CalendarOutlined, UserOutlined } from '@ant-design/icons'
+import {
+  CalendarOutlined,
+  MessageOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 import {
   IconStyled,
   MetaItem,
@@ -36,6 +40,13 @@ export const TopicCard = ({ topic }: TopicCardProps) => {
             <CalendarOutlined />
           </IconStyled>
           <span>{formattedDate}</span>
+        </MetaItem>
+
+        <MetaItem>
+          <IconStyled>
+            <MessageOutlined />
+          </IconStyled>
+          <span>{topic.comments?.length}</span>
         </MetaItem>
       </StyledTopicCardMeta>
     </StyledTopicCard>
