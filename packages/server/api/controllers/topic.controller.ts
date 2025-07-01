@@ -1,5 +1,6 @@
 import { sequelize } from 'api/db/db'
 import Topic from 'api/db/models/Topic.model'
+import User from 'api/db/models/User.model'
 import { TopicSchemaData } from 'api/schemas/topic.schema'
 import { RequestWithValidateData } from 'api/types/request'
 import { NextFunction, Request, Response } from 'express'
@@ -7,7 +8,12 @@ import { QueryTypes } from 'sequelize'
 
 export const getAllTopics = async (_req: Request, res: Response) => {
   try {
-    const topics = await Topic.findAll()
+    const topics = await Topic.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'login'],
+      },
+    })
     res.status(200).json(topics)
   } catch (error) {
     console.error(error)

@@ -1,5 +1,6 @@
 import { Topic } from '@/shared/types/Topic'
 import { List, Spin, Typography } from 'antd'
+import { TopicCard } from '../topic-card/topic-card.ui'
 
 const { Title } = Typography
 
@@ -16,9 +17,8 @@ export const TopicList = ({ topics, isLoading }: TopicListProps) => {
         <Spin />
       ) : (
         <List
-          bordered
           dataSource={topics}
-          renderItem={item => <List.Item>{item.title}</List.Item>}
+          renderItem={topic => <TopicCard topic={topic} />}
         />
       )}
     </div>
