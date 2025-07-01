@@ -15,7 +15,7 @@ export interface TopicAttributes {
   id?: number
   title: string
   description: string
-  author: User
+  userId: User['id']
   comments?: CommentAttributes[]
 }
 

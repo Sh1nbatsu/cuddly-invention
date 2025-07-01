@@ -21,7 +21,7 @@ export const getCurrentUser = async (
 
     const user = await User.findByPk(userId)
 
-    res.json({ user })
+    res.json(user)
   } catch (error) {
     next(error)
   }
