@@ -46,3 +46,39 @@ export const IconStyled = styled.span`
   color: #9ca3af;
   font-size: 16px;
 `
+
+const { Text, Paragraph } = Typography
+
+export const CommentContainer = styled.div`
+  padding: 12px 16px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+`
+
+export const CommentHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+`
+
+export const CommentAuthor = styled(Text)`
+  font-weight: 600;
+`
+
+export const CommentDate = styled(Text)`
+  color: #888;
+  font-size: 12px;
+`
+
+export const CommentContent = styled(Paragraph)`
+  margin: 0;
+  white-space: pre-wrap;
+`
+
+export const RepliesContainer = styled.div`
+  margin-left: 24px;
+  margin-top: 8px;
+`

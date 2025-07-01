@@ -1,11 +1,13 @@
 import { Topic } from './Topic'
+import { User } from './User'
 
 export interface ForumComment {
+  createdAt: string
   id: number
-  author: string
-  text: string
+  author: Pick<User, 'login'>
+  content: string
   date: string
-  replies: ForumComment[]
+  children: ForumComment[]
 }
 
 export interface StoredData {

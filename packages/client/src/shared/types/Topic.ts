@@ -6,7 +6,7 @@ export interface Topic {
   author: User
   description: string
   title: string
-  createdAt: Date
+  createdAt: string
   updatedAt: Date
   comments: ForumComment[]
 }
