@@ -103,7 +103,7 @@ export const createTopic = async (
 ) => {
   try {
     const currentUser = (req as any).user
-    console.log(currentUser, 'currentUser')
+
     const { description, title } = req.body
     const createdTopic = await Topic.create({
       description,

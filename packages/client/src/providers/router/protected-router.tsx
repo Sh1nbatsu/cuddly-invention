@@ -11,7 +11,7 @@ type Props = {
 export const ProtectedRoute = ({ children }: Props) => {
   const user = useCurrentUser()
   const location = useLocation()
-  console.log(user, 'user')
+
   if (!user?.id) {
     return (
       <div
