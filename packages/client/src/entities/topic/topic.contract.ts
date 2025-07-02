@@ -1,7 +1,8 @@
 import { z } from 'zod'
 
-export const CreateComment = z.object({
-  text: z.string().min(3),
+export const CreateCommentSchema = z.object({
+  content: z.string().min(1, 'Комментарий не может быть пустым'),
+  parentCommentId: z.number().int().positive().nullable().optional(),
 })
 
 export const TopicSchema = z.object({

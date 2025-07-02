@@ -14,11 +14,13 @@ import User from './User.model'
 export interface CommentAttributes {
   id?: number
   content: string
-  topic: Topic
-  parentComment: Comment
+  parentCommentId: number | null
+  authorId: number
+  topicId: number
 }
 
-interface CommentCreationAttributes extends Optional<CommentAttributes, 'id'> {}
+export interface CommentCreationAttributes
+  extends Optional<CommentAttributes, 'id'> {}
 
 @Table({ tableName: 'comments' })
 class Comment

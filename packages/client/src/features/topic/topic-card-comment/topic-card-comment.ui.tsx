@@ -7,8 +7,8 @@ import {
   CommentDate,
   CommentHeader,
   RepliesContainer,
-} from './topic-card.styled'
-import { formatDate } from './topic-card.utils'
+} from '../topic-card/topic-card.styled'
+import { formatDate } from '../topic-card/topic-card.utils'
 
 interface ForumCommentItemProps {
   comment: ForumComment
