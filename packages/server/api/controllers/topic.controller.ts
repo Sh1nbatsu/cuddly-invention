@@ -102,13 +102,13 @@ export const createTopic = async (
   next: NextFunction
 ) => {
   try {
-    const currentUser = (req as any).user
+    const currentUser = req.user
 
     const { description, title } = req.body
     const createdTopic = await Topic.create({
       description,
       title,
-      userId: currentUser.id,
+      userId: currentUser?.id,
     })
     res.json(createdTopic)
   } catch (error) {

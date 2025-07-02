@@ -13,8 +13,7 @@ export const createComment = async (
 ): Promise<void> => {
   try {
     const { content, parentCommentId = null } = req.body
-    // @ts-ignore TODO:
-    const authorId = (req.user as any).id
+    const authorId = req.user.id!
     const topicId = parseInt((req.params as CreateCommentParams).topicId, 10)
 
     const comment = await Comment.create({

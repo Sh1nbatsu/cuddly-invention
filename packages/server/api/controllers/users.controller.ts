@@ -1,11 +1,10 @@
 import { StatusCode } from 'api/constants/statusCode'
 import User from 'api/db/models/User.model'
 import { AppError } from 'api/middleware/error.middleware'
-import { RequestWithUser } from 'api/types/request'
-import { NextFunction, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 export const getCurrentUser = async (
-  req: RequestWithUser,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
