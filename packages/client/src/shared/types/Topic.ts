@@ -1,4 +1,4 @@
-import { ForumComment } from './Forum'
+import { ParentComment } from './Forum'
 import { User } from './User'
 
 export interface Topic {
@@ -8,5 +8,5 @@ export interface Topic {
   title: string
   createdAt: string
   updatedAt: Date
-  comments: ForumComment[]
+  comments: ParentComment[]
 }

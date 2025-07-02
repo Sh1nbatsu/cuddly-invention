@@ -10,6 +10,17 @@ export interface ForumComment {
   children: ForumComment[]
 }
 
+export interface ParentComment {
+  authorId: number
+  authorLogin: string
+  children?: ParentComment[]
+  content: string
+  createdAt: string
+  id: 1
+  parentCommentId: number
+  topicId: 1
+}
+
 export interface StoredData {
   topics: Topic[]
   nextTopicId: number

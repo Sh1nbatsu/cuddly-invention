@@ -1,4 +1,4 @@
-import { ForumComment } from '@/shared/types/Forum'
+import { ForumComment, ParentComment } from '@/shared/types/Forum'
 
 export const formatDate = (dateString: string): string =>
   new Date(dateString).toLocaleString('ru-RU', {
@@ -9,13 +9,12 @@ export const formatDate = (dateString: string): string =>
     minute: '2-digit',
   })
 
-export const transformComment = (c: ForumComment): ForumComment => {
-  console.log('transformComment input:', c)
+export const transformComment = (c: ParentComment): ForumComment => {
   return {
     id: c.id,
-    author: { login: c.author?.login || 'Неизвестный' },
+    author: { login: c.authorLogin || 'Неизвестный' },
     content: c.content,
-    date: c.createdAt || c.date,
+    date: c.createdAt,
     children: c.children?.map(transformComment) || [],
     createdAt: c.createdAt || '-',
   }

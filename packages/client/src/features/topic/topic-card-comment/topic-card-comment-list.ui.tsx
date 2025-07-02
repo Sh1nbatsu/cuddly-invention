@@ -1,16 +1,18 @@
 import { TopicCardProps } from '@/entities/topic/topic.types'
-import { ForumComment } from '@/shared/types/Forum'
-import { Button, Typography } from 'antd'
+import { ParentComment } from '@/shared/types/Forum'
+import { Button, Space, Typography } from 'antd'
 import { useState } from 'react'
 import { transformComment } from '../topic-card/topic-card.utils'
 import { TopicCreateModal } from '../topic-create-modal/topic-create-modal.ui'
 import { TopicCardComment } from './topic-card-comment.ui'
 
+const { Text, Title } = Typography
+
 export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
   const [modalVisible, setModalVisible] = useState(false)
-  const [parentComment, setParentComment] = useState<ForumComment | null>(null)
+  const [parentComment, setParentComment] = useState<ParentComment | null>(null)
 
-  const handleReply = (comment: ForumComment) => {
+  const handleReply = (comment: ParentComment) => {
     setParentComment(comment)
     setModalVisible(true)
   }
@@ -24,35 +26,65 @@ export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
     <>
       <div
         style={{
-          padding: '16px 24px',
-          backgroundColor: '#f5f7fa',
+          padding: '20px 24px',
+          backgroundColor: '#f9fafb',
           borderRadius: '0 0 12px 12px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          boxShadow: '0 2px 8px rgb(0 0 0 / 0.1)',
         }}>
-        {topic.comments && topic.comments.length > 0 ? (
-          topic.comments.map(comment => (
-            <div
-              key={comment.id}
-              onClick={() => handleReply(comment)}
-              style={{ cursor: 'pointer' }}
-              title="Ответить на комментарий">
-              <TopicCardComment comment={transformComment(comment)} />
-            </div>
-          ))
-        ) : (
-          <Typography.Text type="secondary" italic>
-            Нет комментариев
-          </Typography.Text>
-        )}
+        <Space direction="vertical" style={{ width: '100%' }}>
+          <Button type="primary" onClick={handleAddRootComment} block>
+            Добавить комментарий
+          </Button>
 
-        <Button
-          type="primary"
-          style={{ marginTop: 16 }}
-          onClick={handleAddRootComment}>
-          Добавить комментарий
-        </Button>
+          {topic.comments && topic.comments.length > 0 ? (
+            <div>
+              <Title level={5} style={{ margin: '16px 0 8px' }}>
+                Комментарии ({topic.comments.length})
+              </Title>
+
+              <div
+                style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {topic.comments.map(comment => (
+                  <div
+                    key={comment.id}
+                    style={{
+                      background: '#fff',
+                      padding: 16,
+                      borderRadius: 8,
+                      boxShadow: '0 1px 4px rgb(0 0 0 / 0.1)',
+                      transition: 'box-shadow 0.3s',
+                      cursor: 'default',
+                    }}
+                    onMouseEnter={e => {
+                      ;(e.currentTarget as HTMLElement).style.boxShadow =
+                        '0 4px 12px rgb(0 0 0 / 0.15)'
+                    }}
+                    onMouseLeave={e => {
+                      ;(e.currentTarget as HTMLElement).style.boxShadow =
+                        '0 1px 4px rgb(0 0 0 / 0.1)'
+                    }}>
+                    <TopicCardComment comment={transformComment(comment)} />
+                    <div style={{ marginTop: 8, textAlign: 'right' }}>
+                      <Button
+                        type="link"
+                        size="small"
+                        onClick={() => handleReply(comment)}>
+                        Ответить
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <Text
+              type="secondary"
+              italic
+              style={{ marginTop: 12, display: 'block' }}>
+              Пока нет комментариев. Будьте первым, кто оставит отзыв!
+            </Text>
+          )}
+        </Space>
       </div>
 
       <TopicCreateModal
@@ -61,7 +93,7 @@ export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
         topicId={topic.id}
         parentComment={parentComment}
         onSuccess={() => {
-          // обновить список комментариев или обновить тему, если нужно
+          // Здесь можно обновить комментарии из API или поднять состояние выше
         }}
       />
     </>

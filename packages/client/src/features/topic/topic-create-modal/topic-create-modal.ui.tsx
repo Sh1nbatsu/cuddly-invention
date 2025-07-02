@@ -1,5 +1,5 @@
 import { createComment } from '@/entities/topic/topic.api'
-import { ForumComment } from '@/shared/types/Forum'
+import { ParentComment } from '@/shared/types/Forum'
 import { Button, Input, Modal } from 'antd'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -9,7 +9,7 @@ interface TopicCreateModalProps {
   visible: boolean
   onClose: () => void
   topicId: number
-  parentComment?: ForumComment | null
+  parentComment?: ParentComment | null
   onSuccess?: () => void
 }
 
@@ -34,7 +34,7 @@ export const TopicCreateModal = ({
       content: '',
     },
   })
-  console.log(errors, 'errors')
+  console.log(parentComment, 'parentComment')
   const onSubmit = async (data: FormData) => {
     try {
       await createComment(
@@ -53,7 +53,7 @@ export const TopicCreateModal = ({
   }
 
   const title = parentComment
-    ? `Ответ на комментарий от ${parentComment.author.login}`
+    ? `Ответ на комментарий от ${parentComment.authorLogin}`
     : 'Добавить комментарий'
 
   return (
@@ -65,7 +65,7 @@ export const TopicCreateModal = ({
         onClose()
       }}
       footer={null}
-      destroyOnClose>
+      destroyOnHidden>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="content"
