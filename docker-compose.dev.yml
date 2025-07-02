@@ -27,6 +27,7 @@ services:
       dockerfile: Dockerfile.server.dev
       args:
         SERVER_PORT: ${SERVER_PORT}
+    restart: on-failure
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
     environment:
@@ -53,5 +54,5 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
 
-volumes: 
+volumes:
   postgres_data:
