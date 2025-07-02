@@ -21,7 +21,7 @@ const formatDateShort = (dateString: string) =>
     year: 'numeric',
   })
 
-export const TopicCard = ({ topic, fetchTopics }: TopicCardProps) => {
+export const TopicCard = ({ topic }: TopicCardProps) => {
   const [expanded, setExpanded] = useState(false)
 
   const formattedDate = formatDateShort(topic.createdAt)
@@ -59,9 +59,7 @@ export const TopicCard = ({ topic, fetchTopics }: TopicCardProps) => {
         </StyledTopicCardMeta>
       </StyledTopicCard>
 
-      {expanded && (
-        <TopicCardCommentList topic={topic} fetchTopics={fetchTopics} />
-      )}
+      {expanded && <TopicCardCommentList topic={topic} />}
     </>
   )
 }

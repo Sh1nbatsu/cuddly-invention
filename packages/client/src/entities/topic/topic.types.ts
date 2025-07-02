@@ -8,5 +8,6 @@ export type TopicSchemaData = z.infer<typeof TopicSchema>
 
 export interface TopicCardProps {
   topic: Topic & { comments?: ForumComment[] }
-  fetchTopics?: () => Promise<void>
 }
+
+export type Topics = Array<TopicCardProps['topic']>

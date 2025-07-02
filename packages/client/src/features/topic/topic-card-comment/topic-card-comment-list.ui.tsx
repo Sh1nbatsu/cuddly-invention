@@ -1,3 +1,4 @@
+import { useTopics } from '@/entities/topic/topic.context'
 import { TopicCardProps } from '@/entities/topic/topic.types'
 import { ParentComment } from '@/shared/types/Forum'
 import { Button, Space, Typography } from 'antd'
@@ -8,13 +9,10 @@ import { TopicCardComment } from './topic-card-comment.ui'
 
 const { Text, Title } = Typography
 
-export const TopicCardCommentList = ({
-  topic,
-  fetchTopics,
-}: TopicCardProps) => {
+export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [parentComment, setParentComment] = useState<ParentComment | null>(null)
-
+  const { refetchTopics } = useTopics()
   const handleReply = (comment: ParentComment) => {
     setParentComment(comment)
     setModalVisible(true)
@@ -95,7 +93,7 @@ export const TopicCardCommentList = ({
         onClose={() => setModalVisible(false)}
         topicId={topic.id}
         parentComment={parentComment}
-        onSuccess={fetchTopics}
+        onSuccess={refetchTopics}
       />
     </>
   )

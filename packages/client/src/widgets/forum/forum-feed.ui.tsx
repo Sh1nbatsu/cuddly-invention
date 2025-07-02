@@ -1,14 +1,14 @@
-import { createTopic, getTopics } from '@/entities/topic/topic.api'
+import { createTopic } from '@/entities/topic/topic.api'
+import { useTopics } from '@/entities/topic/topic.context'
 import { TopicSchema } from '@/entities/topic/topic.contract'
 import {
   StyledForumPageContainer,
   StyledForumTitle,
 } from '@/entities/topic/topic.styled'
-import { TopicCardProps, TopicSchemaData } from '@/entities/topic/topic.types'
+import { TopicSchemaData } from '@/entities/topic/topic.types'
 import { TopicForm } from '@/features/topic/topic-form/topic-form.ui'
 import { TopicList } from '@/features/topic/topic-list/topic-list.ui'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
 export const ForumWidget = () => {
@@ -17,27 +17,11 @@ export const ForumWidget = () => {
     resolver: zodResolver(TopicSchema),
   })
 
-  const [topics, setTopics] = useState<Array<TopicCardProps['topic']>>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  const fetchTopics = useCallback(async () => {
-    try {
-      const data = await getTopics()
-      setTopics(data)
-    } catch (error) {
-      console.error('Ошибка при получении тем:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchTopics()
-  }, [fetchTopics])
+  const { topics, isLoading, refetchTopics } = useTopics()
 
   const onSubmit = async (data: TopicSchemaData) => {
     await createTopic(data)
-    await fetchTopics()
+    await refetchTopics()
     methods.reset()
   }
 
@@ -46,11 +30,7 @@ export const ForumWidget = () => {
       <StyledForumPageContainer>
         <StyledForumTitle level={2}>Форум</StyledForumTitle>
         <TopicForm onSubmit={onSubmit} />
-        <TopicList
-          topics={topics}
-          isLoading={isLoading}
-          fetchTopics={fetchTopics}
-        />
+        <TopicList />
       </StyledForumPageContainer>
     </FormProvider>
   )
