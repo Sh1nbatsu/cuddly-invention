@@ -3,7 +3,7 @@ import { ForumComment } from '@/shared/types/Forum'
 import { Button, Typography } from 'antd'
 import { useState } from 'react'
 import { transformComment } from '../topic-card/topic-card.utils'
-import { TopicCreateModal } from '../topic-create-model/topic-create-model.ui'
+import { TopicCreateModal } from '../topic-create-modal/topic-create-modal.ui'
 import { TopicCardComment } from './topic-card-comment.ui'
 
 export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
