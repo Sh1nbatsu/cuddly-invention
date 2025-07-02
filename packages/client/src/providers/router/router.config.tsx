@@ -1,4 +1,4 @@
-import Leaderboard from '@/pages/leaderboard/LeaderboardPage'
+import { Leaderboard } from '@/pages/leaderboard/leaderboard.ui'
 import { createBrowserRouter } from 'react-router-dom'
 
 import { gameRoute } from '@/pages/game/game-route'
