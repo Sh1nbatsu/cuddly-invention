@@ -1,0 +1,15 @@
+ARG NODE_VERSION=20
+ARG CLIENT_PORT
+FROM node:${NODE_VERSION}-buster AS base
+WORKDIR /app
+
+COPY package.json yarn.lock lerna.json ./
+COPY packages/client/package.json ./packages/client/
+COPY packages/server/package.json ./packages/server/
+RUN yarn install --frozen-lockfile
+
+FROM base AS dev
+COPY . .
+EXPOSE ${CLIENT_PORT}
+
+CMD ["yarn", "lerna", "run", "dev", "--scope", "client", "--stream"]
