@@ -17,7 +17,7 @@ export const ForumWidget = () => {
     resolver: zodResolver(TopicSchema),
   })
 
-  const { topics, isLoading, refetchTopics } = useTopics()
+  const { refetchTopics } = useTopics()
 
   const onSubmit = async (data: TopicSchemaData) => {
     await createTopic(data)
