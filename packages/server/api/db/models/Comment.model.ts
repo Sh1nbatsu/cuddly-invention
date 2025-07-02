@@ -9,6 +9,7 @@ import {
   Table,
 } from 'sequelize-typescript'
 import Topic from './Topic.model'
+import User from './User.model'
 
 export interface CommentAttributes {
   id?: number
@@ -33,6 +34,13 @@ class Comment
 
   @BelongsTo(() => Topic)
   declare topic: Topic
+
+  @ForeignKey(() => User)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  declare authorId: number
+
+  @BelongsTo(() => User)
+  declare author: User
 
   @ForeignKey(() => Comment)
   @Column({ type: DataType.INTEGER, allowNull: true })

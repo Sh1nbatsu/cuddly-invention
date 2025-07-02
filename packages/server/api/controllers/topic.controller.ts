@@ -44,26 +44,32 @@ export const getAllTopics = async (_req: Request, res: Response) => {
           `
           WITH RECURSIVE comment_tree AS (
             SELECT 
-              id, 
-              content, 
-              "topicId", 
-              "parentCommentId", 
-              "createdAt",
+              c.id, 
+              c.content, 
+              c."topicId", 
+              c."parentCommentId", 
+              c."createdAt",
+              u.id AS "authorId",
+              u.login AS "authorLogin",
               1 AS depth
-            FROM comments
-            WHERE "topicId" = :topicId AND "parentCommentId" IS NULL
-            
+            FROM comments c
+            JOIN users u ON c."authorId" = u.id
+            WHERE c."topicId" = :topicId AND c."parentCommentId" IS NULL
+
             UNION ALL
-            
+
             SELECT 
               c.id, 
               c.content, 
               c."topicId", 
               c."parentCommentId", 
               c."createdAt",
+              u.id AS "authorId",
+              u.login AS "authorLogin",
               ct.depth + 1
             FROM comments c
             JOIN comment_tree ct ON c."parentCommentId" = ct.id
+            JOIN users u ON c."authorId" = u.id
           )
           SELECT * FROM comment_tree
           ORDER BY depth, "createdAt"

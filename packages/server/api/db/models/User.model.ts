@@ -1,5 +1,6 @@
 import { Optional } from 'sequelize'
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript'
+import Comment from './Comment.model'
 import Topic from './Topic.model'
 export interface UserAttributes {
   id?: number
@@ -111,6 +112,9 @@ class User
 
   @HasMany(() => Topic)
   declare topics: Topic[]
+
+  @HasMany(() => Comment)
+  declare comments: Comment[]
 }
 
 export default User
