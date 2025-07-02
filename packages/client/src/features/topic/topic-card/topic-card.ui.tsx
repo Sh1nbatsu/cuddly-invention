@@ -4,7 +4,6 @@ import {
   MessageOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Typography } from 'antd'
 import { useState } from 'react'
 import { TopicCardCommentList } from '../topic-card-comment/topic-card-comment-list.ui'
 import {
@@ -15,8 +14,6 @@ import {
   StyledTopicCardTitle,
 } from './topic-card.styled'
 
-const { Text } = Typography
-
 const formatDateShort = (dateString: string) =>
   new Date(dateString).toLocaleDateString('ru-RU', {
     day: '2-digit',
@@ -24,7 +21,7 @@ const formatDateShort = (dateString: string) =>
     year: 'numeric',
   })
 
-export const TopicCard = ({ topic }: TopicCardProps) => {
+export const TopicCard = ({ topic, fetchTopics }: TopicCardProps) => {
   const [expanded, setExpanded] = useState(false)
 
   const formattedDate = formatDateShort(topic.createdAt)
@@ -62,7 +59,9 @@ export const TopicCard = ({ topic }: TopicCardProps) => {
         </StyledTopicCardMeta>
       </StyledTopicCard>
 
-      {expanded && <TopicCardCommentList topic={topic} />}
+      {expanded && (
+        <TopicCardCommentList topic={topic} fetchTopics={fetchTopics} />
+      )}
     </>
   )
 }

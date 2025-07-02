@@ -34,7 +34,7 @@ export const TopicCreateModal = ({
       content: '',
     },
   })
-  console.log(parentComment, 'parentComment')
+
   const onSubmit = async (data: FormData) => {
     try {
       await createComment(

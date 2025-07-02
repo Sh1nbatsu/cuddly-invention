@@ -8,7 +8,10 @@ import { TopicCardComment } from './topic-card-comment.ui'
 
 const { Text, Title } = Typography
 
-export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
+export const TopicCardCommentList = ({
+  topic,
+  fetchTopics,
+}: TopicCardProps) => {
   const [modalVisible, setModalVisible] = useState(false)
   const [parentComment, setParentComment] = useState<ParentComment | null>(null)
 
@@ -92,9 +95,7 @@ export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
         onClose={() => setModalVisible(false)}
         topicId={topic.id}
         parentComment={parentComment}
-        onSuccess={() => {
-          // Здесь можно обновить комментарии из API или поднять состояние выше
-        }}
+        onSuccess={fetchTopics}
       />
     </>
   )

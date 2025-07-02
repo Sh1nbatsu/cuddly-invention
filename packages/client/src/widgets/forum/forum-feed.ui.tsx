@@ -4,10 +4,9 @@ import {
   StyledForumPageContainer,
   StyledForumTitle,
 } from '@/entities/topic/topic.styled'
-import { TopicSchemaData } from '@/entities/topic/topic.types'
+import { TopicCardProps, TopicSchemaData } from '@/entities/topic/topic.types'
 import { TopicForm } from '@/features/topic/topic-form/topic-form.ui'
 import { TopicList } from '@/features/topic/topic-list/topic-list.ui'
-import { Topic } from '@/shared/types/Topic'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -18,7 +17,7 @@ export const ForumWidget = () => {
     resolver: zodResolver(TopicSchema),
   })
 
-  const [topics, setTopics] = useState<Topic[]>([])
+  const [topics, setTopics] = useState<Array<TopicCardProps['topic']>>([])
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchTopics = useCallback(async () => {
@@ -47,8 +46,11 @@ export const ForumWidget = () => {
       <StyledForumPageContainer>
         <StyledForumTitle level={2}>Форум</StyledForumTitle>
         <TopicForm onSubmit={onSubmit} />
-        <TopicList topics={topics} isLoading={isLoading} />
-        {/* <ForumCard /> */}
+        <TopicList
+          topics={topics}
+          isLoading={isLoading}
+          fetchTopics={fetchTopics}
+        />
       </StyledForumPageContainer>
     </FormProvider>
   )

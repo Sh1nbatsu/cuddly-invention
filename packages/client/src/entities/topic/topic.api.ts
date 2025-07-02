@@ -1,8 +1,11 @@
 import { api } from '@/shared/libs/axios'
-import { Topic } from '@/shared/types/Topic'
-import { CreateCommentData, TopicSchemaData } from './topic.types'
+import {
+  CreateCommentData,
+  TopicCardProps,
+  TopicSchemaData,
+} from './topic.types'
 
-type GetTopics = () => Promise<Topic[]>
+type GetTopics = () => Promise<Array<TopicCardProps['topic']>>
 type CreateTopic = (data: TopicSchemaData) => Promise<void>
 type CreateComment = (data: CreateCommentData, topicId: number) => Promise<void>
 
