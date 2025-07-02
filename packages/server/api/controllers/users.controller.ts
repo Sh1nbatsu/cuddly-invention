@@ -9,13 +9,14 @@ export const getCurrentUser = async (
   next: NextFunction
 ) => {
   try {
+    // @ts-ignore TODO:
     if (!req.user) {
       throw new AppError(
         'Пользователь не вошел в систему',
         StatusCode.Unauthorized
       )
     }
-
+    // @ts-ignore TODO:
     const userId = req.user.id
 
     const user = await User.findByPk(userId)

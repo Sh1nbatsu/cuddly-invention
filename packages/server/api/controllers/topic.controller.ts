@@ -102,6 +102,7 @@ export const createTopic = async (
   next: NextFunction
 ) => {
   try {
+    // @ts-ignore TODO:
     const currentUser = req.user
 
     const { description, title } = req.body
