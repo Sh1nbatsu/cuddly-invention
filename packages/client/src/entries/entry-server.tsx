@@ -1,4 +1,4 @@
-import { routerConfig } from '@/providers/router/router.config'
+import { router as routerConfig } from '@/providers/router/router.config'
 import { antdTheme, styledTheme } from '@/shared/themes/defaultTheme'
 import { ConfigProvider } from 'antd'
 import { Request as ExpressRequest } from 'express'
@@ -15,7 +15,7 @@ import { ServerStyleSheet, ThemeProvider } from 'styled-components'
 import { createFetchRequest } from './entry-server.utils'
 
 export async function render(req: ExpressRequest) {
-  const { query, dataRoutes } = createStaticHandler(routerConfig.routes)
+  const { query, dataRoutes } = createStaticHandler(routerConfig)
 
   const fetchRequest = createFetchRequest(req)
 
@@ -42,6 +42,7 @@ export async function render(req: ExpressRequest) {
         </React.StrictMode>
       )
     )
+    console.log(appHtml, 'Here is appHtml')
 
     const styleTags = sheet.getStyleTags()
     const { helmet } = helmetContext as { helmet: HelmetData }

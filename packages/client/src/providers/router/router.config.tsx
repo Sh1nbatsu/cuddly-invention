@@ -13,28 +13,18 @@ import { ProtectedRoute } from './protected-router'
 import { authRoutes } from './router-auth'
 import { forumRoutes } from './router-form'
 
-export const routerConfig = createBrowserRouter([
+export const router = [
   {
     path: '/',
     element: <MainLayout />,
     errorElement: <ErrorLayout config={PAGE_ERROR} />,
-    children: [
-      gameRoute,
-      presentationRoute,
-      {
-        path: 'leaderboard',
-        element: (
-          <ProtectedRoute>
-            <Leaderboard />
-          </ProtectedRoute>
-        ),
-      },
-      forumRoutes,
-    ],
+    children: [gameRoute, presentationRoute, forumRoutes],
   },
   authRoutes,
   {
     path: '*',
     element: <ErrorLayout config={NOT_FOUND_ERROR} />,
   },
-])
+]
+
+export const routerConfig = createBrowserRouter(router)

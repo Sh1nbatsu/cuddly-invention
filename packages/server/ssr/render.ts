@@ -42,7 +42,7 @@ export async function setupSSR(app: express.Express, clientPath: string) {
           ).render
         } else {
           template = await fs.readFile(
-            path.join(clientPath, 'index.html'),
+            path.join(clientPath, 'dist/client/index.html'),
             'utf-8'
           )
 

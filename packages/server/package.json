@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --p ./tsconfig.prod.json",
+    "build": "tsc --project tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
     "preview": "node ./dist/index.js",
     "dev": "ts-node --transpile-only -r tsconfig-paths/register -P tsconfig.json index.ts",
     "lint": "eslint .",
@@ -11,8 +11,6 @@
     "test": "jest . --passWithNoTests"
   },
   "dependencies": {
-    "@types/express": "^5.0.3",
-    "@types/node": "^24.0.7",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -27,6 +25,7 @@
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6",
     "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.16",
     "vite": "^4.4.9",
     "zod": "^3.25.67"
   },
@@ -34,10 +33,10 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
+    "@types/express": "^5.0.3",
     "@types/jest": "^28.1.8",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "18.17.0",
+    "@types/node": "^24.0.7",
     "@types/pg": "^8.6.5",
     "@types/react-helmet": "^6.1.11",
     "@typescript-eslint/eslint-plugin": "^5.35.1",

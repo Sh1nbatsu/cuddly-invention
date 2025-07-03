@@ -10,6 +10,7 @@
     "declarationMap": true,
     "removeComments": true,
     "strict": true,
+    "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "experimentalDecorators": true,
@@ -26,6 +27,6 @@
       "api/*": ["api/*"],
       "@db/*": ["api/db/*"]
     },
-    "outDir": "dist",
+    "outDir": "dist"
   }
 }
