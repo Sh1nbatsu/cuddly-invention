@@ -1,10 +1,6 @@
-# ИСПРАВЛЕННЫЙ docker-compose.yml
-
 services:
-  # Наш единственный сервис приложения
   server:
     container_name: prakticum-app
-    # Собираем из нового, единого Dockerfile
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,10 +8,8 @@ services:
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
     env_file: .env
-    # Передаем переменные, включая SERVER_PORT
     environment:
       SERVER_PORT: ${SERVER_PORT}
-      # Другие переменные из .env тоже будут доступны
     depends_on:
       postgres:
         condition: service_healthy
