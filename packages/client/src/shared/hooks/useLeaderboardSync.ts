@@ -1,14 +1,13 @@
-import { useEffect } from 'react'
 import { useScore } from '@/entities/game/model/hooks/useScore'
-import { useLocation } from 'react-router-dom'
 import { addLeaderHandler } from '@/entities/leaderboard/leaderboard.handler'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useCurrentUser } from './useCurrentUser'
-import RATIONG_FIELD_NAME from '@/shared/constants/ratingFieldName'
 
 const URL = 'https://ya-praktikum.tech/api/v2/leaderboard'
 
 export const useLeaderboardSync = () => {
-  const { user } = useCurrentUser()
+  const user = useCurrentUser()
   const username = user?.login || 'undefined'
   const [score] = useScore()
   const location = useLocation()

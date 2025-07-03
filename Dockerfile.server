@@ -1,27 +1,28 @@
 ARG NODE_VERSION=20
 ARG SERVER_PORT=3001
 
-FROM node:$NODE_VERSION-buster AS base
+FROM node:$NODE_VERSION-buster AS dev
 
 WORKDIR /app
 
-FROM base AS builder
+# 1. Копируем только файлы зависимостей сначала
+COPY package.json yarn.lock lerna.json ./
+COPY packages/server/package.json packages/server/
 
-COPY package.json yarn.lock ./
+# 2. Устанавливаем зависимости (включая devDependencies)
 RUN yarn install --frozen-lockfile
 
+# 3. Устанавливаем nodemon и ts-node глобально
+RUN npm install -g nodemon ts-node
+
+# 4. Копируем весь код
 COPY . .
 
-RUN yarn lerna bootstrap
-RUN rm -rf /app/packages/server/dist/ && yarn build --scope=server
-
-
-FROM node:$NODE_VERSION-buster-slim AS production
-WORKDIR /app
-
-COPY --from=builder /app/packages/server/dist/ /app/
-COPY --from=builder /app/packages/server/package.json /app/package.json
-RUN yarn install --production=true
+# 5. Настраиваем hot reload
+CMD ["nodemon", \
+    "--watch", "/app/packages/server", \
+    "--ext", "ts,js,json", \
+    "--exec", "ts-node -r tsconfig-paths/register -P packages/server/tsconfig.json packages/server/index.ts", \
+    "--delay", "1"]
 
 EXPOSE $SERVER_PORT
-CMD [ "node", "/app/index.js" ]

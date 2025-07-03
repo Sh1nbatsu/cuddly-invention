@@ -1,15 +1,24 @@
-import { logout } from '@/entities/user/model/user.thunk'
+import { fetchMe, logout } from '@/entities/user/model/user.thunk'
+import { useAppDispatch } from '@/providers/store/store.hooks'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
+import { useEffect } from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
 import { OfflineBadge } from './header-offline-badge.ui'
 import { StyledHeader, StyledNav } from './header.styled'
 
 export const Header = () => {
-  const { user } = useCurrentUser()
+  const user = useCurrentUser()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (!user?.id) {
+      dispatch(fetchMe())
+    }
+  }, [dispatch, user?.id])
 
   const handleLogout = async () => {
     try {
-      await logout()
+      await dispatch(logout())
     } catch (error) {
       console.error('Ошибка при выходе:', error)
     }
@@ -30,7 +39,7 @@ export const Header = () => {
         <CustomLink to="/presentation" variant="retro">
           О нас
         </CustomLink>
-        {!user ? (
+        {!user?.id ? (
           <CustomLink to="sign-up" variant="retro">
             Авторизация
           </CustomLink>
