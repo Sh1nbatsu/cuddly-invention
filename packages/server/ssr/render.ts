@@ -48,7 +48,7 @@ export async function setupSSR(app: express.Express, clientPath: string) {
 
           const pathToServer = path.join(
             clientPath,
-            'dist/server/entry-server.js'
+            'dist/server/entry-server.cjs'
           )
 
           render = (await import(pathToServer)).render
