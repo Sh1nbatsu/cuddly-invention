@@ -5,6 +5,7 @@ import { Button, Space, Typography } from 'antd'
 import { useState } from 'react'
 import { transformComment } from '../topic-card/topic-card.utils'
 import { TopicCreateModal } from '../topic-create-modal/topic-create-modal.ui'
+import { StyledWrapper } from './styled'
 import { TopicCardComment } from './topic-card-comment.ui'
 
 const { Text, Title } = Typography
@@ -25,13 +26,7 @@ export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
 
   return (
     <>
-      <div
-        style={{
-          padding: '20px 24px',
-          backgroundColor: '#f9fafb',
-          borderRadius: '0 0 12px 12px',
-          boxShadow: '0 2px 8px rgb(0 0 0 / 0.1)',
-        }}>
+      <StyledWrapper>
         <Space direction="vertical" style={{ width: '100%' }}>
           <Button type="primary" onClick={handleAddRootComment} block>
             Добавить комментарий
@@ -86,7 +81,7 @@ export const TopicCardCommentList = ({ topic }: TopicCardProps) => {
             </Text>
           )}
         </Space>
-      </div>
+      </StyledWrapper>
 
       <TopicCreateModal
         visible={modalVisible}

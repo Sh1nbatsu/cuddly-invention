@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import {
   createContext,
   ReactNode,
@@ -21,13 +22,16 @@ export const TopicContext = createContext<TopicContextType | undefined>(
 
 export const TopicProvider = ({ children }: { children: ReactNode }) => {
   const [topics, setTopics] = useState<Topics>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState(false)
+
   const fetchTopics = useCallback(async () => {
+    setIsLoading(true)
     try {
       const data = await getTopics()
       setTopics(data)
+      message.success('Темы успешно загружены!')
     } catch (error) {
-      console.error('Ошибка при получении тем:', error)
+      message.error('Не удалось загрузить темы')
     } finally {
       setIsLoading(false)
     }
@@ -38,12 +42,10 @@ export const TopicProvider = ({ children }: { children: ReactNode }) => {
   }, [fetchTopics])
 
   return (
-    <>
-      <TopicContext.Provider
-        value={{ topics, refetchTopics: fetchTopics, isLoading }}>
-        {children}
-      </TopicContext.Provider>
-    </>
+    <TopicContext.Provider
+      value={{ topics, refetchTopics: fetchTopics, isLoading }}>
+      {children}
+    </TopicContext.Provider>
   )
 }
 
