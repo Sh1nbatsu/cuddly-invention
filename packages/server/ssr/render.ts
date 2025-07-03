@@ -42,11 +42,11 @@ export async function setupSSR(app: express.Express, clientPath: string) {
           ).render
         } else {
           template = await fs.readFile(
-            path.join(clientPath, 'dist/client/index.html'),
+            path.join(clientPath, 'index.html'),
             'utf-8'
           )
 
-          const pathToServer = path.join(
+          const pathToServer = path.resolve(
             clientPath,
             'dist/server/entry-server.cjs'
           )
