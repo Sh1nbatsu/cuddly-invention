@@ -20,6 +20,14 @@ export async function setupSSR(app: express.Express, clientPath: string) {
     app.use(express.static(distPath))
 
     app.get('*', async (req: Request, res: Response, next: NextFunction) => {
+      if (
+        req.originalUrl.startsWith('/api') ||
+        req.originalUrl.startsWith('/auth') ||
+        req.originalUrl.includes('.')
+      ) {
+        return next()
+      }
+
       const url = req.originalUrl
 
       try {
