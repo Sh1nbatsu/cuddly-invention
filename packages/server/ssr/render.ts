@@ -22,7 +22,7 @@ export async function setupSSR(app: express.Express, clientPath: string) {
       try {
         let template: string
         // Типизации для функции packages/client/src/entries/entry-server.tsx
-        let render: () => Promise<{
+        let render: (req: Request) => Promise<{
           appHtml: string
           styleTags: string
           helmet: HelmetData
@@ -54,7 +54,7 @@ export async function setupSSR(app: express.Express, clientPath: string) {
           render = (await import(pathToServer)).render
         }
 
-        const { appHtml, styleTags, helmet } = await render()
+        const { appHtml, styleTags, helmet } = await render(req)
 
         const html = template
           .replace(`<!--ssr-outlet-->`, appHtml)

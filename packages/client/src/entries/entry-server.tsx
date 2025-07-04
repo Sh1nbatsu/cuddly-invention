@@ -1,4 +1,4 @@
-import { router as routerConfig } from '@/providers/router/router.config'
+import { routes } from '@/providers/router/router.routes'
 import { antdTheme, styledTheme } from '@/shared/themes/defaultTheme'
 import { ConfigProvider } from 'antd'
 import { Request as ExpressRequest } from 'express'
@@ -15,7 +15,7 @@ import { ServerStyleSheet, ThemeProvider } from 'styled-components'
 import { createFetchRequest } from './entry-server.utils'
 
 export async function render(req: ExpressRequest) {
-  const { query, dataRoutes } = createStaticHandler(routerConfig)
+  const { query, dataRoutes } = createStaticHandler(routes)
 
   const fetchRequest = createFetchRequest(req)
 
