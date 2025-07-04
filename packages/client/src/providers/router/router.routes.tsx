@@ -9,13 +9,27 @@ import {
   PAGE_ERROR,
 } from '@/shared/layouts/error/error.config'
 import { authRoutes } from './router-auth'
+import { ProtectedRoute } from './protected-router'
+import { Leaderboard } from '@/pages/leaderboard/leaderboard.ui'
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <MainLayout />,
     errorElement: <ErrorLayout config={PAGE_ERROR} />,
-    children: [gameRoute, presentationRoute, forumRoutes],
+    children: [
+      gameRoute,
+      presentationRoute,
+      forumRoutes,
+      {
+        path: 'leaderboard',
+        element: (
+          <ProtectedRoute>
+            <Leaderboard />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   authRoutes,
   {

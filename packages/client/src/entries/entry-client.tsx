@@ -1,4 +1,3 @@
-// import { routerConfig } from '@/providers/router/router.config'
 import { routes } from '@/providers/router/router.routes'
 import { store } from '@/providers/store/store'
 import { antdTheme, styledTheme } from '@/shared/themes/defaultTheme'

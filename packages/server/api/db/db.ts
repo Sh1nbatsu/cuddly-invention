@@ -1,5 +1,8 @@
 import 'dotenv/config'
 import { Sequelize } from 'sequelize-typescript'
+import Comment from './models/Comment.model'
+import Topic from './models/Topic.model'
+import User from './models/User.model'
 
 const {
   POSTGRES_USER,
@@ -15,7 +18,7 @@ export const sequelize = new Sequelize({
   host: 'postgres',
   port: Number(POSTGRES_CONTAINER_PORT),
   dialect: 'postgres',
-  models: [__dirname + '/models/*.model.ts'],
+  models: [Comment, Topic, User],
 })
 
 export const connectDB = async () => {

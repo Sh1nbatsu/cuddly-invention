@@ -16,6 +16,9 @@ export async function setupSSR(app: express.Express, clientPath: string) {
 
     app.use(vite.middlewares)
   } else {
+    const distPath = path.resolve(clientPath, 'dist/client')
+    app.use(express.static(distPath))
+
     app.get('*', async (req: Request, res: Response, next: NextFunction) => {
       const url = req.originalUrl
 
