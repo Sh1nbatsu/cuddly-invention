@@ -29,13 +29,6 @@ swSelf.addEventListener('install', (event: ExtendableEvent) => {
 })
 
 swSelf.addEventListener('fetch', event => {
-  const requestUrl = new URL(event.request.url)
-
-  if (requestUrl.pathname.startsWith('/api/')) {
-    event.respondWith(fetch(event.request))
-    return
-  }
-
   event.respondWith(
     caches.match(event.request).then(response => {
       if (response) return response
