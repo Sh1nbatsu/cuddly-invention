@@ -3,7 +3,7 @@ import {
   NavigationDiv,
   CustomWrapper,
   CustomButton,
-} from './leaderboard.styled'
+} from '@/pages/leaderboard/leaderboard.styled'
 
 import { LeaderboardWidget } from '@/widgets/leaderboard/leader-scroll.ui'
 

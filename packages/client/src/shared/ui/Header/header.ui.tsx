@@ -3,8 +3,8 @@ import { useAppDispatch } from '@/providers/store/store.hooks'
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
 import { useEffect } from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
-import { OfflineBadge } from './header-offline-badge.ui'
-import { StyledHeader, StyledNav } from './header.styled'
+import { OfflineBadge } from '@/shared/ui/Header/header-offline-badge.ui'
+import { StyledHeader, StyledNav } from '@/shared/ui/Header/header.styled'
 
 export const Header = () => {
   const user = useCurrentUser()
@@ -38,6 +38,9 @@ export const Header = () => {
         </CustomLink>
         <CustomLink to="/presentation" variant="retro">
           О нас
+        </CustomLink>
+        <CustomLink to="/user/profile" variant="retro">
+          Профиль
         </CustomLink>
         {!user?.id ? (
           <CustomLink to="sign-up" variant="retro">
