@@ -13,7 +13,6 @@ export const StyledLink = styled(Link)<StyledLinkProps>`
   color: var(--color-primary);
   text-decoration: none;
   cursor: pointer;
-  font-family: 'PressStart2P', monospace;
   transition: all 0.2s ease;
   user-select: none;
 
@@ -37,8 +36,8 @@ export const StyledLink = styled(Link)<StyledLinkProps>`
   ${({ $active }) =>
     $active &&
     css`
-      font-weight: bold;
-      text-decoration: underline;
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px var(--color-primary);
     `}
 
   ${({ $disabled }) =>
