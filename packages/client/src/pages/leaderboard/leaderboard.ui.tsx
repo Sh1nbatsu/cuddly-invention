@@ -1,9 +1,9 @@
 import {
-  ScrollableDiv,
-  NavigationDiv,
-  CustomWrapper,
   CustomButton,
-} from './leaderboard.styled'
+  CustomWrapper,
+  NavigationDiv,
+  ScrollableDiv,
+} from './Leaderboard.styled'
 
 import { LeaderboardWidget } from '@/widgets/leaderboard/leader-scroll.ui'
 
