@@ -14,7 +14,7 @@ export type LeaderData = {
 }
 
 export type LeaderRequestData = {
-  scoreCount: number
+  count: number
 }
 
 export type LeaderboardResponse = Array<{ data: User }>

@@ -63,6 +63,7 @@ export const updateCurrentUserLeaderboardScore = async (
   next: NextFunction
 ) => {
   try {
+    // @ts-ignore TODO:
     const { id } = req.user
     const { scoreCount } = req.body
     await User.update(

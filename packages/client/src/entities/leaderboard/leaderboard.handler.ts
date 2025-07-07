@@ -1,4 +1,4 @@
-import { addLeaderApi, getLeaderboardApi } from './leaderboard.api'
+import { getLeaderboardApi, updateLeaderApi } from './leaderboard.api'
 
 import { LeaderboardResponse } from '@/shared/types/Leaderboard'
 
@@ -24,8 +24,8 @@ export const getLeaderboardHandler = async (
 
 export const addLeaderHandler = async (score: number): Promise<string> => {
   try {
-    const data = await addLeaderApi({
-      scoreCount: score,
+    const data = await updateLeaderApi({
+      count: score,
     })
     return data
   } catch (error) {

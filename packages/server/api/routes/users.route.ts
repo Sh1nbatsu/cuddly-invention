@@ -11,7 +11,7 @@ import { Router } from 'express'
 const router = Router()
 
 router.get('/me', getCurrentUser)
-router.get('/leaderboard', validate(paginationSchema), getUsersLeaderboard)
+router.post('/leaderboard', validate(paginationSchema), getUsersLeaderboard)
 router.patch(
   '/leaderboard',
   validate(userScoreSchema),

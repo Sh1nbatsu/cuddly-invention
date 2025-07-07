@@ -112,7 +112,7 @@ class User
   declare phone: string
 
   @Column({
-    type: DataType.NOW,
+    type: DataType.DATE,
     allowNull: true,
   })
   declare score: number
