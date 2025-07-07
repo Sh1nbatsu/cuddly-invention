@@ -1,8 +1,5 @@
 import { useScore } from '@/entities/game/model/hooks/useScore'
-import {
-  addLeaderHandler,
-  getLeaderboardHandler,
-} from '@/entities/leaderboard/leaderboard.handler'
+import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
 import { User } from '@/shared/types/User'
 import { Avatar, Button, List, message, Space, Spin, Typography } from 'antd'
 import { useEffect, useState } from 'react'
@@ -41,8 +38,18 @@ export const LeaderboardWidget = () => {
       const { rows, count } = await getLeaderboardHandler(
         currentPage * PAGE_SIZE
       )
-      await addLeaderHandler(score)
-      setLeaderData(prev => [...prev, ...rows])
+
+      setLeaderData(prev => {
+        const newData = [...prev, ...rows]
+        return newData.filter(
+          (item, index, self) =>
+            index ===
+            self.findIndex(
+              t => t.login === item.login && t.email === item.email
+            )
+        )
+      })
+
       setCurrentPage(prev => prev + 1)
       setHasMore(leaderData.length + rows.length < count)
     } catch (error) {
@@ -75,7 +82,7 @@ export const LeaderboardWidget = () => {
       <LeaderboardTitle level={3}>🏆 Leaderboard</LeaderboardTitle>
 
       <List
-        dataSource={leaderData}
+        dataSource={Array.from(new Set(leaderData))}
         renderItem={(item: User, index) => (
           <StyledCard hoverable>
             <List.Item key={`${item.login}-${item.email}-${index}`}>
@@ -93,13 +100,8 @@ export const LeaderboardWidget = () => {
               <Space size="large">
                 <ScoreWrapper>
                   <ScoreLabel type="secondary">Score</ScoreLabel>
-                  <div>
-                    <ScoreBadge>{item.score || 0}</ScoreBadge>
-                  </div>
+                  <ScoreBadge>{item.score || 0}</ScoreBadge>
                 </ScoreWrapper>
-                <Button type="link" href={`mailto:${item.email}`}>
-                  Contact
-                </Button>
               </Space>
             </List.Item>
           </StyledCard>
