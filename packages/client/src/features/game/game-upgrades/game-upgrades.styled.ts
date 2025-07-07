@@ -1,7 +1,8 @@
-import { Button } from 'antd'
 import styled from 'styled-components'
 
-export const UpgradeButton = styled(Button)<{ $canAfford: boolean }>`
+export const UpgradeButton = styled.button<{ $canAfford: boolean }>`
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: ${({ $canAfford }) =>
     $canAfford ? '1px solid var(--color-primary)' : '1px dashed #ccc'};
@@ -43,7 +44,7 @@ export const StyledUpgradesList = styled.div`
   gap: 12px;
 `
 
-export const LockedUpgradeButton = styled(Button)`
+export const LockedUpgradeButton = styled.button`
   background: #fff;
   border: 1px dashed #ccc;
   padding: 16px;

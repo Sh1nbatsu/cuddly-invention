@@ -4,8 +4,10 @@ import {
   FullscreenClose,
   FullscreenOpen,
 } from './fullscreen-toggler.styled'
+import { useClient } from '@/shared/hooks/useClient'
 
 export const FullscreenToggler = () => {
+  useClient()
   const { isFullscreen, toggleFullscreen } = useFullscreen()
 
   return (

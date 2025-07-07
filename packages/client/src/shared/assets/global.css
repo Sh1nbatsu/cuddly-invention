@@ -1,4 +1,5 @@
 @import url('./fonts/press-start.css');
+@import url('./fonts/nunito.css');
 
 * {
   margin: 0;
@@ -11,9 +12,22 @@
 
 html,
 body {
+  font-family: 'Nunito', monospace;
+}
+
+h1 {
   font-family: 'PressStart2P', monospace;
 }
 
 a {
   text-decoration: none;
+}
+
+h2 {
+  margin: 0;
+}
+
+sup {
+  font-size: 14px;
+  filter: opacity(0.8);
 }

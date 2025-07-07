@@ -105,11 +105,9 @@ export const GameUpgradesSidebar = ({
               onClick={() => handleBuyUpgrade(upg.id, upg.name, upg.amount)}
               disabled={!canAfford}
               $canAfford={canAfford}>
-              <div>
-                <strong>
-                  {upg.name} ({upg.amount})
-                </strong>
-              </div>
+              <strong>
+                {upg.name} ({upg.amount})
+              </strong>
               {levelText && <UpgradeLevelText>{levelText}</UpgradeLevelText>}
               <UpgradeCostText>Цена: {formatNumber(totalCost)}</UpgradeCostText>
               <UpgradeEffectText $active={effectActive}>

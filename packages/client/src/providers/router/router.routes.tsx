@@ -1,19 +1,19 @@
-import { Leaderboard } from '@/pages/leaderboard/leaderboard.ui'
-import { createBrowserRouter } from 'react-router-dom'
-
+import { RouteObject } from 'react-router-dom'
+import { MainLayout } from '@/shared/layouts/main-layout.ui'
+import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
 import { gameRoute } from '@/pages/game/game-route'
 import { presentationRoute } from '@/pages/presentation/presentation.route'
-import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
+import { userProfileRoute } from '@/pages/user-profile/user-profile.route'
+import { forumRoutes } from './router-form'
 import {
   NOT_FOUND_ERROR,
   PAGE_ERROR,
 } from '@/shared/layouts/error/error.config'
-import { MainLayout } from '@/shared/layouts/main-layout.ui'
-import { ProtectedRoute } from './protected-router'
 import { authRoutes } from './router-auth'
-import { forumRoutes } from './router-form'
+import { ProtectedRoute } from './protected-router'
+import { Leaderboard } from '@/pages/leaderboard/leaderboard.ui'
 
-export const routerConfig = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
     path: '/',
     element: <MainLayout />,
@@ -21,6 +21,8 @@ export const routerConfig = createBrowserRouter([
     children: [
       gameRoute,
       presentationRoute,
+      forumRoutes,
+      userProfileRoute,
       {
         path: 'leaderboard',
         element: (
@@ -29,7 +31,6 @@ export const routerConfig = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      forumRoutes,
     ],
   },
   authRoutes,
@@ -37,4 +38,4 @@ export const routerConfig = createBrowserRouter([
     path: '*',
     element: <ErrorLayout config={NOT_FOUND_ERROR} />,
   },
-])
+]

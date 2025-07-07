@@ -6,8 +6,6 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 16px 0;
-  font-family: 'PressStart2P', monospace;
-  font-size: 12px;
 `
 
 export const StyledNav = styled.nav`

@@ -3,15 +3,13 @@ import {
   NavigationDiv,
   CustomWrapper,
   CustomButton,
-} from './leaderboard.styled'
+} from '@/pages/leaderboard/leaderboard.styled'
 
 import { LeaderboardWidget } from '@/widgets/leaderboard/leader-scroll.ui'
-import { FullscreenToggler } from '@/shared/ui/fullscreen-toggler/fullscreen-toggler.ui'
 
 export const Leaderboard = () => {
   return (
     <CustomWrapper>
-      <FullscreenToggler />
       <ScrollableDiv id="scrollableDiv">
         <LeaderboardWidget />
       </ScrollableDiv>

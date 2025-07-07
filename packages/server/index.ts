@@ -1,22 +1,20 @@
-import { errorHandler } from 'api/middleware/error.middleware'
+import { errorHandler } from './api/middleware/error.middleware'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
 import path from 'path'
-import { setupSSR } from 'ssr/render'
+import { setupSSR } from './ssr/render'
 import { connectDB } from './api/db/db'
 import apiRouter from './api/routes/api.route'
 import sessionRouter from './api/routes/session.route'
 
-const CLIENT_PATH = path.resolve(__dirname, '../client/dist/client')
-
-const PORT = process.env.SERVER_PORT
+const PORT = process.env.SERVER_PORT || 3000
+const CLIENT_PATH = path.resolve(process.cwd(), 'packages/client')
 
 async function startServer() {
   const app = express()
 
   await connectDB()
-  await setupSSR(app, CLIENT_PATH)
 
   app.use(
     cors({
@@ -29,8 +27,9 @@ async function startServer() {
   app.use(cookieParser())
 
   app.use('/auth', sessionRouter)
-
   app.use('/api', apiRouter)
+
+  await setupSSR(app, CLIENT_PATH)
 
   app.use(errorHandler)
 

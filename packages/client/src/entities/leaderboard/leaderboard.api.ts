@@ -12,6 +12,7 @@ type getLeaderboard = (
 type addLeader = (data: LeaderRequestData) => Promise<string>
 
 export const getLeaderboardApi: getLeaderboard = data =>
-  api.post('/leaderboard/all', data)
+  api.post('/api/leaderboard/all', data)
 
-export const addLeaderApi: addLeader = data => api.post('/leaderboard', data)
+export const addLeaderApi: addLeader = data =>
+  api.post('/api/leaderboard', data)
