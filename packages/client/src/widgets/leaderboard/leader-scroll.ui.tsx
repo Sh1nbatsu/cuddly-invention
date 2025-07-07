@@ -1,63 +1,51 @@
 import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
 import { User } from '@/shared/types/User'
-import { Avatar, Button, Card, List, message, Space, Typography } from 'antd'
+import { Avatar, Button, List, message, Space, Spin, Typography } from 'antd'
 import { useEffect, useState } from 'react'
-import InfiniteScroll from 'react-infinite-scroll-component'
-import styled from 'styled-components'
+import {
+  EndOfListMessage,
+  LeaderboardContainer,
+  LeaderboardTitle,
+  LoadingWrapper,
+  LoadMoreWrapper,
+  RankBadge,
+  ScoreBadge,
+  ScoreLabel,
+  ScoreWrapper,
+  StyledCard,
+  UserDetailsWrapper,
+  UserInfo,
+  UserLogin,
+  UserName,
+} from './leadboard.styled'
 
-const { Title, Text } = Typography
-
-const StyledCard = styled(Card)`
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  margin-bottom: 16px;
-
-  .ant-card-body {
-    padding: 16px;
-  }
-`
-
-const RankBadge = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #1890ff;
-  color: white;
-  font-weight: bold;
-  margin-right: 16px;
-`
-
-const UserInfo = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const ScoreBadge = styled.span`
-  background: #f6ffed;
-  border: 1px solid #b7eb8f;
-  color: #52c41a;
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-weight: 500;
-`
+const { Text } = Typography
+const PAGE_SIZE = 10
 
 export const LeaderboardWidget = () => {
   const [leaderData, setLeaderData] = useState<User[]>([])
-  const [nextCursor, setNextCursor] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [initialLoading, setInitialLoading] = useState(true)
   const [hasMore, setHasMore] = useState(true)
 
   const loadMoreData = async () => {
+    if (loading || !hasMore) return
+
+    setLoading(true)
     try {
-      const { rows, count } = await getLeaderboardHandler(nextCursor)
+      const { rows, count } = await getLeaderboardHandler(
+        currentPage * PAGE_SIZE
+      )
       setLeaderData(prev => [...prev, ...rows])
-      setNextCursor(prev => prev + 1)
-      setHasMore(count > leaderData.length)
+      setCurrentPage(prev => prev + 1)
+      setHasMore(leaderData.length + rows.length < count)
     } catch (error) {
       message.error('Ошибка при получении списка рекордов :(')
-      setHasMore(false)
+      console.error('Leaderboard loading error:', error)
+    } finally {
+      setLoading(false)
+      setInitialLoading(false)
     }
   }
 
@@ -65,62 +53,71 @@ export const LeaderboardWidget = () => {
     loadMoreData()
   }, [])
 
+  const handleLoadMore = () => {
+    loadMoreData()
+  }
+
+  if (initialLoading) {
+    return (
+      <LoadingWrapper>
+        <Spin size="large" />
+      </LoadingWrapper>
+    )
+  }
+
   return (
-    <div style={{ padding: '24px', width: '100%', maxWidth: '100%' }}>
-      <Title level={3} style={{ marginBottom: '24px' }}>
-        🏆 Leaderboard
-      </Title>
+    <LeaderboardContainer>
+      <LeaderboardTitle level={3}>🏆 Leaderboard</LeaderboardTitle>
 
-      <InfiniteScroll
-        dataLength={leaderData.length}
-        next={loadMoreData}
-        hasMore={hasMore}
-        loader={
-          <div style={{ textAlign: 'center', padding: '16px' }}>
-            <Text type="secondary">Loading more users...</Text>
-          </div>
-        }
-        endMessage={
-          <div style={{ textAlign: 'center', padding: '16px' }}>
-            <Text strong>You've reached the end of the leaderboard</Text>
-          </div>
-        }>
-        <List
-          dataSource={leaderData}
-          renderItem={(item: User, index) => (
-            <StyledCard hoverable>
-              <List.Item key={`${item.login}-${item.email}`}>
-                <UserInfo>
-                  <RankBadge>{index + 1}</RankBadge>
-                  <Avatar
-                    size={48}
-                    src={item.avatar || '/default-avatar.png'}
-                    alt="User avatar"
-                  />
-                  <div style={{ marginLeft: '16px' }}>
-                    <Title level={5} style={{ marginBottom: 0 }}>
-                      {item.first_name} {item.second_name}
-                    </Title>
-                    <Text type="secondary">@{item.login}</Text>
-                  </div>
-                </UserInfo>
+      <List
+        dataSource={leaderData}
+        renderItem={(item: User, index) => (
+          <StyledCard hoverable>
+            <List.Item key={`${item.login}-${item.email}-${index}`}>
+              <UserInfo>
+                <RankBadge $topRank={index < 3}>{index + 1}</RankBadge>
+                <Avatar size={48} src={item.avatar || '/'} alt="User avatar" />
+                <UserDetailsWrapper>
+                  <UserName level={5}>
+                    {item.first_name} {item.second_name}
+                  </UserName>
+                  <UserLogin type="secondary">@{item.login}</UserLogin>
+                </UserDetailsWrapper>
+              </UserInfo>
 
-                <Space size="large">
+              <Space size="large">
+                <ScoreWrapper>
+                  <ScoreLabel type="secondary">Score</ScoreLabel>
                   <div>
-                    <Text type="secondary">Score</Text>
-                    <div>
-                      <ScoreBadge>{item.score || 0}</ScoreBadge>
-                    </div>
+                    <ScoreBadge>{item.score || 0}</ScoreBadge>
                   </div>
-                  <Button type="link" href={`mailto:${item.email}`}>
-                    Contact
-                  </Button>
-                </Space>
-              </List.Item>
-            </StyledCard>
-          )}
-        />
-      </InfiniteScroll>
-    </div>
+                </ScoreWrapper>
+                <Button type="link" href={`mailto:${item.email}`}>
+                  Contact
+                </Button>
+              </Space>
+            </List.Item>
+          </StyledCard>
+        )}
+      />
+
+      {hasMore && (
+        <LoadMoreWrapper>
+          <Button
+            type="primary"
+            onClick={handleLoadMore}
+            loading={loading}
+            disabled={loading}>
+            Загрузить еще
+          </Button>
+        </LoadMoreWrapper>
+      )}
+
+      {!hasMore && leaderData.length > 0 && (
+        <EndOfListMessage>
+          <Text type="secondary">Вы достигли конца списка</Text>
+        </EndOfListMessage>
+      )}
+    </LeaderboardContainer>
   )
 }
