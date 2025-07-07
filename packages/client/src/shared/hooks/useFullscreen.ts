@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react'
 
 export const useFullscreen = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
-
   const toggleFullscreen = useCallback(() => {
     if (document.fullscreenElement) {
       document.exitFullscreen()
