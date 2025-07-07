@@ -13,9 +13,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    # volumes:
-    #   - ./packages:/app/packages
-    #   - /app/node_modules
 
   postgres:
     image: postgres:14
