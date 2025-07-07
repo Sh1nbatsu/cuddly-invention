@@ -1,4 +1,5 @@
 import { useScore } from '@/entities/game/model/hooks/useScore'
+import { updateLeaderApi } from '@/entities/leaderboard/leaderboard.api'
 import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
 import { User } from '@/shared/types/User'
 import { Avatar, Button, List, message, Space, Spin, Typography } from 'antd'
@@ -38,7 +39,7 @@ export const LeaderboardWidget = () => {
       const { rows, count } = await getLeaderboardHandler(
         currentPage * PAGE_SIZE
       )
-
+      await updateLeaderApi({ count: score })
       setLeaderData(prev => {
         const newData = [...prev, ...rows]
         return newData.filter(
