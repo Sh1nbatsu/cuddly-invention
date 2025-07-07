@@ -15,6 +15,7 @@ import {
 } from '@/entities/session/session.styled'
 import { LoginFormData } from '@/entities/session/session.types'
 import { login } from '@/entities/user/model/user.thunk'
+import { YandexLoginButton } from '@/shared/ui/auth/yandex-login-button.ui'
 import { useAppDispatch } from '@/providers/store/store.hooks'
 
 const DEFAULT_VALUES = {
@@ -69,6 +70,7 @@ export const Login = () => {
           size="large">
           Войти
         </AuthSubmitButton>
+        <YandexLoginButton />
 
         <AuthSpace direction="horizontal">
           <AuthFooterText>

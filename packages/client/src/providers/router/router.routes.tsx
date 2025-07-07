@@ -3,6 +3,7 @@ import { MainLayout } from '@/shared/layouts/main-layout.ui'
 import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
 import { gameRoute } from '@/pages/game/game-route'
 import { presentationRoute } from '@/pages/presentation/presentation.route'
+import { userProfileRoute } from '@/pages/user-profile/user-profile.route'
 import { forumRoutes } from './router-form'
 import {
   NOT_FOUND_ERROR,
@@ -21,6 +22,7 @@ export const routes: RouteObject[] = [
       gameRoute,
       presentationRoute,
       forumRoutes,
+      userProfileRoute,
       {
         path: 'leaderboard',
         element: (

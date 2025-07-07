@@ -10,7 +10,6 @@ export const getCurrentUser = async (
   next: NextFunction
 ) => {
   try {
-    console.log(req.user, 'req.user in getCurrentUser')
     // @ts-ignore TODO:
     if (!req.user) {
       throw new AppError(

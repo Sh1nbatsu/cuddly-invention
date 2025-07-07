@@ -15,7 +15,6 @@ async function startServer() {
   const app = express()
 
   await connectDB()
-  await setupSSR(app, CLIENT_PATH)
 
   app.use(
     cors({
@@ -28,8 +27,9 @@ async function startServer() {
   app.use(cookieParser())
 
   app.use('/auth', sessionRouter)
-
   app.use('/api', apiRouter)
+
+  await setupSSR(app, CLIENT_PATH)
 
   app.use(errorHandler)
 
