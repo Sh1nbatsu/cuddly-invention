@@ -16,13 +16,11 @@ export const StyledNav = styled.nav`
 `
 
 export const StyledBadge = styled(Badge)`
-  // Стили для контейнера Badge
   & {
     display: inline-flex;
     align-items: center;
   }
 
-  // Стили для счетчика (точки)
   .ant-badge-count {
     background-color: #000;
     color: #000;
@@ -38,10 +36,9 @@ export const StyledBadge = styled(Badge)`
     line-height: 1;
   }
 
-  // Стили для иконки внутри счетчика
   .ant-badge-count .anticon {
     font-size: 10px;
-    color: #fff; // Белый цвет иконки на черном фоне
+    color: #fff;
     transform: rotate(45deg);
   }
 `
