@@ -15,6 +15,7 @@ import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { YandexLoginButton } from '@/shared/ui/auth/yandex-login-button.ui'
 
 const DEFAULT_VALUES = {
   first_name: '',
@@ -38,6 +39,7 @@ export const Registration = () => {
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await dispatch(register(data))
@@ -47,14 +49,13 @@ export const Registration = () => {
     }
   }
 
-  const onFinish = () => {
-    return handleSubmit(onSubmit)()
-  }
+  const onFinish = () => handleSubmit(onSubmit)()
 
   return (
     <PageWrapper>
-      <AuthForm onFinish={onFinish} layout="vertical" autoComplete="off">
+      <AuthForm layout="vertical" autoComplete="off" onFinish={onFinish}>
         <AuthTitle level={2}>Регистрация</AuthTitle>
+
         <FormInput control={control} name="first_name" label="Имя" />
         <FormInput control={control} name="second_name" label="Фамилия" />
         <FormInput control={control} name="login" label="Логин" />
@@ -62,27 +63,19 @@ export const Registration = () => {
           control={control}
           name="email"
           label="Почта"
-          inputProps={{
-            type: 'email',
-          }}
+          inputProps={{ type: 'email' }}
         />
         <FormInput
           control={control}
           name="password"
           label="Пароль"
-          inputProps={{
-            type: 'password',
-            autoComplete: 'new-password',
-          }}
+          inputProps={{ type: 'password', autoComplete: 'new-password' }}
         />
-
         <FormInput
           control={control}
           name="phone"
           label="Телефон"
-          inputProps={{
-            type: 'tel',
-          }}
+          inputProps={{ type: 'tel' }}
         />
 
         <AuthSubmitButton
@@ -92,6 +85,7 @@ export const Registration = () => {
           size="large">
           Зарегистрироваться
         </AuthSubmitButton>
+        <YandexLoginButton />
 
         <AuthSpace direction="horizontal">
           <AuthFooterText>

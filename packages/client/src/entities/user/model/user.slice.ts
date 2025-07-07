@@ -1,5 +1,6 @@
 import { User } from '@/shared/types/User'
 import {
+  PayloadAction,
   createSlice,
   isFulfilled,
   isPending,
@@ -20,7 +21,12 @@ const initialState: AuthState = {
 const userSlice = createSlice({
   name: '@@user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser(state, action: PayloadAction<User | null>) {
+      state.user = action.payload
+      state.loading = false
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchMe.fulfilled, (state, action) => {
@@ -35,19 +41,17 @@ const userSlice = createSlice({
       .addCase(logout.fulfilled, state => {
         state.user = null
       })
-
       .addMatcher(isPending(fetchMe, login, register, logout), state => {
         state.loading = true
       })
-
       .addMatcher(isRejected(fetchMe, login, register, logout), state => {
         state.loading = false
       })
-
       .addMatcher(isFulfilled(fetchMe, login, register, logout), state => {
         state.loading = false
       })
   },
 })
 
+export const { setUser } = userSlice.actions
 export const userReducer = userSlice.reducer
