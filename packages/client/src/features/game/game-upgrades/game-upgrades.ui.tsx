@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from 'react'
-
 import {
   LockedUpgradeButton,
   StyledUpgradeBuyButtonsContainer,
@@ -10,10 +9,10 @@ import {
   UpgradeEffectText,
   UpgradeLevelText,
 } from '@/features/game/game-upgrades/game-upgrades.styled'
-
 import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
 import { formatNumber, getLevel } from '@/entities/game/model/game.lib'
 import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
+import { achievementService } from '@/notification/achievement-service'
 
 interface SidebarUpgradesProps {
   buyAmount: number
@@ -41,8 +40,20 @@ export const GameUpgradesSidebar = ({
     (max, upg, i) => (upg.amount > 0 && i > max ? i : max),
     -1
   )
-
   const nextIndex = lastPurchasedIndex + 1
+
+  const handleBuyUpgrade = (
+    upgradeId: string,
+    upgradeName: string,
+    prevAmount: number
+  ) => {
+    buyUpgrade(upgradeId, score, setScore, buyAmount)
+    achievementService.processPurchase(
+      upgradeId,
+      upgradeName,
+      prevAmount + buyAmount
+    )
+  }
 
   return (
     <StyledUpgradeSidebar>
@@ -64,7 +75,6 @@ export const GameUpgradesSidebar = ({
         {upgrades.map((upg, i) => {
           const isUnlocked =
             i === 0 || i <= lastPurchasedIndex || i === nextIndex
-
           if (!isUnlocked) {
             return <LockedUpgradeButton key={upg.id}>?</LockedUpgradeButton>
           }
@@ -83,7 +93,6 @@ export const GameUpgradesSidebar = ({
           if (upg.id.startsWith('autoclick_')) {
             const level = getLevel(upg.amount)
             levelText = `Уровень: ${level}`
-
             const effectValue = getUpgradeTotalPower(upg.id)
             const formattedEffectValue = formatTwoDecimals(effectValue)
             effectText = `+${formattedEffectValue} / сек.`
@@ -93,7 +102,7 @@ export const GameUpgradesSidebar = ({
           return (
             <UpgradeButton
               key={upg.id}
-              onClick={() => buyUpgrade(upg.id, score, setScore, buyAmount)}
+              onClick={() => handleBuyUpgrade(upg.id, upg.name, upg.amount)}
               disabled={!canAfford}
               $canAfford={canAfford}>
               <strong>
