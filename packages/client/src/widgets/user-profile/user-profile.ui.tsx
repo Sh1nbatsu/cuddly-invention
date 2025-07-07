@@ -1,27 +1,59 @@
+import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
+import { EditOutlined, StarOutlined } from '@ant-design/icons'
+import { message } from 'antd'
 import {
+  Avatar,
+  Bio,
+  EditButton,
   LeftBlock,
   Profile,
   RightBlock,
-  Avatar,
-} from '@/shared/ui/user-profile/user-profile.styled'
-
+  StatItem,
+  Stats,
+  UserId,
+  UserName,
+} from './user-profile.styled'
 import dinoAvatar from '/dino-sticker.jpg'
 
 export const UserProfileWidget = () => {
+  const user = useCurrentUser()
+
   return (
     <Profile>
       <LeftBlock>
-        <Avatar src={dinoAvatar} alt="Avatar" />
-        <p>
-          Место в топе: <span>13</span>
-        </p>
+        <Avatar src={user?.avatar || dinoAvatar} alt="User avatar" />
+
+        <Stats>
+          <StatItem>
+            <StarOutlined style={{ color: '#faad14' }} />
+            <span>Очки: {user?.score || 0}</span>
+          </StatItem>
+        </Stats>
       </LeftBlock>
+
       <RightBlock>
-        <h2>
-          dino14 <sup>#000001</sup>
-        </h2>
-        <p>В сети</p>
-        <p>Арр-р!</p>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+          }}>
+          <div>
+            <UserName>
+              {user?.login || 'dino14'}
+              <UserId>
+                #{user?.id?.toString().padStart(6, '0') || '000001'}
+              </UserId>
+            </UserName>
+          </div>
+          <EditButton
+            icon={<EditOutlined />}
+            size="small"
+            onClick={() => message.info('Данный функционал в разработке!')}
+          />
+        </div>
+
+        <Bio>Арр-р! Люблю играть и побеждать!</Bio>
       </RightBlock>
     </Profile>
   )
