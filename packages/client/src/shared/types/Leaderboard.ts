@@ -6,15 +6,11 @@ export type LeaderboardRequestData = {
   limit: number
 }
 
-export type LeaderData = {
-  username: string
-  date: string
-  undefScore12: number
-  avatar?: string
-}
-
 export type LeaderRequestData = {
   count: number
 }
 
-export type LeaderboardResponse = Array<{ data: User }>
+export type LeaderboardResponse = {
+  rows: Array<User>
+  count: number
+}

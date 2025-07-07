@@ -1,36 +1,24 @@
-import { RouteObject } from 'react-router-dom'
-import { MainLayout } from '@/shared/layouts/main-layout.ui'
-import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
 import { gameRoute } from '@/pages/game/game-route'
+import { leadBoardRoute } from '@/pages/leaderboard/leadboard.route'
 import { presentationRoute } from '@/pages/presentation/presentation.route'
 import { userProfileRoute } from '@/pages/user-profile/user-profile.route'
-import { forumRoutes } from './router-form'
-import {
-  NOT_FOUND_ERROR,
-  PAGE_ERROR,
-} from '@/shared/layouts/error/error.config'
+import { ErrorLayout } from '@/shared/layouts/error/error-layout.ui'
+import { NOT_FOUND_ERROR } from '@/shared/layouts/error/error.config'
+import { MainLayout } from '@/shared/layouts/main-layout.ui'
+import { RouteObject } from 'react-router-dom'
 import { authRoutes } from './router-auth'
-import { ProtectedRoute } from './protected-router'
-import { Leaderboard } from '@/pages/leaderboard/leaderboard.ui'
+import { forumRoutes } from './router-form'
 
 export const routes: RouteObject[] = [
   {
     path: '/',
     element: <MainLayout />,
-    errorElement: <ErrorLayout config={PAGE_ERROR} />,
     children: [
       gameRoute,
       presentationRoute,
       forumRoutes,
       userProfileRoute,
-      {
-        path: 'leaderboard',
-        element: (
-          <ProtectedRoute>
-            <Leaderboard />
-          </ProtectedRoute>
-        ),
-      },
+      leadBoardRoute,
     ],
   },
   authRoutes,

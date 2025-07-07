@@ -10,20 +10,24 @@ export const getLeaderboardHandler = async (
   cursor: number
 ): Promise<LeaderboardResponse> => {
   try {
-    const data = await getLeaderboardApi({
+    const { rows, count } = await getLeaderboardApi({
       ratingFieldName: RATING_FIELD_NAME,
       cursor,
       limit: 10,
     })
-    return data
+    return { rows, count }
   } catch (error) {
     console.error('Error fetching leaderboard:', error)
     throw error
   }
 }
 
-export const addLeaderHandler = async (score: number): Promise<string> => {
+export const addLeaderHandler = async (
+  score: number
+): Promise<string | undefined> => {
   try {
+    if (!score) return
+
     const data = await updateLeaderApi({
       count: score,
     })

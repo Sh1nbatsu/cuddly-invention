@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { CustomButton as RetroButton } from '@/shared/ui/custom-button/custom-button.ui'
+import styled from 'styled-components'
 
 export const CustomButton = styled(RetroButton)`
   &&& {
@@ -17,7 +17,8 @@ export const ScrollableDiv = styled.div`
   overflow: auto;
   padding: 0 16px;
   border: 1px solid rgba(140, 140, 140, 0.35);
-  width: 33vw;
+  max-width: 100%;
+  width: 100%;
 `
 
 export const NavigationDiv = styled.div`
