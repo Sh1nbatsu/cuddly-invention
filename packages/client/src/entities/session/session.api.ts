@@ -7,12 +7,12 @@ type RegisterData = (data: RegisterFormData) => Promise<User>
 type GetMe = () => Promise<User>
 
 export const loginUserApi: LoginData = data =>
-  api.post('/auth/signin', data).then(res => res.data)
+  api.post('/auth/sign-in', data).then(res => res.data)
 
 export const registerUserApi: RegisterData = data =>
-  api.post('/auth/signup', data).then(res => res.data)
+  api.post('/auth/sign-up', data).then(res => res.data)
 
-export const getMeApi: GetMe = () => api.get('/auth/user')
+export const getMeApi: GetMe = () => api.get('/api/users/me')
 
 export const logoutUserApi = () => {
   localStorage.removeItem('ya_token')

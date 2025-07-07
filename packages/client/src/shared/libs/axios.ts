@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ya-praktikum.tech/api/v2'
+const BASE_URL = 'http://localhost:3001'
 
 export const api = axios.create({
   baseURL: BASE_URL,

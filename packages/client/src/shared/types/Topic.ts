@@ -1,10 +1,12 @@
-import { ForumComment } from './Forum'
+import { ParentComment } from './Forum'
+import { User } from './User'
 
 export interface Topic {
   id: number
+  author: User
+  description: string
   title: string
-  author: string
-  text: string
-  date: string
-  comments: ForumComment[]
+  createdAt: string
+  updatedAt: Date
+  comments: ParentComment[]
 }

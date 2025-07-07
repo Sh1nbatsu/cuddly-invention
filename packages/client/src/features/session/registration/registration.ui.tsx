@@ -9,6 +9,7 @@ import {
 } from '@/entities/session/session.styled'
 import { RegisterFormData } from '@/entities/session/session.types'
 import { register } from '@/entities/user/model/user.thunk'
+import { useAppDispatch } from '@/providers/store/store.hooks'
 import { FormInput } from '@/shared/ui/form-input/form-input.ui'
 import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -35,11 +36,13 @@ export const Registration = () => {
     mode: 'onChange',
     resolver: zodResolver(RegisterSchema),
   })
+
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const onSubmit = async (data: RegisterFormData) => {
     try {
-      await register(data)
+      await dispatch(register(data))
       navigate('/')
     } catch (error) {
       console.error('error', error)
