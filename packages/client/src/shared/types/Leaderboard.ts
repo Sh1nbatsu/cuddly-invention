@@ -1,7 +1,6 @@
 import { User } from './User'
 
 export type LeaderboardRequestData = {
-  ratingFieldName: string
   cursor: number
   limit: number
 }

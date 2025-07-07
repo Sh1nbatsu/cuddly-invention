@@ -57,7 +57,7 @@ export const getUsersLeaderboard = async (
 
 export const updateCurrentUserLeaderboardScore = async (
   req: RequestWithValidateData<{
-    scoreCount: number
+    count: number
   }>,
   res: Response,
   next: NextFunction
@@ -65,10 +65,11 @@ export const updateCurrentUserLeaderboardScore = async (
   try {
     // @ts-ignore TODO:
     const { id } = req.user
-    const { scoreCount } = req.body
+    const { count } = req.body
+
     await User.update(
       {
-        score: scoreCount,
+        score: count,
       },
       {
         where: {
@@ -76,7 +77,10 @@ export const updateCurrentUserLeaderboardScore = async (
         },
       }
     )
-    res.status(StatusCode.OK)
+    res.status(StatusCode.OK).json({
+      success: true,
+      message: 'Score updated successfully',
+    })
   } catch (error) {
     next(error)
   }

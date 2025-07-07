@@ -1,4 +1,8 @@
-import { getLeaderboardHandler } from '@/entities/leaderboard/leaderboard.handler'
+import { useScore } from '@/entities/game/model/hooks/useScore'
+import {
+  addLeaderHandler,
+  getLeaderboardHandler,
+} from '@/entities/leaderboard/leaderboard.handler'
 import { User } from '@/shared/types/User'
 import { Avatar, Button, List, message, Space, Spin, Typography } from 'antd'
 import { useEffect, useState } from 'react'
@@ -18,7 +22,6 @@ import {
   UserLogin,
   UserName,
 } from './leadboard.styled'
-
 const { Text } = Typography
 const PAGE_SIZE = 10
 
@@ -28,6 +31,7 @@ export const LeaderboardWidget = () => {
   const [loading, setLoading] = useState(false)
   const [initialLoading, setInitialLoading] = useState(true)
   const [hasMore, setHasMore] = useState(true)
+  const [score] = useScore()
 
   const loadMoreData = async () => {
     if (loading || !hasMore) return
@@ -37,6 +41,7 @@ export const LeaderboardWidget = () => {
       const { rows, count } = await getLeaderboardHandler(
         currentPage * PAGE_SIZE
       )
+      await addLeaderHandler(score)
       setLeaderData(prev => [...prev, ...rows])
       setCurrentPage(prev => prev + 1)
       setHasMore(leaderData.length + rows.length < count)
