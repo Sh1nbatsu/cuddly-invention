@@ -2,16 +2,14 @@ import { useScore } from '@/entities/game/model/hooks/useScore'
 import { addLeaderHandler } from '@/entities/leaderboard/leaderboard.handler'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { BASE_URL } from '../libs/axios'
 import { useCurrentUser } from './useCurrentUser'
-
-const URL = 'https://ya-praktikum.tech/api/v2/leaderboard'
 
 export const useLeaderboardSync = () => {
   const user = useCurrentUser()
   const username = user?.login || 'undefined'
   const [score] = useScore()
   const location = useLocation()
-  console.log(username, score)
 
   const syncLeaderboard = () => {
     const data = {
@@ -24,11 +22,11 @@ export const useLeaderboardSync = () => {
       ratingFieldName: 'undefScore12',
       teamName: 'string',
     }
-    navigator.sendBeacon(URL, JSON.stringify(data))
+    navigator.sendBeacon(BASE_URL, JSON.stringify(data))
   }
 
   useEffect(() => {
-    addLeaderHandler(score, username)
+    addLeaderHandler(score)
   }, [location])
 
   useEffect(() => {

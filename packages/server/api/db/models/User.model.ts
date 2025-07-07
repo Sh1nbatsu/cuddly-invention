@@ -10,6 +10,7 @@ export interface UserAttributes {
   email: string
   password: string
   phone: string
+  score: number
 }
 
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -109,6 +110,12 @@ class User
     },
   })
   declare phone: string
+
+  @Column({
+    type: DataType.NOW,
+    allowNull: true,
+  })
+  declare score: number
 
   @HasMany(() => Topic)
   declare topics: Topic[]

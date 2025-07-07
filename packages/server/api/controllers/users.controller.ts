@@ -1,6 +1,7 @@
 import { StatusCode } from 'api/constants/statusCode'
 import User from 'api/db/models/User.model'
 import { AppError } from 'api/middleware/error.middleware'
+import { RequestWithValidateData } from 'api/types/request'
 import { NextFunction, Request, Response } from 'express'
 
 export const getCurrentUser = async (
@@ -22,6 +23,59 @@ export const getCurrentUser = async (
     const user = await User.findByPk(userId)
 
     res.json(user)
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getUsersLeaderboard = async (
+  req: RequestWithValidateData<{
+    pageSize: number
+    cursor: number
+  }>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const pageSize = Number(req.query.pageSize) || 10
+    const cursor = Number(req.query.cursor) || 1
+
+    const { count, rows } = await User.findAndCountAll({
+      limit: pageSize,
+      offset: (cursor - 1) * pageSize,
+      order: [['score', 'DESC']],
+    })
+
+    res.json({
+      count,
+      rows,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const updateCurrentUserLeaderboardScore = async (
+  req: RequestWithValidateData<{
+    scoreCount: number
+  }>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.user
+    const { scoreCount } = req.body
+    await User.update(
+      {
+        score: scoreCount,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    )
+    res.status(StatusCode.OK)
   } catch (error) {
     next(error)
   }

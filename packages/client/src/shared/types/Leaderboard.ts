@@ -1,3 +1,5 @@
+import { User } from './User'
+
 export type LeaderboardRequestData = {
   ratingFieldName: string
   cursor: number
@@ -12,9 +14,7 @@ export type LeaderData = {
 }
 
 export type LeaderRequestData = {
-  data: LeaderData
-  ratingFieldName: string
-  teamName: string
+  scoreCount: number
 }
 
-export type LeaderboardResponse = Array<{ data: LeaderData }>
+export type LeaderboardResponse = Array<{ data: User }>
