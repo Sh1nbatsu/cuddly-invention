@@ -30,7 +30,6 @@ COPY --from=builder /app/packages/client/dist/ ./packages/client/dist/
 
 COPY --from=builder /app/packages/server/package.json ./packages/server/package.json
 
-
 EXPOSE ${SERVER_PORT}
 
 CMD [ "node", "packages/server/dist/index.js" ]

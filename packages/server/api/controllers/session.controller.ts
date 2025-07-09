@@ -3,7 +3,7 @@ import { AppError } from 'api/middleware/error.middleware'
 import { LoginFormData, RegisterFormData } from 'api/schemas/session.schema'
 import { RequestWithValidateData } from 'api/types/request'
 import bcrypt from 'bcrypt'
-import { NextFunction, Response } from 'express'
+import { NextFunction, RequestHandler, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { Op } from 'sequelize'
 
@@ -84,6 +84,7 @@ export const signUp = async (
       second_name,
       phone,
       login,
+      score: 0,
     })
 
     const token = jwt.sign(
@@ -104,6 +105,24 @@ export const signUp = async (
     })
 
     res.json({ message: 'Пользователь успешно создан!', token })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const logout: RequestHandler = async (
+  _,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.clearCookie('auth-token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    })
+
+    res.json({ message: 'Вы вышли из системы' })
   } catch (error) {
     next(error)
   }

@@ -29,7 +29,6 @@ export const TopicProvider = ({ children }: { children: ReactNode }) => {
     try {
       const data = await getTopics()
       setTopics(data)
-      message.success('Темы успешно загружены!')
     } catch (error) {
       message.error('Не удалось загрузить темы')
     } finally {

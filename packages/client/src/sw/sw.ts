@@ -11,7 +11,6 @@ const wbManifest = (self as any).__WB_MANIFEST || []
 const assetsToCache = wbManifest.map((entry: any) => entry.url)
 
 swSelf.addEventListener('install', (event: ExtendableEvent) => {
-  console.log('Service Worker installing...')
   swSelf.skipWaiting()
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {

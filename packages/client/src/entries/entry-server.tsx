@@ -42,7 +42,6 @@ export async function render(req: ExpressRequest) {
         </React.StrictMode>
       )
     )
-    console.log(appHtml, 'Here is appHtml')
 
     const styleTags = sheet.getStyleTags()
     const { helmet } = helmetContext as { helmet: HelmetData }

@@ -19,6 +19,7 @@ export const sequelize = new Sequelize({
   port: Number(POSTGRES_CONTAINER_PORT),
   dialect: 'postgres',
   models: [Comment, Topic, User],
+  logging: false,
 })
 
 export const connectDB = async () => {

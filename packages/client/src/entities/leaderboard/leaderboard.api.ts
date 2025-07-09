@@ -1,18 +1,18 @@
 import { api } from '@/shared/libs/axios'
 import {
   LeaderboardRequestData,
-  LeaderRequestData,
   LeaderboardResponse,
+  LeaderRequestData,
 } from '@/shared/types/Leaderboard'
 
-type getLeaderboard = (
+type GetLeaderboard = (
   data: LeaderboardRequestData
 ) => Promise<LeaderboardResponse>
 
-type addLeader = (data: LeaderRequestData) => Promise<string>
+type AddLeader = (data: LeaderRequestData) => Promise<string>
 
-export const getLeaderboardApi: getLeaderboard = data =>
-  api.post('/api/leaderboard/all', data)
+export const getLeaderboardApi: GetLeaderboard = data =>
+  api.post('/users/leaderboard', data)
 
-export const addLeaderApi: addLeader = data =>
-  api.post('/api/leaderboard', data)
+export const updateLeaderApi: AddLeader = data =>
+  api.patch('/users/leaderboard', data)

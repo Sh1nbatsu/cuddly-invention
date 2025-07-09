@@ -7,4 +7,5 @@ export type User = {
   password: string
   phone: string
   avatar: string | null
+  score: number
 }
