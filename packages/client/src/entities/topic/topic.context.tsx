@@ -41,12 +41,10 @@ export const TopicProvider = ({ children }: { children: ReactNode }) => {
   }, [fetchTopics])
 
   return (
-    <>
-      <TopicContext.Provider
-        value={{ topics, refetchTopics: fetchTopics, isLoading }}>
-        {children}
-      </TopicContext.Provider>
-    </>
+    <TopicContext.Provider
+      value={{ topics, refetchTopics: fetchTopics, isLoading }}>
+      {children}
+    </TopicContext.Provider>
   )
 }
 
