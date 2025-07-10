@@ -1,20 +1,15 @@
+import { User } from './User'
+
 export type LeaderboardRequestData = {
-  ratingFieldName: string
   cursor: number
   limit: number
 }
 
-export type LeaderData = {
-  username: string
-  date: string
-  undefScore12: number
-  avatar?: string
-}
-
 export type LeaderRequestData = {
-  data: LeaderData
-  ratingFieldName: string
-  teamName: string
+  count: number
 }
 
-export type LeaderboardResponse = Array<{ data: LeaderData }>
+export type LeaderboardResponse = {
+  rows: Array<User>
+  count: number
+}

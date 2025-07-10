@@ -1,9 +1,4 @@
-import {
-  ScrollableDiv,
-  NavigationDiv,
-  CustomWrapper,
-  CustomButton,
-} from '@/pages/leaderboard/leaderboard.styled'
+import { CustomWrapper, ScrollableDiv } from './Leaderboard.styled'
 
 import { LeaderboardWidget } from '@/widgets/leaderboard/leader-scroll.ui'
 
@@ -13,9 +8,6 @@ export const Leaderboard = () => {
       <ScrollableDiv id="scrollableDiv">
         <LeaderboardWidget />
       </ScrollableDiv>
-      <NavigationDiv>
-        <CustomButton variant="retro">Ещё раз?</CustomButton>
-      </NavigationDiv>
     </CustomWrapper>
   )
 }
