@@ -34,7 +34,7 @@ export const StyledUpgradeSidebar = styled.div`
   width: 100%;
   max-height: -webkit-fill-available;
   padding: 12px;
-  border-right: 2px solid var(--color-primary);
+  border-right: 2px solid #ccc;
   overflow: auto;
   color: #121212;
 `
