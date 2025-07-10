@@ -17,7 +17,11 @@ export function useCanvasRender(
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
+
     if (!canvas || !ctx || !dimensions.width || !dimensions.height) return
+
+    const computedStyles = getComputedStyle(document.documentElement)
+    const textColor = computedStyles.getPropertyValue('--color-text').trim()
 
     canvas.width = dimensions.width
     canvas.height = dimensions.height
@@ -25,7 +29,7 @@ export function useCanvasRender(
     ctx.clearRect(0, 0, dimensions.width, dimensions.height)
 
     ctx.font = '48px Nunito'
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = textColor
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
     ctx.fillText(
@@ -35,7 +39,7 @@ export function useCanvasRender(
     )
 
     ctx.font = '20px Nunito'
-    ctx.fillStyle = '#333'
+    ctx.fillStyle = textColor
     ctx.fillText(
       `${formatNumber(power)} / сек.`,
       dimensions.width / 2,
@@ -44,7 +48,7 @@ export function useCanvasRender(
 
     ctx.beginPath()
     ctx.arc(dimensions.width / 2, dimensions.height / 2, radius, 0, Math.PI * 2)
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = textColor
     ctx.fill()
   }, [canvasRef, dimensions, score, radius, power])
 }
