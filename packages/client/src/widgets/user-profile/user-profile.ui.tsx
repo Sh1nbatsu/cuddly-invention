@@ -5,7 +5,9 @@ import {
   Avatar,
 } from '@/shared/ui/user-profile/user-profile.styled'
 
-import dinoAvatar from '/dino-sticker.jpg'
+import { ThemeToggleButton } from '@/shared/ui/theme-toggle-button/theme-toggle-button'
+
+import dinoAvatar from '/pwa-192x192.png'
 
 export const UserProfileWidget = () => {
   return (
@@ -23,6 +25,7 @@ export const UserProfileWidget = () => {
         <p>В сети</p>
         <p>Арр-р!</p>
       </RightBlock>
+      <ThemeToggleButton />
     </Profile>
   )
 }
