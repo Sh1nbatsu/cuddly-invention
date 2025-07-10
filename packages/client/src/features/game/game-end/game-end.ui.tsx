@@ -4,7 +4,7 @@ import {
   StyledGameTitle,
   StyledGameWrapper,
 } from '@/entities/game/game.styled'
-import dinoSticker from '/dino-sticker.jpg'
+import dinoSticker from '/pwa-192x192.png'
 
 interface GameEndProps {
   visible: boolean
