@@ -5,7 +5,7 @@ export const UpgradeButton = styled.button<{ $canAfford: boolean }>`
   flex-direction: column;
   background: #fff;
   border: ${({ $canAfford }) =>
-    $canAfford ? '1px solid var(--color-primary)' : '1px dashed #ccc'};
+    $canAfford ? '1px solid var(--color-secondary)' : '1px dashed #ccc'};
   padding: 8px;
   border-radius: 6px;
   text-align: left;
@@ -34,8 +34,9 @@ export const StyledUpgradeSidebar = styled.div`
   width: 100%;
   max-height: -webkit-fill-available;
   padding: 12px;
-  border-right: 2px solid var(--color-primary);
+  border-right: 2px solid #ccc;
   overflow: auto;
+  color: #121212;
 `
 
 export const StyledUpgradesList = styled.div`

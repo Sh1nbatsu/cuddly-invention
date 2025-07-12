@@ -13,10 +13,10 @@ export const RightBlock = styled.div`
 `
 
 export const Avatar = styled.img`
-  max-width: 128px;
+  width: 128px;
   max-height: 128px;
   display: flex;
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--color-secondary);
   border-radius: 6px;
   padding: 8px;
   margin-bottom: 12px;

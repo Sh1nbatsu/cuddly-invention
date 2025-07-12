@@ -22,13 +22,13 @@ export const StyledButton = styled.button<StyledButtonProps>`
       background-color: white;
       padding: 8px 12px;
       border-radius: 4px;
-      border: 2px solid var(--color-primary);
-      box-shadow: 4px 4px var(--color-primary);
+      border: 2px solid var(--color-secondary);
+      box-shadow: 4px 4px var(--color-secondary);
       font-weight: 600;
 
       &:hover:not(:disabled) {
         transform: translate(2px, 2px);
-        box-shadow: 2px 2px var(--color-primary);
+        box-shadow: 2px 2px var(--color-secondary);
       }
     `}
 
@@ -37,7 +37,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
     $active &&
     css`
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px var(--color-primary);
+      box-shadow: 2px 2px var(--color-secondary);
     `}
 
   &:disabled {
