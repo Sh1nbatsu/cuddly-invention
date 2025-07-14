@@ -9,6 +9,8 @@ import {
   RepliesContainer,
 } from '../topic-card/topic-card.styled'
 import { formatDate } from '../topic-card/topic-card.utils'
+import { useState } from 'react'
+import { TopicCardCommentEmoji } from './topic-card-comment-emoji.ui'
 
 interface ForumCommentItemProps {
   comment: ForumComment
@@ -27,7 +29,7 @@ export const TopicCardComment: React.FC<ForumCommentItemProps> = ({
         <CommentDate>{formatDate(comment.date)}</CommentDate>
       </CommentHeader>
       <CommentContent>{comment.content}</CommentContent>
-
+      <TopicCardCommentEmoji commentId={comment.id} />
       {comment.children && comment.children.length > 0 && (
         <RepliesContainer>
           {comment.children.map(child => (
