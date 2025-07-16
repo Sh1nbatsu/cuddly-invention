@@ -8,11 +8,20 @@
 
 :root {
   --color-primary: #121212;
+  --color-secondary: #cccccc;
+  --color-text: #121212;
+  --color-background-primary: #ffffff;
+}
+
+[data-theme='dark'] {
+  --color-background-primary: #1e1e1e;
+  --color-text: #cccccc;
 }
 
 html,
 body {
   font-family: 'Nunito', monospace;
+  background: var(--color-background-primary);
 }
 
 h1 {
@@ -25,6 +34,12 @@ a {
 
 h2 {
   margin: 0;
+}
+
+h2,
+h4,
+p {
+  color: var(--color-text);
 }
 
 sup {

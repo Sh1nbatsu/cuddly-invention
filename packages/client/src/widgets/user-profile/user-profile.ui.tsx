@@ -13,6 +13,9 @@ import {
   UserId,
   UserName,
 } from './user-profile.styled'
+
+import { ThemeToggleButton } from '@/shared/ui/theme-toggle-button/theme-toggle-button'
+
 import dinoAvatar from '/dino-sticker.jpg'
 
 export const UserProfileWidget = () => {
@@ -55,6 +58,7 @@ export const UserProfileWidget = () => {
 
         <Bio>Арр-р! Люблю играть и побеждать!</Bio>
       </RightBlock>
+      <ThemeToggleButton />
     </Profile>
   )
 }

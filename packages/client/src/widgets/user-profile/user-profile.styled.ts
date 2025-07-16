@@ -42,6 +42,7 @@ export const UserName = styled.h2`
   display: flex;
   align-items: baseline;
   gap: 8px;
+  color: var(--color-primary);
 `
 
 export const UserId = styled.sup`
