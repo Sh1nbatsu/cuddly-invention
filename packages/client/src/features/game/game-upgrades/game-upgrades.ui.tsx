@@ -8,9 +8,10 @@ import {
   UpgradeCostText,
   UpgradeEffectText,
   UpgradeLevelText,
+  UpgradeNameText,
+  UpgradeInfoRow,
 } from '@/features/game/game-upgrades/game-upgrades.styled'
 import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
-import { formatNumber, getLevel } from '@/entities/game/model/game.lib'
 import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
 import { achievementService } from '@/notification/achievement-service'
 
@@ -23,8 +24,11 @@ interface SidebarUpgradesProps {
 
 const BUY_AMOUNTS = [1, 10, 100]
 
-function formatTwoDecimals(num: number): string {
-  return parseFloat(num.toFixed(2)).toString()
+const formatNumberSpaces = (num: number) => {
+  const [intPart, decPart] = num.toFixed(2).split('.')
+  const intFormatted = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  const decTrimmed = decPart.replace(/0+$/, '')
+  return decTrimmed ? `${intFormatted}.${decTrimmed}` : intFormatted
 }
 
 export const GameUpgradesSidebar = ({
@@ -57,7 +61,7 @@ export const GameUpgradesSidebar = ({
 
   return (
     <StyledUpgradeSidebar>
-      <h4 style={{ marginTop: 0 }}>Усиления</h4>
+      <h4 style={{ marginTop: 0, color: 'var(--color-text)' }}>Усиления</h4>
 
       <StyledUpgradeBuyButtonsContainer>
         {BUY_AMOUNTS.map(amount => (
@@ -75,9 +79,8 @@ export const GameUpgradesSidebar = ({
         {upgrades.map((upg, i) => {
           const isUnlocked =
             i === 0 || i <= lastPurchasedIndex || i === nextIndex
-          if (!isUnlocked) {
+          if (!isUnlocked)
             return <LockedUpgradeButton key={upg.id}>?</LockedUpgradeButton>
-          }
 
           const totalCost = getUpgradeTotalCost(
             upg.getCost,
@@ -86,17 +89,15 @@ export const GameUpgradesSidebar = ({
           )
           const canAfford = score >= totalCost
 
-          let effectText = ''
           let levelText = ''
+          let effectText = ''
           let effectActive = false
-
           if (upg.id.startsWith('autoclick_')) {
-            const level = getLevel(upg.amount)
-            levelText = `Уровень: ${level}`
-            const effectValue = getUpgradeTotalPower(upg.id)
-            const formattedEffectValue = formatTwoDecimals(effectValue)
-            effectText = `+${formattedEffectValue} / сек.`
-            if (upg.amount > 0) effectActive = true
+            levelText = `Уровень: ${upg.amount}`
+            effectText = `+${formatNumberSpaces(
+              getUpgradeTotalPower(upg.id)
+            )}/сек.`
+            effectActive = upg.amount > 0
           }
 
           return (
@@ -105,14 +106,18 @@ export const GameUpgradesSidebar = ({
               onClick={() => handleBuyUpgrade(upg.id, upg.name, upg.amount)}
               disabled={!canAfford}
               $canAfford={canAfford}>
-              <strong>
-                {upg.name} ({upg.amount})
-              </strong>
-              {levelText && <UpgradeLevelText>{levelText}</UpgradeLevelText>}
-              <UpgradeCostText>Цена: {formatNumber(totalCost)}</UpgradeCostText>
-              <UpgradeEffectText $active={effectActive}>
-                {effectText}
-              </UpgradeEffectText>
+              <UpgradeNameText>{upg.name}</UpgradeNameText>
+
+              <UpgradeInfoRow>
+                {levelText && <UpgradeLevelText>{levelText}</UpgradeLevelText>}
+                <UpgradeEffectText $active={effectActive}>
+                  {effectText}
+                </UpgradeEffectText>
+              </UpgradeInfoRow>
+
+              <UpgradeCostText>
+                Цена: {formatNumberSpaces(totalCost)}
+              </UpgradeCostText>
             </UpgradeButton>
           )
         })}

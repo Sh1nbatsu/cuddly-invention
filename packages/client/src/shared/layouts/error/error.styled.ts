@@ -7,7 +7,7 @@ export const PageContent = styled.div`
   padding: 2rem;
   width: 100%;
   height: calc(100vh - 148px);
-  max-width: 480px;
+  max-width: 50%;
   text-align: center;
   padding: 2rem;
   background: ${({ theme }) => theme.colors.backgroundBase};
@@ -15,4 +15,6 @@ export const PageContent = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.backgroundPrimary};
   box-shadow: 4px 4px ${({ theme }) => theme.colors.backgroundPrimary};
   font-weight: 600;
+  margin: 32px auto auto;
+  flex-direction: column;
 `
