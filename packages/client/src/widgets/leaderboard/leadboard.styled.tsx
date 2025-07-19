@@ -54,6 +54,7 @@ export const LeaderboardContainer = styled.div`
 
 export const LeaderboardTitle = styled(Title)`
   margin-bottom: 24px !important;
+  color: var(--color-text) !important;
 `
 
 export const LoadingWrapper = styled.div`

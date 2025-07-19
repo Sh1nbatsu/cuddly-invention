@@ -10,12 +10,17 @@
   --color-primary: #121212;
   --color-secondary: #cccccc;
   --color-text: #121212;
+  --color-text-secondary: #555555;
+  --color-positive: #007700;
   --color-background-primary: #ffffff;
 }
 
 [data-theme='dark'] {
-  --color-background-primary: #1e1e1e;
+  --color-secondary: #444444;
   --color-text: #cccccc;
+  --color-text-secondary: #888888;
+  --color-positive: #2ecc2e;
+  --color-background-primary: #1e1e1e;
 }
 
 html,
@@ -30,10 +35,6 @@ h1 {
 
 a {
   text-decoration: none;
-}
-
-h2 {
-  margin: 0;
 }
 
 h2,

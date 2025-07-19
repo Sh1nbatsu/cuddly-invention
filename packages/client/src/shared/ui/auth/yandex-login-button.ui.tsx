@@ -1,14 +1,8 @@
 import { memo } from 'react'
-import styled from 'styled-components'
 import { AuthSubmitButton } from '@/entities/session/session.styled'
 
 const CLIENT_ID = import.meta.env.VITE_YANDEX_CLIENT_ID as string
 const ORIGIN = window.location.origin
-
-const StyledAuthButton = styled(AuthSubmitButton)`
-  margin-top: 16px;
-  margin-bottom: 16px;
-`
 
 export const YandexLoginButton = memo(() => {
   function handleClick(): void {
@@ -23,12 +17,12 @@ export const YandexLoginButton = memo(() => {
   }
 
   return (
-    <StyledAuthButton
+    <AuthSubmitButton
       variant="outlined"
       htmlType="button"
       size="large"
       onClick={handleClick}>
       Войти через Яндекс
-    </StyledAuthButton>
+    </AuthSubmitButton>
   )
 })

@@ -7,11 +7,12 @@ import {
   RegisterOptions,
 } from 'react-hook-form'
 import { StyledFormItem } from './form-input.styled'
+import { ReactNode } from 'react'
 
 interface FormInputProps<TFieldValues extends FieldValues = FieldValues> {
   control: Control<TFieldValues>
   name: FieldPath<TFieldValues>
-  label?: string
+  label?: ReactNode
   rules?: RegisterOptions<TFieldValues>
   formItemProps?: Omit<FormItemProps, 'label' | 'help' | 'validateStatus'>
   inputProps?: React.ComponentProps<typeof Input>

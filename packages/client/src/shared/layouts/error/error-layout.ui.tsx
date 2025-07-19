@@ -23,16 +23,26 @@ export const ErrorLayout = ({ config }: ErrorLayoutProps) => {
 
   return (
     <PageContent>
-      <Typography.Title level={2}>{config.title}</Typography.Title>
-      <Typography.Paragraph>{config.message}</Typography.Paragraph>
+      <Typography.Title level={2} style={{ color: 'var(--color-text)' }}>
+        {config.title}
+      </Typography.Title>
+
+      <Typography.Paragraph style={{ color: 'var(--color-text)' }}>
+        {config.message}
+      </Typography.Paragraph>
+
       {config.showStatus && status != null && (
-        <Typography.Paragraph>
+        <Typography.Paragraph style={{ color: 'var(--color-text)' }}>
           Код ошибки: <strong>{status}</strong>
         </Typography.Paragraph>
       )}
+
       {config.showStatusText && statusText && (
-        <Typography.Text>{statusText}</Typography.Text>
+        <Typography.Text style={{ color: 'var(--color-text)' }}>
+          {statusText}
+        </Typography.Text>
       )}
+
       <CustomLink to="/" variant="retro">
         На главную
       </CustomLink>

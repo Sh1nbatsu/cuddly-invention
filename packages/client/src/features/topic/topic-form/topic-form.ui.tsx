@@ -2,6 +2,7 @@ import { TopicSchemaData } from '@/entities/topic/topic.types'
 import { FormInput } from '@/shared/ui/form-input/form-input.ui'
 import { Button } from 'antd'
 import { useFormContext } from 'react-hook-form'
+import { LabelStyle } from '@/entities/session/session.styled'
 
 interface TopicFormProps {
   onSubmit: (data: TopicSchemaData) => void
@@ -14,7 +15,7 @@ export const TopicForm = ({ onSubmit }: TopicFormProps) => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 mb-6">
       <FormInput
         name="title"
-        label="Заголовок"
+        label={<LabelStyle>Заголовок</LabelStyle>}
         control={control}
         inputProps={{
           placeholder: 'Введите заголовок топика',
@@ -22,7 +23,7 @@ export const TopicForm = ({ onSubmit }: TopicFormProps) => {
       />
       <FormInput
         name="description"
-        label="Описание"
+        label={<LabelStyle>Описание</LabelStyle>}
         control={control}
         inputProps={{
           placeholder: 'Введите описание топика',

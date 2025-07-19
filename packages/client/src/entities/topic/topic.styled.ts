@@ -22,6 +22,7 @@ export const TopActions = styled.div`
 
 export const StyledForumTitle = styled(Typography.Title)`
   margin-bottom: 24px !important;
+  color: var(--color-text) !important;
 `
 
 export const StyledForumPageContainer = styled(Layout.Content)`

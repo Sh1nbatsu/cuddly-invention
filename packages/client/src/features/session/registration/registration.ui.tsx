@@ -6,6 +6,7 @@ import {
   AuthSpace,
   AuthSubmitButton,
   AuthTitle,
+  LabelStyle,
 } from '@/entities/session/session.styled'
 import { RegisterFormData } from '@/entities/session/session.types'
 import { register } from '@/entities/user/model/user.thunk'
@@ -56,26 +57,45 @@ export const Registration = () => {
       <AuthForm layout="vertical" autoComplete="off" onFinish={onFinish}>
         <AuthTitle level={2}>Регистрация</AuthTitle>
 
-        <FormInput control={control} name="first_name" label="Имя" />
-        <FormInput control={control} name="second_name" label="Фамилия" />
-        <FormInput control={control} name="login" label="Логин" />
+        <FormInput
+          control={control}
+          name="first_name"
+          label={<LabelStyle>Имя</LabelStyle>}
+          inputProps={{ placeholder: 'Введите имя' }}
+        />
+        <FormInput
+          control={control}
+          name="second_name"
+          label={<LabelStyle>Фамилия</LabelStyle>}
+          inputProps={{ placeholder: 'Введите фамилию' }}
+        />
+        <FormInput
+          control={control}
+          name="login"
+          label={<LabelStyle>Логин</LabelStyle>}
+          inputProps={{ placeholder: 'Придумайте логин' }}
+        />
         <FormInput
           control={control}
           name="email"
-          label="Почта"
-          inputProps={{ type: 'email' }}
+          label={<LabelStyle>Почта</LabelStyle>}
+          inputProps={{ type: 'email', placeholder: 'example@mail.com' }}
         />
         <FormInput
           control={control}
           name="password"
-          label="Пароль"
-          inputProps={{ type: 'password', autoComplete: 'new-password' }}
+          label={<LabelStyle>Пароль</LabelStyle>}
+          inputProps={{
+            type: 'password',
+            autoComplete: 'new-password',
+            placeholder: 'Придумайте пароль',
+          }}
         />
         <FormInput
           control={control}
           name="phone"
-          label="Телефон"
-          inputProps={{ type: 'tel' }}
+          label={<LabelStyle>Телефон</LabelStyle>}
+          inputProps={{ type: 'tel', placeholder: '+7 (___) ___‑__‑__' }}
         />
 
         <AuthSubmitButton
@@ -85,6 +105,7 @@ export const Registration = () => {
           size="large">
           Зарегистрироваться
         </AuthSubmitButton>
+
         <YandexLoginButton />
 
         <AuthSpace direction="horizontal">
