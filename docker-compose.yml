@@ -13,7 +13,7 @@ services:
         condition: service_healthy
 
   postgres:
-    image: postgres:14
+    image: postgres:16
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_CONTAINER_PORT}'
     environment:

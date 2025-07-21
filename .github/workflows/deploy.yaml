@@ -18,6 +18,8 @@ jobs:
       DOCKER_HOST: ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Connect to docker
         run: | 
           export DOCKER_HOST=${DOCKER_HOST}
