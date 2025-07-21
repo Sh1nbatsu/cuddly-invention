@@ -18,7 +18,7 @@ jobs:
       - name: Log secret in console
         run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
       - name: Download Openssh and Git
-        run: apk add openssh-client git openssh
+        run: apt-get install openssh-client git openssh
       - name: Initialize SSH agent
         run: eval $(ssh-agent -s)
       - name: Add private SSH key
