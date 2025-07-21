@@ -22,7 +22,6 @@ jobs:
       # 1. Используем экшен для настройки SSH-агента.
       # Он сам запустит агент и добавит ваш ключ.
       - name: Connect to docker
-        uses: actions/checkout@v3
         run: | 
           export DOCKER_HOST=${DOCKER_HOST}
 
