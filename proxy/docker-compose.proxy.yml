@@ -1,0 +1,21 @@
+services:
+  proxy:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - nginx-conf.d:/etc/nginx/conf.d
+      - certbot-folder:/var/www/certbot/:ro
+      - letsencrypt-folder:/etc/letsencrypt/:ro
+    environment:
+      SSL_TEXT: "ssl http2"
+      SSL_CERTIFICATE_TEXT: "include common/ssl.conf;"
+
+volumes:
+  certbot-folder:
+  letsencrypt-folder:
+  nginx-conf.d:
