@@ -30,6 +30,7 @@ jobs:
       - name: Rebuild and deploy
         run: |
           cd ${{ github.workspace }}
+          ls -la
           docker compose -p dino-app pull
           docker compose -p dino-app up -d --force-recreate
         
