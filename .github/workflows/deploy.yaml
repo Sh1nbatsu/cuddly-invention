@@ -10,10 +10,12 @@ permissions:
   packages: write
 
 jobs:
-  deploy:
+  rebuild-and-deploy:
     runs-on: ubuntu-latest
     environment: deploy
 
     steps:
       - name: Log secret in console
         run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
+        run: export DOCKER_HOST=ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
+        run: docker ps
