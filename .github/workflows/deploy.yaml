@@ -1,7 +1,9 @@
 name: Deploy to virtual machine
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -13,5 +15,4 @@ jobs:
 
     steps:
       - name: Log secret in console
-        run: |
-          echo printenv
+    run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
