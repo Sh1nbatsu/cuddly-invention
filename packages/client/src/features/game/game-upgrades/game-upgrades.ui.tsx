@@ -14,6 +14,7 @@ import {
 import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
 import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
 import { achievementService } from '@/notification/achievement-service'
+import { useClient } from '@/shared/hooks/useClient'
 
 interface SidebarUpgradesProps {
   buyAmount: number
@@ -37,6 +38,7 @@ export const GameUpgradesSidebar = ({
   score,
   setScore,
 }: SidebarUpgradesProps) => {
+  useClient()
   const { upgrades, buyUpgrade, getUpgradeTotalCost, getUpgradeTotalPower } =
     useUpgradesContext()
 

@@ -36,7 +36,7 @@ export async function foundYandexUser(): Promise<void> {
 
     const yandexInfoResponse = (await res.json()) as YandexInfoResponse
 
-    const user: User = {
+    const user: Partial<User> = {
       id: Number(yandexInfoResponse.id),
       username:
         yandexInfoResponse.login ??
@@ -50,7 +50,7 @@ export async function foundYandexUser(): Promise<void> {
         : null,
     }
 
-    store.dispatch(setUser(user))
+    store.dispatch(setUser(user as User))
   } catch (err) {
     console.error(err)
     localStorage.removeItem('ya_token')

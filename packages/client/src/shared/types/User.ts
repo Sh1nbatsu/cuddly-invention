@@ -8,4 +8,5 @@ export type User = {
   phone: string
   avatar: string | null
   score: number
+  username: string
 }

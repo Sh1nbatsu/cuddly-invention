@@ -5,10 +5,25 @@ import { useEffect } from 'react'
 import { CustomLink } from '../custom-link/custom-link.ui'
 import { OfflineBadge } from '@/shared/ui/Header/header-offline-badge.ui'
 import { StyledHeader, StyledNav } from '@/shared/ui/Header/header.styled'
+import { useClient } from '@/shared/hooks/useClient'
+import { foundYandexUser } from '@/shared/hooks/found-yandex-user'
 
 export const Header = () => {
+  useClient()
   const user = useCurrentUser()
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const initializeAuth = async (): Promise<void> => {
+      try {
+        await foundYandexUser()
+      } catch (error) {
+        console.error('Ошибка инициализации пользователя Яндекс:', error)
+      }
+    }
+
+    initializeAuth()
+  }, [])
 
   useEffect(() => {
     if (!user?.id) {

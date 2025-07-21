@@ -9,8 +9,14 @@ import { useEffect } from 'react'
 import { MIN_RADIUS, TARGET_RADIUS } from '../game.constants'
 import { getClickGain } from '../game.lib'
 import { achievementService } from '@/notification/achievement-service'
+import { useClient } from '@/shared/hooks/useClient'
 
 type AnimateRadius = (from: number, to: number, duration: number) => void
+
+type UseClicklogicReturn = {
+  handleMouseDown: (e: MouseEvent<HTMLCanvasElement>) => void
+  handleMouseUp: () => void
+}
 
 export function useClickLogic(
   canvasRef: RefObject<HTMLCanvasElement>,
@@ -18,10 +24,8 @@ export function useClickLogic(
   setScore: Dispatch<SetStateAction<number>>,
   animateRadius: AnimateRadius,
   score: number
-): {
-  handleMouseDown: (e: MouseEvent<HTMLCanvasElement>) => void
-  handleMouseUp: () => void
-} {
+): UseClicklogicReturn {
+  useClient()
   useEffect(() => {
     achievementService.processScore(score)
   }, [score])
