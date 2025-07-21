@@ -6,12 +6,24 @@ on:
 jobs:
   deploy-proxy:
     runs-on: ubuntu-latest
+    environment: deploy
+
+    env:
+      DOCKER_HOST: ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
 
     steps:
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}
+
+      - name: Add host to known_hosts
+        run: ssh-keyscan -H ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Build proxy (init config)
