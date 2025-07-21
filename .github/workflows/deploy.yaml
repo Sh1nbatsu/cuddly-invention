@@ -15,4 +15,4 @@ jobs:
 
     steps:
       - name: Log secret in console
-        run: echo "Connecting to host ${{ secrets.VM_HOST }}"
+        run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
