@@ -28,8 +28,8 @@ jobs:
       - name: Add host to known_hosts
         run: ssh-keyscan -H ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
       - name: Rebuild and deploy
-        uses: actions/checkout@v3
         run: |
+          cd ..
           docker compose -p dino-app pull
           docker compose -p dino-app up -d --force-recreate
         
