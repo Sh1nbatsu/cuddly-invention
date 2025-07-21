@@ -17,5 +17,7 @@ jobs:
     steps:
       - name: Log secret in console
         run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
+      - name: Connect to Docker
         run: export DOCKER_HOST=ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
+      - name: Check connection to docker
         run: docker ps
