@@ -29,7 +29,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
       - name: Rebuild and deploy
         run: |
-          cd ..
-          docker compose -p dino-app pull
+          cd ${{ github.workspace }}
+          docker compose --p dino-app pull
           docker compose -p dino-app up -d --force-recreate
         
