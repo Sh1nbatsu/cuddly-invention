@@ -3,25 +3,22 @@ import { PageWrapper } from '@/shared/ui/page-wrapper/page-wrapper.ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-
 import { LoginSchema } from '@/entities/session/session.contract'
 import {
-  AuthFooterText,
   AuthForm,
+  AuthFooterText,
   AuthLink,
   AuthSpace,
   AuthSubmitButton,
   AuthTitle,
+  LabelStyle,
 } from '@/entities/session/session.styled'
 import { LoginFormData } from '@/entities/session/session.types'
 import { login } from '@/entities/user/model/user.thunk'
 import { YandexLoginButton } from '@/shared/ui/auth/yandex-login-button.ui'
 import { useAppDispatch } from '@/providers/store/store.hooks'
 
-const DEFAULT_VALUES = {
-  login: '',
-  password: '',
-}
+const DEFAULT_VALUES = { login: '', password: '' }
 
 export const Login = () => {
   const {
@@ -36,13 +33,10 @@ export const Login = () => {
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+
   const onSubmit = async (data: LoginFormData) => {
-    try {
-      await dispatch(login(data))
-      navigate('/')
-    } catch (error) {
-      console.error('Произошла ошибка:', error)
-    }
+    await dispatch(login(data))
+    navigate('/')
   }
 
   const onFinish = async () => {
@@ -53,23 +47,29 @@ export const Login = () => {
     <PageWrapper>
       <AuthForm onFinish={onFinish} layout="vertical" autoComplete="off">
         <AuthTitle level={2}>Вход</AuthTitle>
-        <FormInput control={control} name="login" label="Логин" />
+
+        <FormInput
+          control={control}
+          name="login"
+          label={<LabelStyle>Логин</LabelStyle>}
+          inputProps={{ placeholder: 'Введите логин' }}
+        />
+
         <FormInput
           control={control}
           name="password"
-          label="Пароль"
+          label={<LabelStyle>Пароль</LabelStyle>}
           inputProps={{
             type: 'password',
             autoComplete: 'new-password',
+            placeholder: 'Введите пароль',
           }}
         />
-        <AuthSubmitButton
-          variant="outlined"
-          htmlType="submit"
-          disabled={!isValid}
-          size="large">
+
+        <AuthSubmitButton htmlType="submit" disabled={!isValid} size="large">
           Войти
         </AuthSubmitButton>
+
         <YandexLoginButton />
 
         <AuthSpace direction="horizontal">
