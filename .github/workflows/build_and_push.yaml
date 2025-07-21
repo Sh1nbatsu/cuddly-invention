@@ -1,10 +1,11 @@
 name: Push to GitHub Container Registry
 
 on:
-  push:
-    branches:
-      - main
-      - cloud
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   build-and-push:
