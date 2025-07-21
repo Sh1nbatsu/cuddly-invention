@@ -12,7 +12,8 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: deploy
 
     steps:
       - name: Log secret in console
-        run: echo "Connecting to host ${{ deploy.PRODUCTION_PRIVATE_SSH_KEY }}"
+        run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
