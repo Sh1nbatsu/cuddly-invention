@@ -1,0 +1,36 @@
+name: Deploy Proxy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-proxy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build proxy (init config)
+        run: docker compose -f proxy/docker-compose.proxy.init.yml build --no-cache proxy
+
+      - name: Run proxy (init config)
+        run: docker compose -f proxy/docker-compose.proxy.init.yml up -d --force-recreate proxy
+
+      - name: Wait for proxy to be ready
+        run: sleep 60
+
+      - name: Make obtain-cert.sh executable
+        run: chmod +x proxy/obtain-cert.sh
+
+      - name: Obtain SSL certificate
+        run: ./proxy/obtain-cert.sh
+
+      - name: Build proxy (production config)
+        run: docker compose -f proxy/docker-compose.proxy.yml build --no-cache
+
+      - name: Run proxy (production config)
+        run: docker compose -f proxy/docker-compose.proxy.yml up -d --force-recreate
