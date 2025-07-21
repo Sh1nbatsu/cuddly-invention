@@ -15,8 +15,8 @@ jobs:
     environment: deploy
 
     steps:
-      - name: Log secret in console
-        run: echo "Connecting to host ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}"
+      - name: Connect to Docker
+        run: export DOCKER_HOST=ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
       - name: Download Openssh and Git
         run: sudo apt-get install openssh-client git
       - name: Initialize SSH agent
@@ -31,8 +31,6 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-      - name: Connect to Docker
-        run: export DOCKER_HOST=ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
       - name: Check connection to docker
         run: docker ps
 # 1 Скачать open ssh и гит
