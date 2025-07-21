@@ -1,12 +1,11 @@
-import { routerConfig } from '@/providers/router/router.config'
+import { routes } from '@/providers/router/router.routes'
 import { store } from '@/providers/store/store'
-import { antdTheme, styledTheme } from '@/shared/themes/defaultTheme'
 import { ConfigProvider } from 'antd'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider as ReduxProvider } from 'react-redux'
-import { RouterProvider } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ThemeProviderCustom } from '@/shared/themes/themeContext'
 
 import 'antd/dist/reset.css'
 
@@ -17,15 +16,29 @@ if (import.meta.env.PROD) {
   registerServiceWorker()
 }
 
+const browserRouter = createBrowserRouter(routes)
+
+const App = () => {
+  return (
+    <ConfigProvider>
+      <RouterProvider router={browserRouter} />
+    </ConfigProvider>
+  )
+}
+
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+  throw new Error('rootElement не найден.')
+}
+
 ReactDOM.hydrateRoot(
-  document.getElementById('root')!,
+  rootElement,
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <ConfigProvider theme={antdTheme}>
-        <ThemeProvider theme={styledTheme}>
-          <RouterProvider router={routerConfig} />
-        </ThemeProvider>
-      </ConfigProvider>
+      <ThemeProviderCustom>
+        <App />
+      </ThemeProviderCustom>
     </ReduxProvider>
   </React.StrictMode>
 )

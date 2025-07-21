@@ -1,4 +1,4 @@
-import { api } from '@/shared/libs/axios'
+import { api, apiAuth } from '@/shared/libs/axios'
 import { User } from '@/shared/types/User'
 import { LoginFormData, RegisterFormData } from './session.types'
 
@@ -7,11 +7,11 @@ type RegisterData = (data: RegisterFormData) => Promise<User>
 type GetMe = () => Promise<User>
 
 export const loginUserApi: LoginData = data =>
-  api.post('/auth/signin', data).then(res => res.data)
+  apiAuth.post('/sign-in', data).then(res => res.data)
 
 export const registerUserApi: RegisterData = data =>
-  api.post('/auth/signup', data).then(res => res.data)
+  apiAuth.post('/sign-up', data).then(res => res.data)
 
-export const getMeApi: GetMe = () => api.get('/auth/user')
+export const logoutUserApi = () => apiAuth.post('/logout')
 
-export const logoutUserApi = () => api.post('/auth/logout')
+export const getMeApi: GetMe = () => api.get('/users/me')

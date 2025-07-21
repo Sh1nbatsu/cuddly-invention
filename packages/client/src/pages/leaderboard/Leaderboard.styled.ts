@@ -1,6 +1,5 @@
-import styled from 'styled-components'
 import { CustomButton as RetroButton } from '@/shared/ui/custom-button/custom-button.ui'
-import { Avatar } from 'antd'
+import styled from 'styled-components'
 
 export const CustomButton = styled(RetroButton)`
   &&& {
@@ -18,7 +17,8 @@ export const ScrollableDiv = styled.div`
   overflow: auto;
   padding: 0 16px;
   border: 1px solid rgba(140, 140, 140, 0.35);
-  width: 33vw;
+  max-width: 100%;
+  width: 100%;
 `
 
 export const NavigationDiv = styled.div`
@@ -30,7 +30,8 @@ export const NavigationDiv = styled.div`
 
 export const CustomWrapper = styled.div`
   display: flex;
-  padding: 16px !important;
+  padding: 16px;
+  height: 90vh;
 `
 
 export const CustomTitle = styled.p`

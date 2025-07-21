@@ -1,6 +1,5 @@
+import { Card, Layout, Typography } from 'antd'
 import styled from 'styled-components'
-import { Layout, Card } from 'antd'
-
 const { Content } = Layout
 
 export const PageContainer = styled(Content)`
@@ -19,4 +18,16 @@ export const TopActions = styled.div`
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
+`
+
+export const StyledForumTitle = styled(Typography.Title)`
+  margin-bottom: 24px !important;
+  color: var(--color-text) !important;
+`
+
+export const StyledForumPageContainer = styled(Layout.Content)`
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
 `

@@ -3,3 +3,5 @@ node_modules
 .gitignore
 Dockerfile
 README.md
+dist
+docker-compose.cloud.yml

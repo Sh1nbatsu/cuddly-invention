@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from 'react'
-
 import {
   LockedUpgradeButton,
   StyledUpgradeBuyButtonsContainer,
@@ -9,11 +8,12 @@ import {
   UpgradeCostText,
   UpgradeEffectText,
   UpgradeLevelText,
+  UpgradeNameText,
+  UpgradeInfoRow,
 } from '@/features/game/game-upgrades/game-upgrades.styled'
-
 import { useUpgradesContext } from '@/entities/game/game-upgrades/game-upgrades.context'
-import { formatNumber, getLevel } from '@/entities/game/model/game.lib'
 import { CustomButton } from '@/shared/ui/custom-button/custom-button.ui'
+import { achievementService } from '@/notification/achievement-service'
 
 interface SidebarUpgradesProps {
   buyAmount: number
@@ -24,8 +24,11 @@ interface SidebarUpgradesProps {
 
 const BUY_AMOUNTS = [1, 10, 100]
 
-function formatTwoDecimals(num: number): string {
-  return parseFloat(num.toFixed(2)).toString()
+const formatNumberSpaces = (num: number) => {
+  const [intPart, decPart] = num.toFixed(2).split('.')
+  const intFormatted = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  const decTrimmed = decPart.replace(/0+$/, '')
+  return decTrimmed ? `${intFormatted}.${decTrimmed}` : intFormatted
 }
 
 export const GameUpgradesSidebar = ({
@@ -41,12 +44,24 @@ export const GameUpgradesSidebar = ({
     (max, upg, i) => (upg.amount > 0 && i > max ? i : max),
     -1
   )
-
   const nextIndex = lastPurchasedIndex + 1
+
+  const handleBuyUpgrade = (
+    upgradeId: string,
+    upgradeName: string,
+    prevAmount: number
+  ) => {
+    buyUpgrade(upgradeId, score, setScore, buyAmount)
+    achievementService.processPurchase(
+      upgradeId,
+      upgradeName,
+      prevAmount + buyAmount
+    )
+  }
 
   return (
     <StyledUpgradeSidebar>
-      <h4 style={{ marginTop: 0 }}>Усиления</h4>
+      <h4 style={{ marginTop: 0, color: 'var(--color-text)' }}>Усиления</h4>
 
       <StyledUpgradeBuyButtonsContainer>
         {BUY_AMOUNTS.map(amount => (
@@ -64,10 +79,8 @@ export const GameUpgradesSidebar = ({
         {upgrades.map((upg, i) => {
           const isUnlocked =
             i === 0 || i <= lastPurchasedIndex || i === nextIndex
-
-          if (!isUnlocked) {
+          if (!isUnlocked)
             return <LockedUpgradeButton key={upg.id}>?</LockedUpgradeButton>
-          }
 
           const totalCost = getUpgradeTotalCost(
             upg.getCost,
@@ -76,36 +89,35 @@ export const GameUpgradesSidebar = ({
           )
           const canAfford = score >= totalCost
 
-          let effectText = ''
           let levelText = ''
+          let effectText = ''
           let effectActive = false
-
           if (upg.id.startsWith('autoclick_')) {
-            const level = getLevel(upg.amount)
-            levelText = `Уровень: ${level}`
-
-            const effectValue = getUpgradeTotalPower(upg.id)
-            const formattedEffectValue = formatTwoDecimals(effectValue)
-            effectText = `+${formattedEffectValue} / сек.`
-            if (upg.amount > 0) effectActive = true
+            levelText = `Уровень: ${upg.amount}`
+            effectText = `+${formatNumberSpaces(
+              getUpgradeTotalPower(upg.id)
+            )}/сек.`
+            effectActive = upg.amount > 0
           }
 
           return (
             <UpgradeButton
               key={upg.id}
-              onClick={() => buyUpgrade(upg.id, score, setScore, buyAmount)}
+              onClick={() => handleBuyUpgrade(upg.id, upg.name, upg.amount)}
               disabled={!canAfford}
               $canAfford={canAfford}>
-              <div>
-                <strong>
-                  {upg.name} ({upg.amount})
-                </strong>
-              </div>
-              {levelText && <UpgradeLevelText>{levelText}</UpgradeLevelText>}
-              <UpgradeCostText>Цена: {formatNumber(totalCost)}</UpgradeCostText>
-              <UpgradeEffectText $active={effectActive}>
-                {effectText}
-              </UpgradeEffectText>
+              <UpgradeNameText>{upg.name}</UpgradeNameText>
+
+              <UpgradeInfoRow>
+                {levelText && <UpgradeLevelText>{levelText}</UpgradeLevelText>}
+                <UpgradeEffectText $active={effectActive}>
+                  {effectText}
+                </UpgradeEffectText>
+              </UpgradeInfoRow>
+
+              <UpgradeCostText>
+                Цена: {formatNumberSpaces(totalCost)}
+              </UpgradeCostText>
             </UpgradeButton>
           )
         })}

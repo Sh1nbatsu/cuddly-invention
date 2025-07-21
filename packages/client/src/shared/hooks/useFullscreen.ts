@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export const useFullscreen = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
-
   const toggleFullscreen = useCallback(() => {
     if (document.fullscreenElement) {
       document.exitFullscreen()
@@ -23,7 +22,6 @@ export const useFullscreen = () => {
 
   const handleCombination = (event: KeyboardEvent) => {
     if ((event.key === 'F' || event.key === 'f') && event.shiftKey) {
-      console.log('pressed')
       toggleFullscreen()
     }
   }

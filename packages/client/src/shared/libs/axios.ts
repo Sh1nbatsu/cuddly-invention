@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ya-praktikum.tech/api/v2'
+export const BASE_URL = 'http://localhost:3001/api'
+const BASE_AUTH_URL = 'http://localhost:3001/auth'
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -12,6 +13,22 @@ export const api = axios.create({
     'X-Requested-With': 'XMLHttpRequest',
   },
 })
+
+export const apiAuth = axios.create({
+  baseURL: BASE_AUTH_URL,
+  timeout: 5000,
+  withCredentials: true,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+  },
+})
+
+apiAuth.interceptors.response.use(
+  response => response.data,
+  error => Promise.reject(error)
+)
 
 api.interceptors.response.use(
   response => response.data,

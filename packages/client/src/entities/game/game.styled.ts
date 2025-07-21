@@ -46,6 +46,7 @@ export const StyledGameTitle = styled(Typography.Title)`
     cursor: pointer;
     font-family: 'PressStart2P', monospace;
     font-size: 16px;
+    color: var(--color-text);
   }
 `
 

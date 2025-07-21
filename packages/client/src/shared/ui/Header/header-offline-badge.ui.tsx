@@ -1,6 +1,6 @@
 import { useOnline } from '@/shared/hooks/useOnline'
 import { Popover } from 'antd'
-import { StyledBadge, StyledBadgeIcon } from './header.styled'
+import { StyledBadge, StyledBadgeIcon } from '@/shared/ui/Header/header.styled'
 
 export const OfflineBadge = () => {
   const { isOnline } = useOnline()

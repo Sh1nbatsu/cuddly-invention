@@ -1,6 +1,5 @@
-/* TODO: Нужно будет тоже скачать по примеру с press-start. */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import url('./fonts/press-start.css');
+@import url('./fonts/nunito.css');
 
 * {
   margin: 0;
@@ -9,13 +8,42 @@
 
 :root {
   --color-primary: #121212;
+  --color-secondary: #cccccc;
+  --color-text: #121212;
+  --color-text-secondary: #555555;
+  --color-positive: #007700;
+  --color-background-primary: #ffffff;
+}
+
+[data-theme='dark'] {
+  --color-secondary: #444444;
+  --color-text: #cccccc;
+  --color-text-secondary: #888888;
+  --color-positive: #2ecc2e;
+  --color-background-primary: #1e1e1e;
 }
 
 html,
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', monospace;
+  background: var(--color-background-primary);
+}
+
+h1 {
+  font-family: 'PressStart2P', monospace;
 }
 
 a {
   text-decoration: none;
+}
+
+h2,
+h4,
+p {
+  color: var(--color-text);
+}
+
+sup {
+  font-size: 14px;
+  filter: opacity(0.8);
 }

@@ -1,19 +1,37 @@
-import { useForumLogic } from '@/entities/forum/forum.hooks'
+import { createTopic } from '@/entities/topic/topic.api'
+import { useTopics } from '@/entities/topic/topic.context'
+import { TopicSchema } from '@/entities/topic/topic.contract'
 import {
   StyledForumPageContainer,
   StyledForumTitle,
-} from '@/entities/forum/forum.styled'
-import { ForumCard } from '@/features/forum/forum-card/forum-card.ui'
-import { ForumList } from '@/features/forum/forum-list/forum-list.ui'
+} from '@/entities/topic/topic.styled'
+import { TopicSchemaData } from '@/entities/topic/topic.types'
+import { TopicForm } from '@/features/topic/topic-form/topic-form.ui'
+import { TopicList } from '@/features/topic/topic-list/topic-list.ui'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormProvider, useForm } from 'react-hook-form'
 
 export const ForumWidget = () => {
-  const { data } = useForumLogic()
+  const methods = useForm<TopicSchemaData>({
+    mode: 'onSubmit',
+    resolver: zodResolver(TopicSchema),
+  })
+
+  const { refetchTopics } = useTopics()
+
+  const onSubmit = async (data: TopicSchemaData) => {
+    await createTopic(data)
+    await refetchTopics()
+    methods.reset()
+  }
 
   return (
-    <StyledForumPageContainer>
-      <StyledForumTitle level={2}>Форум</StyledForumTitle>
-      <ForumList dataSource={data} />
-      <ForumCard />
-    </StyledForumPageContainer>
+    <FormProvider {...methods}>
+      <StyledForumPageContainer>
+        <StyledForumTitle level={2}>Форум</StyledForumTitle>
+        <TopicForm onSubmit={onSubmit} />
+        <TopicList />
+      </StyledForumPageContainer>
+    </FormProvider>
   )
 }

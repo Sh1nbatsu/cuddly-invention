@@ -13,7 +13,6 @@ export const StyledLink = styled(Link)<StyledLinkProps>`
   color: var(--color-primary);
   text-decoration: none;
   cursor: pointer;
-  font-family: 'PressStart2P', monospace;
   transition: all 0.2s ease;
   user-select: none;
 
@@ -23,22 +22,22 @@ export const StyledLink = styled(Link)<StyledLinkProps>`
       background-color: white;
       padding: 8px 12px;
       border-radius: 4px;
-      border: 2px solid var(--color-primary);
-      box-shadow: 4px 4px var(--color-primary);
+      border: 2px solid var(--color-secondary);
+      box-shadow: 4px 4px var(--color-secondary);
       font-weight: 600;
       display: inline-block;
 
       &:hover {
         transform: translate(2px, 2px);
-        box-shadow: 2px 2px var(--color-primary);
+        box-shadow: 2px 2px var(--color-secondary);
       }
     `}
 
   ${({ $active }) =>
     $active &&
     css`
-      font-weight: bold;
-      text-decoration: underline;
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px var(--color-secondary);
     `}
 
   ${({ $disabled }) =>

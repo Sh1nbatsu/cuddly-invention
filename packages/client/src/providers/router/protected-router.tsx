@@ -1,20 +1,40 @@
 import { useCurrentUser } from '@/shared/hooks/useCurrentUser'
-import { ReactElement } from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
-import { RouterLoader } from './router-loader'
+import { Button, Space, Typography } from 'antd'
+import { Link, useLocation } from 'react-router-dom'
 
-interface Props {
-  children: ReactElement
+const { Title, Text } = Typography
+
+type Props = {
+  children: React.ReactElement
 }
 
 export const ProtectedRoute = ({ children }: Props) => {
-  const { user, loading } = useCurrentUser()
-
+  const user = useCurrentUser()
   const location = useLocation()
 
-  if (loading) return <RouterLoader />
-  if (!user)
-    return <Navigate to="/sign-in" state={{ from: location }} replace />
+  if (!user?.id) {
+    return (
+      <div
+        style={{
+          minHeight: '60vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          padding: '2rem',
+        }}>
+        <Space direction="vertical" size="large">
+          <Title level={3}>Доступ ограничен</Title>
+          <Text>Чтобы увидеть содержимое страницы, войдите в аккаунт.</Text>
+          <Link to="/sign-in" state={{ from: location }}>
+            <Button type="primary" size="large">
+              Войти
+            </Button>
+          </Link>
+        </Space>
+      </div>
+    )
+  }
 
   return children
 }

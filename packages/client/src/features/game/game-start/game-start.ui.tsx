@@ -4,7 +4,7 @@ import {
   StyledGameWrapper,
 } from '@/entities/game/game.styled'
 import { useGame } from '@/entities/game/model/hooks/useGame'
-import dinoSticker from '/dino-sticker.jpg'
+import dinoSticker from '/pwa-192x192.png'
 
 interface GameStartProps {
   visible: boolean

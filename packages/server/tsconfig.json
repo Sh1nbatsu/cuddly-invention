@@ -10,8 +10,11 @@
     "declarationMap": true,
     "removeComments": true,
     "strict": true,
+    "skipLibCheck": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": true,
@@ -21,7 +24,8 @@
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {
-      "*": ["types/*"]
+      "api/*": ["api/*"],
+      "@db/*": ["api/db/*"]
     },
     "outDir": "dist"
   }

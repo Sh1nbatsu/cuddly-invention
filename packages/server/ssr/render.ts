@@ -16,13 +16,24 @@ export async function setupSSR(app: express.Express, clientPath: string) {
 
     app.use(vite.middlewares)
   } else {
+    const distPath = path.resolve(clientPath, 'dist/client')
+    app.use(express.static(distPath))
+
     app.get('*', async (req: Request, res: Response, next: NextFunction) => {
+      if (
+        req.originalUrl.startsWith('/api') ||
+        req.originalUrl.startsWith('/auth') ||
+        req.originalUrl.includes('.')
+      ) {
+        return next()
+      }
+
       const url = req.originalUrl
 
       try {
         let template: string
         // Типизации для функции packages/client/src/entries/entry-server.tsx
-        let render: () => Promise<{
+        let render: (req: Request) => Promise<{
           appHtml: string
           styleTags: string
           helmet: HelmetData
@@ -46,15 +57,15 @@ export async function setupSSR(app: express.Express, clientPath: string) {
             'utf-8'
           )
 
-          const pathToServer = path.join(
+          const pathToServer = path.resolve(
             clientPath,
-            'dist/server/entry-server.js'
+            'dist/server/entry-server.cjs'
           )
 
           render = (await import(pathToServer)).render
         }
 
-        const { appHtml, styleTags, helmet } = await render()
+        const { appHtml, styleTags, helmet } = await render(req)
 
         const html = template
           .replace(`<!--ssr-outlet-->`, appHtml)

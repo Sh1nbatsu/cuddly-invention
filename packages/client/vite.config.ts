@@ -9,6 +9,14 @@ dotenv.config()
 export default defineConfig({
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
+    host: '0.0.0.0',
+    watch: {
+      usePolling: true,
+    },
+    hmr: {
+      host: 'localhost',
+      port: Number(process.env.CLIENT_PORT) || 3000,
+    },
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
@@ -31,6 +39,7 @@ export default defineConfig({
       strategies: 'injectManifest',
       srcDir: 'src/sw',
       filename: 'sw.ts',
+      injectRegister: null,
       manifest: {
         name: 'My Custom PWA',
         short_name: 'CustomPWA',
