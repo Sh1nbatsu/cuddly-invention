@@ -1,0 +1,17 @@
+name: Deploy to virtual machine
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Log secret in console
+        run: |
+          echo printenv
