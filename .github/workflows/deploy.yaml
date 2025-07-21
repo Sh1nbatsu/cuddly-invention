@@ -25,12 +25,12 @@ jobs:
         run: echo "${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}" >> /tmp/id_rsa
       - name: Set permissions for SSH key
         run: |
-          - chmod 600 /tmp/id_rsa
-          - ssh-add /tmp/id_rsa || { echo "Failed to add SSH key"; cat /tmp/id_rsa; exit 1; }
-          - mkdir -p ~/.ssh
-          - chmod 700 ~/.ssh
-          - ssh-keyscan ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
-          - chmod 644 ~/.ssh/known_hosts
+          chmod 600 /tmp/id_rsa
+          ssh-add /tmp/id_rsa || { echo "Failed to add SSH key"; cat /tmp/id_rsa; exit 1; }
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
       - name: Connect to Docker
         run: export DOCKER_HOST=ssh://${{ secrets.VM_USERNAME }}@${{ secrets.PRODUCTION_HOST }}
       - name: Check connection to docker
