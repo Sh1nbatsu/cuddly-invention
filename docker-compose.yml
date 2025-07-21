@@ -1,9 +1,7 @@
 services:
   server:
     container_name: prakticum-app
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/sh1nbatsu/cuddly-invention/server:latest
     restart: always
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'

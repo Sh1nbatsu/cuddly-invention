@@ -1,9 +1,7 @@
 name: Deploy to virtual machine
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 permissions:
   contents: read
@@ -27,8 +25,10 @@ jobs:
           ssh-private-key: ${{ secrets.PRODUCTION_PRIVATE_SSH_KEY }}
       - name: Add host to known_hosts
         run: ssh-keyscan -H ${{ secrets.PRODUCTION_HOST }} >> ~/.ssh/known_hosts
-      - name: Rebuild and deploy
-        run: |
-          docker compose -p dino-app pull
-          docker compose -p dino-app up -d --force-recreate
-        
+      - name: Check connection to Docker
+        run: docker ps
+      # - name: Rebuild and deploy
+        # run: |
+        #   docker compose pull
+        #   docker compose up -d --build
+        #   exit
