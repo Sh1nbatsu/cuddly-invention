@@ -17,8 +17,11 @@ services:
 
 volumes:
   certbot-folder:
+    external: true
   letsencrypt-folder:
+    external: true
   nginx-conf.d:
+    external: true
 
 networks:
   default:
