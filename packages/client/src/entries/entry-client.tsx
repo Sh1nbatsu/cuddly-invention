@@ -6,14 +6,15 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider as ReduxProvider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { registerServiceWorker } from '@/sw/register'
 
 import 'antd/dist/reset.css'
 
 import '../shared/assets/global.css'
 
-// if (import.meta.env.PROD) {
-//   registerServiceWorker()
-// }
+if (import.meta.env.PROD) {
+  registerServiceWorker()
+}
 
 const browserRouter = createBrowserRouter(routes)
 
