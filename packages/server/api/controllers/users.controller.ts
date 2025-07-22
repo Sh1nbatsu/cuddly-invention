@@ -9,6 +9,7 @@ export const getCurrentUser = async (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('Trying to get current user')
   try {
     // @ts-ignore TODO:
     if (!req.user) {
