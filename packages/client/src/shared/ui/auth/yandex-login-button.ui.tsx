@@ -1,10 +1,11 @@
-import { memo } from 'react'
 import { AuthSubmitButton } from '@/entities/session/session.styled'
+import { useClient } from '@/shared/hooks/useClient'
 
 const CLIENT_ID = import.meta.env.VITE_YANDEX_CLIENT_ID as string
 const ORIGIN = window.location.origin
 
-export const YandexLoginButton = memo(() => {
+export const YandexLoginButton = () => {
+  useClient()
   function handleClick(): void {
     const params = new URLSearchParams({
       response_type: 'token',
@@ -25,4 +26,4 @@ export const YandexLoginButton = memo(() => {
       Войти через Яндекс
     </AuthSubmitButton>
   )
-})
+}

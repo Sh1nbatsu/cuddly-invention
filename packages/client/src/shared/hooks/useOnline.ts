@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useClient } from './useClient'
 
 export const useOnline = () => {
+  useClient()
   const [isOnline, setIsOnline] = useState(navigator.onLine)
 
   useEffect(() => {
