@@ -1,7 +1,14 @@
 import axios from 'axios'
 
-export const BASE_URL = 'http://localhost:3001/api'
-const BASE_AUTH_URL = 'http://localhost:3001/auth'
+const isDev = import.meta.env.DEV || process.env.NODE_ENV === 'development'
+
+export const BASE_URL = isDev
+  ? 'http://localhost:3001/api'
+  : 'https://titleisundefined.ya-praktikum.tech/api'
+
+const BASE_AUTH_URL = isDev
+  ? 'http://localhost:3001/auth'
+  : 'https://titleisundefined.ya-praktikum.tech/auth'
 
 export const api = axios.create({
   baseURL: BASE_URL,
