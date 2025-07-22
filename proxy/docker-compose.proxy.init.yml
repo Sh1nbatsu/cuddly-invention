@@ -22,8 +22,11 @@ services:
 
 volumes:
   certbot-folder:
+    name: game-certbot-folder
   letsencrypt-folder:
+    name: game-letsencrypt-folder
   nginx-conf.d:
+    name: game-nginx-conf.d-folder
 
 networks:
   default:

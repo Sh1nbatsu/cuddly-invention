@@ -18,10 +18,13 @@ services:
 volumes:
   certbot-folder:
     external: true
+    name: game-certbot-folder
   letsencrypt-folder:
     external: true
+    name: game-letsencrypt-folder
   nginx-conf.d:
     external: true
+    name: game-nginx-conf.d-folder
 
 networks:
   default:
