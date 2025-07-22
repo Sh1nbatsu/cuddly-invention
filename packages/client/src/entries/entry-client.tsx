@@ -1,20 +1,19 @@
 import { routes } from '@/providers/router/router.routes'
 import { store } from '@/providers/store/store'
+import { ThemeProviderCustom } from '@/shared/themes/themeContext'
 import { ConfigProvider } from 'antd'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider as ReduxProvider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { ThemeProviderCustom } from '@/shared/themes/themeContext'
 
 import 'antd/dist/reset.css'
 
-import { registerServiceWorker } from '@/sw/register'
 import '../shared/assets/global.css'
 
-if (import.meta.env.PROD) {
-  registerServiceWorker()
-}
+// if (import.meta.env.PROD) {
+//   registerServiceWorker()
+// }
 
 const browserRouter = createBrowserRouter(routes)
 
