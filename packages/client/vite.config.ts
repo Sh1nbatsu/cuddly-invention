@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import path from 'path'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
-import ssr from 'vite-plugin-ssr/plugin'
 
 dotenv.config()
 
@@ -35,7 +34,6 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    ssr(),
     VitePWA({
       registerType: 'prompt',
       strategies: 'injectManifest',
