@@ -30,7 +30,6 @@ export async function render(req: ExpressRequest) {
   const sheet = new ServerStyleSheet()
   const helmetContext = {}
 
-  console.log({ context, dataRoutes, router })
   try {
     const appHtml = ReactDOMServer.renderToString(
       sheet.collectStyles(

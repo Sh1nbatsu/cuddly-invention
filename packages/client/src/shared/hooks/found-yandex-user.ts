@@ -1,11 +1,11 @@
-import { store } from '@/providers/store/store'
 import { setUser } from '@/entities/user/model/user.slice'
+import { store } from '@/providers/store/store'
 import { User } from '@/shared/types/User'
 import { YandexInfoResponse } from '@/shared/types/YandexInfoResponse'
 
 export async function foundYandexUser(): Promise<void> {
   let token: string | null = localStorage.getItem('ya_token')
-
+  if (typeof window === 'undefined') return
   if (window.location.hash.startsWith('#')) {
     const hashParams = new URLSearchParams(window.location.hash.slice(1))
     const yandexAccessToken = hashParams.get('access_token')

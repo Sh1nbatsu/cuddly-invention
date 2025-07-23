@@ -1,10 +1,10 @@
+import { notificationService } from '@/notification/notification-service'
 import {
+  PURCHASE_THRESHOLDS,
   SCORE_MILESTONES,
   generateAchievementMessage,
-  PURCHASE_THRESHOLDS,
   generatePurchaseAchievementMessage,
 } from '../entities/achievements'
-import { notificationService } from '@/notification/notification-service'
 
 type AchievementId = `score-${number}` | `purchase-${string}-${number}`
 
@@ -38,6 +38,7 @@ class AchievementService {
   }
 
   public processScore(score: number): void {
+    if (typeof window === 'undefined') return
     for (const threshold of SCORE_MILESTONES) {
       const id = `score-${threshold}` as AchievementId
       if (score < threshold || this.unlocked.has(id)) {
@@ -63,6 +64,7 @@ class AchievementService {
     upgradeName: string,
     totalOwned: number
   ): void {
+    if (typeof window === 'undefined') return
     for (const threshold of PURCHASE_THRESHOLDS) {
       const id = `purchase-${upgradeId}-${threshold}` as AchievementId
       if (totalOwned < threshold || this.unlocked.has(id)) {
@@ -86,11 +88,13 @@ class AchievementService {
     }
   }
 
-  public getUnlocked(): string[] {
+  public getUnlocked(): string[] | undefined {
+    if (typeof window === 'undefined') return
     return Array.from(this.unlocked)
   }
 
   public reset(): void {
+    if (typeof window === 'undefined') return
     this.unlocked.clear()
     this.persist()
   }

@@ -48,6 +48,7 @@ export function useCanvasRender(
   }, [isHovered, canvasRef])
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
     if (!canvas || !ctx || !dimensions.width || !dimensions.height) return

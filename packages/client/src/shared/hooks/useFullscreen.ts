@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 export const useFullscreen = () => {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const toggleFullscreen = useCallback(() => {
+    if (typeof window === 'undefined') return
     if (document.fullscreenElement) {
       document.exitFullscreen()
       setIsFullscreen(false)
@@ -13,6 +14,7 @@ export const useFullscreen = () => {
   }, [])
 
   const handleEscape = () => {
+    if (typeof window === 'undefined') return
     if (document.fullscreenElement) {
       setIsFullscreen(true)
     } else {
@@ -27,6 +29,7 @@ export const useFullscreen = () => {
   }
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
     document.addEventListener('fullscreenchange', handleEscape)
 
     document.addEventListener('keydown', handleCombination)

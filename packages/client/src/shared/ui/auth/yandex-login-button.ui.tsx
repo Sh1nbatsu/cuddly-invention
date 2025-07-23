@@ -2,15 +2,15 @@ import { AuthSubmitButton } from '@/entities/session/session.styled'
 import { useClient } from '@/shared/hooks/useClient'
 
 const CLIENT_ID = import.meta.env.VITE_YANDEX_CLIENT_ID as string
-const ORIGIN = window.location.origin
 
 export const YandexLoginButton = () => {
+  if (typeof window === 'undefined') return
   useClient()
   function handleClick(): void {
     const params = new URLSearchParams({
       response_type: 'token',
       client_id: CLIENT_ID,
-      redirect_uri: ORIGIN,
+      redirect_uri: window.location.origin,
       scope: 'login:email login:info',
       state: crypto.randomUUID(),
     })
