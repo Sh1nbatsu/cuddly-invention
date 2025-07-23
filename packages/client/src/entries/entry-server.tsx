@@ -49,6 +49,8 @@ export async function render(req: ExpressRequest) {
     const styleTags = sheet.getStyleTags()
     const { helmet } = helmetContext as { helmet: HelmetData }
     return { appHtml, styleTags, helmet }
+  } catch (error) {
+    console.error('Error during render to string:', error)
   } finally {
     console.log('Render to string is finally')
   }

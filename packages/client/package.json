@@ -28,6 +28,7 @@
     "react-router-dom": "^7.5.1",
     "styled-components": "^6.1.17",
     "vite-plugin-pwa": "0.12.8",
+    "vite-plugin-ssr": "^0.4.142",
     "zod": "^3.24.3"
   },
   "devDependencies": {

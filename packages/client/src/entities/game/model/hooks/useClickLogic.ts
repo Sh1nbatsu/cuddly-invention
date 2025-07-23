@@ -25,7 +25,7 @@ export function useClickLogic(
   animateRadius: AnimateRadius,
   score: number
 ): UseClicklogicReturn {
-  useClient()
+  const client = useClient()
   useEffect(() => {
     achievementService.processScore(score)
   }, [score])
