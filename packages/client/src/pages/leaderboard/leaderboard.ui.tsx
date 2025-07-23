@@ -1,6 +1,6 @@
 import { CustomWrapper, ScrollableDiv } from './Leaderboard.styled'
 
-import { LeaderboardWidget } from '@/widgets/leaderboard/leader-scroll.ui'
+import { LeaderboardWidget } from '@/widgets/leaderboard/leaderboard.ui'
 
 export const Leaderboard = () => {
   return (
