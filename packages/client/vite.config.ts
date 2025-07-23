@@ -40,7 +40,6 @@ export default defineConfig({
       srcDir: 'src/sw',
       filename: 'sw.ts',
       injectRegister: null,
-      disable: true,
       manifest: {
         name: 'My Custom PWA',
         short_name: 'CustomPWA',
