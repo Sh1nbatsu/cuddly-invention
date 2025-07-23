@@ -2,8 +2,10 @@ import { store } from '@/providers/store/store'
 import { setUser } from '@/entities/user/model/user.slice'
 import { User } from '@/shared/types/User'
 import { YandexInfoResponse } from '@/shared/types/YandexInfoResponse'
+import { useClient } from './useClient'
 
 export async function foundYandexUser(): Promise<void> {
+  useClient()
   let token: string | null = localStorage.getItem('ya_token')
 
   if (window.location.hash.startsWith('#')) {

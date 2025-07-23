@@ -18,6 +18,7 @@ async function startServer() {
 
   const allowedOrigins = [
     'http://localhost:3000',
+    'http://localhost:3001',
     'https://titleisundefined.ya-praktikum.tech',
   ]
 
