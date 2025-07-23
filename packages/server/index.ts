@@ -41,8 +41,11 @@ async function startServer() {
 
   app.use('/auth', sessionRouter)
   app.use('/api', apiRouter)
+  console.log('before setup')
 
   await setupSSR(app, CLIENT_PATH)
+
+  console.log('after setup')
 
   app.use(errorHandler)
 

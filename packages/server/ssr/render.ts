@@ -7,7 +7,10 @@ import { createServer, ViteDevServer } from 'vite'
 export async function setupSSR(app: express.Express, clientPath: string) {
   const isDev = process.env.NODE_ENV === 'development'
   let vite: ViteDevServer | undefined
+
+  console.log(isDev)
   if (isDev) {
+    console.log('running dev')
     vite = await createServer({
       server: { middlewareMode: true },
       root: clientPath,
@@ -16,6 +19,7 @@ export async function setupSSR(app: express.Express, clientPath: string) {
 
     app.use(vite.middlewares)
   } else {
+    console.log('running prod')
     const distPath = path.resolve(clientPath, 'dist/client')
     app.use(express.static(distPath))
 

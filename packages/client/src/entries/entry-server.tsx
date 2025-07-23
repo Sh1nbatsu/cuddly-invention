@@ -22,12 +22,15 @@ export async function render(req: ExpressRequest) {
   const context = await query(fetchRequest)
 
   if (context instanceof Response) {
+    console.log(context)
     throw context
   }
 
   const router = createStaticRouter(dataRoutes, context)
   const sheet = new ServerStyleSheet()
   const helmetContext = {}
+
+  console.log({ context, dataRoutes, router })
   try {
     const appHtml = ReactDOMServer.renderToString(
       sheet.collectStyles(
