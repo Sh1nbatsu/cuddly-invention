@@ -41,6 +41,10 @@ export const AuthSubmitButton = styled(Button)`
     color: var(--color-text-secondary) !important;
     transform: none;
   }
+
+  &[data-theme='dark'] {
+    background: #333 !important;
+  }
 `
 
 export const AuthFooterText = styled(Typography.Text)`
