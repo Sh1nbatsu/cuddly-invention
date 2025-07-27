@@ -2,6 +2,7 @@ import { errorHandler } from './api/middleware/error.middleware'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
+import helmet from 'helmet'
 import path from 'path'
 import { setupSSR } from './ssr/render'
 import { connectDB } from './api/db/db'
@@ -25,6 +26,31 @@ async function startServer() {
 
   app.use(express.json())
   app.use(cookieParser())
+
+  const isDev = process.env.NODE_ENV === 'development'
+
+  const allowedOrigin = isDev
+    ? 'http://localhost:3000'
+    : 'https://titleisundefined.ya-praktikum.tech'
+
+  if (!isDev) {
+    app.use(
+      helmet({
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'", allowedOrigin],
+            scriptSrc: ["'self'", allowedOrigin],
+            styleSrc: ["'self'", "'unsafe-inline'", allowedOrigin],
+            imgSrc: ["'self'", 'data:', allowedOrigin],
+            fontSrc: ["'self'", allowedOrigin],
+            connectSrc: ["'self'", allowedOrigin],
+            objectSrc: ["'none'"],
+            upgradeInsecureRequests: [],
+          },
+        },
+      })
+    )
+  }
 
   app.use('/auth', sessionRouter)
   app.use('/api', apiRouter)
