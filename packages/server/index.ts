@@ -2,6 +2,7 @@ import { errorHandler } from './api/middleware/error.middleware'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
+import helmet from 'helmet' // 🔐 добавили
 import path from 'path'
 import { setupSSR } from './ssr/render'
 import { connectDB } from './api/db/db'
@@ -25,6 +26,23 @@ async function startServer() {
 
   app.use(express.json())
   app.use(cookieParser())
+
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'", 'http://localhost:3000'],
+          scriptSrc: ["'self'", 'http://localhost:3000'],
+          styleSrc: ["'self'", "'unsafe-inline'", 'http://localhost:3000'],
+          imgSrc: ["'self'", 'data:', 'http://localhost:3000'],
+          fontSrc: ["'self'", 'http://localhost:3000'],
+          connectSrc: ["'self'", 'http://localhost:3000'],
+          objectSrc: ["'none'"],
+          upgradeInsecureRequests: [],
+        },
+      },
+    })
+  )
 
   app.use('/auth', sessionRouter)
   app.use('/api', apiRouter)
