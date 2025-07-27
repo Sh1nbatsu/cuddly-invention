@@ -2,7 +2,7 @@ import { errorHandler } from './api/middleware/error.middleware'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
-import helmet from 'helmet' // 🔐 добавили
+import helmet from 'helmet'
 import path from 'path'
 import { setupSSR } from './ssr/render'
 import { connectDB } from './api/db/db'
