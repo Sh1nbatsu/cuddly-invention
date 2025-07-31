@@ -12,9 +12,9 @@ import 'antd/dist/reset.css'
 
 import '../shared/assets/global.css'
 
-// if (import.meta.env.PROD) {
-//   registerServiceWorker()
-// }
+if (import.meta.env.PROD) {
+  registerServiceWorker()
+}
 
 const browserRouter = createBrowserRouter(routes)
 

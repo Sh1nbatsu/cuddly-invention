@@ -23,15 +23,15 @@ export const AuthTitle = styled(Typography.Title)`
 
 export const AuthSubmitButton = styled(Button)`
   margin-top: 15px;
-  background: var(--color-primary);
-  border: 1px solid var(--color-primary);
-  color: var(--color-text);
+  background: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+  color: var(--color-secondary);
   transition: transform 0.12s ease;
 
   &:hover {
     background: var(--color-primary) !important;
     border: 1px solid var(--color-primary) !important;
-    color: var(--color-text) !important;
+    color: var(--color-secondary) !important;
     transform: scale(1.05);
   }
 
@@ -40,6 +40,10 @@ export const AuthSubmitButton = styled(Button)`
     border-color: var(--color-secondary) !important;
     color: var(--color-text-secondary) !important;
     transform: none;
+  }
+
+  &[data-theme='dark'] {
+    background: #333 !important;
   }
 `
 

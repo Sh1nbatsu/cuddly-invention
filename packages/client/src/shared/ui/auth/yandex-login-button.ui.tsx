@@ -1,11 +1,9 @@
 import { AuthSubmitButton } from '@/entities/session/session.styled'
-import { useClient } from '@/shared/hooks/useClient'
 
 const CLIENT_ID = import.meta.env.VITE_YANDEX_CLIENT_ID as string
 
 export const YandexLoginButton = () => {
   if (typeof window === 'undefined') return
-  useClient()
   function handleClick(): void {
     const params = new URLSearchParams({
       response_type: 'token',
